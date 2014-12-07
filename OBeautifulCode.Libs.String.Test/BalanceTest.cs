@@ -79,6 +79,23 @@ namespace OBeautifulCode.Libs.String.Test
         /// <summary>
         /// Test method.
         /// </summary>
+        [Fact]
+        public static void IsBalanced_SingleCharacterOpenAndCloseMarkersAndOpenEqualsClose_ThrowsArgumentException()
+        {
+            // Arrange
+            int unbalancedPosition;
+            const string Source = "this is my source";
+            const char Open = '(';
+            const char Close = '(';
+            
+            // Act, Assert
+            Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open, Close));
+            Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open, Close, out unbalancedPosition));
+        }
+
+        /// <summary>
+        /// Test method.
+        /// </summary>
         /// <param name="toValidate">The string to validate.</param>
         /// <param name="opening">The opening marker(s).</param>
         /// <param name="closing">The closing marker(s).</param>
@@ -246,6 +263,23 @@ namespace OBeautifulCode.Libs.String.Test
 
             Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open, Close3));
             Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open, Close3, out unbalancedPosition));
+        }
+
+        /// <summary>
+        /// Test method.
+        /// </summary>
+        [Fact]
+        public static void IsBalanced_OpenAndCloseMarkersAreStringsAndOpenEqualsClose_ThrowsArgumentException()
+        {
+            // Arrange
+            int unbalancedPosition;
+            const string Source = "this is my source";
+            const string Open = "(";
+            const string Close = "(";
+
+            // Act, Assert
+            Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open, Close));
+            Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open, Close, out unbalancedPosition));
         }
 
         /// <summary>
@@ -421,6 +455,36 @@ namespace OBeautifulCode.Libs.String.Test
 
             Assert.Throws<ArgumentException>(() => Source.IsBalanced(open2, close2));
             Assert.Throws<ArgumentException>(() => Source.IsBalanced(open2, close2, out unbalancedPosition));
+        }
+
+        /// <summary>
+        /// Test method.
+        /// </summary>
+        [Fact]
+        public static void IsBalanced_MultipleOpenAndCloseMarkersAndAtLeastOneOfTheOpenAndCorrespondingCloseMarkersAreEqual_ThrowsArgumentException()
+        {
+            // Arrange
+            int unbalancedPosition;
+            const string Source = "this is the source";
+
+            var open1 = new[] { '(', '[' };
+            var close1 = new[] { '(', ']' };
+
+            var open2 = new[] { '(', ']' };
+            var close2 = new[] { ')', ']' };
+
+            var open3 = new[] { ')', '[' };
+            var close3 = new[] { ')', '[' };
+
+            // Act, Assert
+            Assert.Throws<ArgumentException>(() => Source.IsBalanced(open1, close1));
+            Assert.Throws<ArgumentException>(() => Source.IsBalanced(open1, close1, out unbalancedPosition));
+
+            Assert.Throws<ArgumentException>(() => Source.IsBalanced(open2, close2));
+            Assert.Throws<ArgumentException>(() => Source.IsBalanced(open2, close2, out unbalancedPosition));
+
+            Assert.Throws<ArgumentException>(() => Source.IsBalanced(open3, close3));
+            Assert.Throws<ArgumentException>(() => Source.IsBalanced(open3, close3, out unbalancedPosition));
         }
 
         /// <summary>

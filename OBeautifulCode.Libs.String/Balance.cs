@@ -43,6 +43,7 @@ namespace OBeautifulCode.Libs.String
         /// <param name="close">The closing character to search for ( i.e. ')' ).</param>
         /// <exception cref="ArgumentNullException">source is null.</exception>
         /// <exception cref="ArgumentException">source is whitespace.</exception>
+        /// <exception cref="ArgumentException">open == close</exception>
         /// <returns>Returns true if character is balanced in the string, false if not</returns>
         public static bool IsBalanced(this string source, char open, char close)
         {
@@ -59,10 +60,12 @@ namespace OBeautifulCode.Libs.String
         /// <param name="unbalancedPosition">Returns -1 if the string is balanced, otherwise returns the zero-based position in the string where the first unbalanced character was found.</param>
         /// <exception cref="ArgumentNullException">source is null.</exception>
         /// <exception cref="ArgumentException">source is whitespace.</exception>
+        /// <exception cref="ArgumentException">open == close</exception>
         /// <returns>Returns true if character is balanced in the string, false if not</returns>
         public static bool IsBalanced(this string source, char open, char close, out int unbalancedPosition)
         {
             Condition.Requires(source, "source").IsNotNullOrWhiteSpace();
+            Condition.Requires(open, "open").IsNotEqualTo(close, "close");
             return IsBalanced(source.ToCharArray(), open, close, out unbalancedPosition);
         }
 
@@ -78,6 +81,7 @@ namespace OBeautifulCode.Libs.String
         /// <exception cref="ArgumentException">open is whitespace.</exception>
         /// <exception cref="ArgumentNullException">close is null.</exception>
         /// <exception cref="ArgumentException">close is whitespace.</exception>
+        /// <exception cref="ArgumentException">open == close</exception>
         /// <returns>Returns true if opening and closing strings are is balanced in the string being searched, false if not.</returns> 
         public static bool IsBalanced(this string source, string open, string close)
         {
@@ -91,19 +95,21 @@ namespace OBeautifulCode.Libs.String
         /// <param name="source">The string being searched</param>
         /// <param name="open">the opening string to search for (i.e. &lt;html&gt;)</param>
         /// <param name="close">the closing string to search for (i.e. &lt;/html&gt;)</param>
-        /// <param name="unbalancedPosition">returns <b>-1</b> if the string is balanced, otherwise returns the zero-based position in the string where the first unbalanced string was found.</param>
+        /// <param name="unbalancedPosition">returns -1 if the string is balanced, otherwise returns the zero-based position in the string where the first unbalanced string was found.</param>
         /// <exception cref="ArgumentNullException">source is null.</exception>
         /// <exception cref="ArgumentException">source is whitespace.</exception>
         /// <exception cref="ArgumentNullException">open is null.</exception>
         /// <exception cref="ArgumentException">open is whitespace.</exception>
         /// <exception cref="ArgumentNullException">close is null.</exception>
         /// <exception cref="ArgumentException">close is whitespace.</exception>
-        /// <returns><b>True</b> if opening and closing strings are is balanced in the string being searched, <b>False</b> if not</returns> 
+        /// <exception cref="ArgumentException">open == close</exception>
+        /// <returns>Returns true if opening and closing strings are is balanced in the string being searched, false if not</returns> 
         public static bool IsBalanced(this string source, string open, string close, out int unbalancedPosition)
         {
             Condition.Requires(source, "source").IsNotNullOrWhiteSpace();
             Condition.Requires(open, "open").IsNotNullOrWhiteSpace();
             Condition.Requires(close, "close").IsNotNullOrWhiteSpace();
+            Condition.Requires(open, "open").IsNotEqualTo(close, "close");
             return IsBalanced(source.ToCharArray(), open.ToCharArray(), close.ToCharArray(), out unbalancedPosition);
         }
 
@@ -125,6 +131,7 @@ namespace OBeautifulCode.Libs.String
         /// <exception cref="ArgumentNullException">close is null.</exception>
         /// <exception cref="ArgumentException">close is empty.</exception>
         /// <exception cref="ArgumentException">open.Length != close.Length</exception>
+        /// <exception cref="ArgumentException">An opening marker is the same as the corresponding closing marker.</exception>
         /// <returns>Returns true if opening and closing markers are balanced in the string being searched, false if not.</returns>
         public static bool IsBalanced(this string source, ICollection<char> open, ICollection<char> close)
         {
@@ -143,7 +150,7 @@ namespace OBeautifulCode.Libs.String
         /// <param name="source">String to check for balancing.</param>
         /// <param name="open">An ICollection(T) of opening character markers.</param>
         /// <param name="close">An ICollection(T) of closing character markers.  The position in the collection will be matched up against the same position in open to get the open-close pair.</param>
-        /// <param name="unbalancedPosition">returns <b>-1</b> if the string is balanced, otherwise returns the zero-based position in the string where the first unbalanced character was found.</param>
+        /// <param name="unbalancedPosition">returns -1 if the string is balanced, otherwise returns the zero-based position in the string where the first unbalanced character was found.</param>
         /// <exception cref="ArgumentNullException">source is null.</exception>
         /// <exception cref="ArgumentException">source is whitespace.</exception>
         /// <exception cref="ArgumentNullException">open is null.</exception>
@@ -151,7 +158,8 @@ namespace OBeautifulCode.Libs.String
         /// <exception cref="ArgumentNullException">close is null.</exception>
         /// <exception cref="ArgumentException">close is empty.</exception>
         /// <exception cref="ArgumentException">open.Count != close.Count</exception>
-        /// <returns><b>True</b> if opening and closing markers are balanced in the string being searched, <b>False</b> if not</returns>        
+        /// <exception cref="ArgumentException">An opening marker is the same as the corresponding closing marker.</exception>
+        /// <returns>Returns true if opening and closing markers are balanced in the string being searched, false if not</returns>        
         public static bool IsBalanced(this string source, ICollection<char> open, ICollection<char> close, out int unbalancedPosition)
         {
             Condition.Requires(source, "source").IsNotNullOrWhiteSpace();
@@ -164,7 +172,14 @@ namespace OBeautifulCode.Libs.String
                 throw new ArgumentException("open and close must have the same number of elments.  Every opening character requires a matching closing character.");
             }
 
-            return IsBalancedMultipleMarkers(source.ToCharArray(), open.ToArray(), close.ToArray(), out unbalancedPosition);
+            var openArray = open.ToArray();
+            var closeArray = close.ToArray();
+            if (openArray.Where((item, i) => item == closeArray[i]).Any())
+            {
+                throw new ArgumentException("An opening marker is the same as the corresponding closing marker.");
+            }
+
+            return IsBalancedMultipleMarkers(source.ToCharArray(), openArray, closeArray, out unbalancedPosition);
         }
 
         #endregion
