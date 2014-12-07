@@ -26,7 +26,7 @@ namespace OBeautifulCode.Libs.String
         #region Fields (Private)
 
         /// <summary>
-        /// Lock object for the pluralization service.
+        /// Lock object for the service that makes words plural.
         /// </summary>
         private static readonly object PluralizationServiceLock = new object();
 
@@ -111,7 +111,7 @@ namespace OBeautifulCode.Libs.String
         /// </summary>
         /// <remarks>
         /// This method is a wrapper around <see cref="System.Data.Entity.Design.PluralizationServices.PluralizationService.Pluralize"/>
-        /// It's provides the convenience of creating the pluralization service once, on demand, and using that instance of the service
+        /// It provides the convenience of creating the service that makes words plural once, on demand, and using that instance of the service
         /// for the life of the app domain.
         /// </remarks>
         /// <param name="value">The word to pluralize.</param>
