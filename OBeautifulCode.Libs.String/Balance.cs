@@ -9,9 +9,9 @@
 
 namespace OBeautifulCode.Libs.String
 {
-    using System;
-    using System.Linq;
+    using System;    
     using System.Collections.Generic;
+    using System.Linq;
 
     using CuttingEdge.Conditions;
 
@@ -19,15 +19,10 @@ namespace OBeautifulCode.Libs.String
     /// Provides methods to check a strings for balanced parentheses, 
     /// other characters, strings, tags, etc.
     /// </summary>
-    public class Balance
+    public static class Balance
     {
         #region Fields (Private)
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly Stack<int> bookMarks = new Stack<int>();
-
+        
         #endregion
 
         #region Constructors
@@ -43,46 +38,51 @@ namespace OBeautifulCode.Libs.String
         /// <summary>
         /// Checks for balanced characters in a string.
         /// </summary>
-        /// <param name="source">The string to search for blanced characters</param>
-        /// <param name="open">the opening character to search for ( i.e. '(' )</param>
-        /// <param name="close">the closing character to search for ( i.e. ')' )</param>
-        /// <returns><b>True</b> if character is balanced in the string, <b>False</b> if not</returns>
-        public bool IsBalanced(string source, char open, char close)
+        /// <param name="source">The string to search for balanced characters.</param>
+        /// <param name="open">The opening character to search for ( i.e. '(' ).</param>
+        /// <param name="close">The closing character to search for ( i.e. ')' ).</param>
+        /// <exception cref="ArgumentNullException">source is null.</exception>
+        /// <exception cref="ArgumentException">source is whitespace.</exception>
+        /// <returns>Returns true if character is balanced in the string, false if not</returns>
+        public static bool IsBalanced(this string source, char open, char close)
         {
-            Condition.Requires(source, "source").IsNotNullOrWhiteSpace();            
             int unbalancedPosition;
-            return (IsBalanced(source.ToCharArray(), open, close, out unbalancedPosition));
+            return IsBalanced(source, open, close, out unbalancedPosition);
         }
 
         /// <summary>
         /// Checks for balanced characters in a string.
         /// </summary>
-        /// <param name="source">The string to search for blanced characters</param>
-        /// <param name="open">the opening character to search for ( i.e. '(' )</param>
-        /// <param name="close">the closing character to search for ( i.e. ')' )</param>
-        /// <param name="unbalancedPosition">returns <b>-1</b> if the string is balanced, otherwise returns the zero-based position in the string where the first unbalanced character was found.</param>
-        /// <returns><b>True</b> if character is balanced in the string, <b>False</b> if not</returns>
-        public bool IsBalanced(string source, char open, char close, out int unbalancedPosition)
+        /// <param name="source">The string to search for balanced characters.</param>
+        /// <param name="open">The opening character to search for ( i.e. '(' ).</param>
+        /// <param name="close">The closing character to search for ( i.e. ')' ).</param>
+        /// <param name="unbalancedPosition">Returns -1 if the string is balanced, otherwise returns the zero-based position in the string where the first unbalanced character was found.</param>
+        /// <exception cref="ArgumentNullException">source is null.</exception>
+        /// <exception cref="ArgumentException">source is whitespace.</exception>
+        /// <returns>Returns true if character is balanced in the string, false if not</returns>
+        public static bool IsBalanced(this string source, char open, char close, out int unbalancedPosition)
         {
             Condition.Requires(source, "source").IsNotNullOrWhiteSpace();
-            return (IsBalanced(source.ToCharArray(), open, close, out unbalancedPosition));
+            return IsBalanced(source.ToCharArray(), open, close, out unbalancedPosition);
         }
 
         /// <summary>
         /// Checks for balanced strings (i.e. a tag) in another string.
         /// </summary>
-        /// <param name="source">The string being searched</param>
-        /// <param name="open">the opening string to search for (i.e. &lt;html&gt;)</param>
-        /// <param name="close">the closing string to search for (i.e. &lt;/html&gt;)</param>
-        /// <returns><b>True</b> if opening and closing strings are is balanced in the string being searched, <b>False</b> if not</returns> 
-        public bool IsBalanced(string source, string open, string close)
+        /// <param name="source">The string being searched.</param>
+        /// <param name="open">the opening string to search for (i.e. &lt;html&gt;).</param>
+        /// <param name="close">the closing string to search for (i.e. &lt;/html&gt;).</param>
+        /// <exception cref="ArgumentNullException">source is null.</exception>
+        /// <exception cref="ArgumentException">source is whitespace.</exception>
+        /// <exception cref="ArgumentNullException">open is null.</exception>
+        /// <exception cref="ArgumentException">open is whitespace.</exception>
+        /// <exception cref="ArgumentNullException">close is null.</exception>
+        /// <exception cref="ArgumentException">close is whitespace.</exception>
+        /// <returns>Returns true if opening and closing strings are is balanced in the string being searched, false if not.</returns> 
+        public static bool IsBalanced(this string source, string open, string close)
         {
-            Condition.Requires(source, "source").IsNotNullOrWhiteSpace();
-            Condition.Requires(open, "open").IsNotNullOrWhiteSpace();
-            Condition.Requires(close, "close").IsNotNullOrWhiteSpace();
             int unbalancedPosition;
-            return (IsBalanced(source.ToCharArray(), open.ToCharArray(),
-                close.ToCharArray(), out unbalancedPosition));
+            return IsBalanced(source, open, close, out unbalancedPosition);
         }
 
         /// <summary>
@@ -92,56 +92,79 @@ namespace OBeautifulCode.Libs.String
         /// <param name="open">the opening string to search for (i.e. &lt;html&gt;)</param>
         /// <param name="close">the closing string to search for (i.e. &lt;/html&gt;)</param>
         /// <param name="unbalancedPosition">returns <b>-1</b> if the string is balanced, otherwise returns the zero-based position in the string where the first unbalanced string was found.</param>
+        /// <exception cref="ArgumentNullException">source is null.</exception>
+        /// <exception cref="ArgumentException">source is whitespace.</exception>
+        /// <exception cref="ArgumentNullException">open is null.</exception>
+        /// <exception cref="ArgumentException">open is whitespace.</exception>
+        /// <exception cref="ArgumentNullException">close is null.</exception>
+        /// <exception cref="ArgumentException">close is whitespace.</exception>
         /// <returns><b>True</b> if opening and closing strings are is balanced in the string being searched, <b>False</b> if not</returns> 
-        public bool IsBalanced(string source, string open, string close, out int unbalancedPosition)
+        public static bool IsBalanced(this string source, string open, string close, out int unbalancedPosition)
         {
             Condition.Requires(source, "source").IsNotNullOrWhiteSpace();
             Condition.Requires(open, "open").IsNotNullOrWhiteSpace();
             Condition.Requires(close, "close").IsNotNullOrWhiteSpace();
-            return (IsBalanced(source.ToCharArray(), open.ToCharArray(),
-                close.ToCharArray(), out unbalancedPosition));
+            return IsBalanced(source.ToCharArray(), open.ToCharArray(), close.ToCharArray(), out unbalancedPosition);
         }
 
         /// <summary>
         /// Checks that a string is balanced given a set of opening and closing marker characters.
         /// </summary>
-        /// <param name="source">String to check for balancing</param>
-        /// <param name="open">An ICollection(T) of opening character markers</param>
-        /// <param name="close">An ICollection(T) of closing character markers.  The position in the colleciton will be matched up against the same position in open to get the open-close pair</param>
-        /// <returns><b>True</b> if opening and closing markers are balanced in the string being searched, <b>False</b> if not</returns>
         /// <remarks>
         /// If opening = "(" and "["  and corresponding closing characters are ")" and "]" then
-        /// this[is(definately)]balanced
+        /// this[is(definitely)]balanced
         /// but[this(is]not)
         /// </remarks>
-        public bool IsBalancedMultipleMarkers(string source, ICollection<char> open, ICollection<char> close)
+        /// <param name="source">String to check for balancing.</param>
+        /// <param name="open">An ICollection(T) of opening character markers.</param>
+        /// <param name="close">An ICollection(T) of closing character markers.  The position in the collection will be matched up against the same position in open to get the open-close pair.</param>
+        /// <exception cref="ArgumentNullException">source is null.</exception>
+        /// <exception cref="ArgumentException">source is whitespace.</exception>
+        /// <exception cref="ArgumentNullException">open is null.</exception>
+        /// <exception cref="ArgumentException">open is empty.</exception>
+        /// <exception cref="ArgumentNullException">close is null.</exception>
+        /// <exception cref="ArgumentException">close is empty.</exception>
+        /// <exception cref="ArgumentException">open.Length != close.Length</exception>
+        /// <returns>Returns true if opening and closing markers are balanced in the string being searched, false if not.</returns>
+        public static bool IsBalanced(this string source, ICollection<char> open, ICollection<char> close)
         {
-            Condition.Requires(source, "source").IsNotNullOrWhiteSpace();
-            Condition.Requires(open, "open").IsNotEmpty();
-            Condition.Requires(close, "close").IsNotEmpty();
             int unbalancedPosition;
-            return IsBalancedMultipleMarkers(source.ToCharArray(), open.ToArray(), close.ToArray(), out unbalancedPosition);
+            return IsBalanced(source, open, close, out unbalancedPosition);
         }
 
         /// <summary>
         /// Checks that a string is balanced given a set of opening and closing marker characters.
         /// </summary>
-        /// <param name="source">String to check for balancing</param>
-        /// <param name="open">An ICollection(T) of opening character markers</param>
-        /// <param name="close">An ICollection(T) of closing character markers.  The position in the colleciton will be matched up against the same position in open to get the open-close pair</param>
-        /// <param name="unbalancedPosition">returns <b>-1</b> if the string is balanced, otherwise returns the zero-based position in the string where the first unbalanced character was found.</param>
-        /// <returns><b>True</b> if opening and closing markers are balanced in the string being searched, <b>False</b> if not</returns>
         /// <remarks>
         /// If opening = "(" and "["  and corresponding closing characters are ")" and "]" then
-        /// this[is(definately)]balanced
+        /// this[is(definitely)]balanced
         /// but[this(is]not)
         /// </remarks>
-        public bool IsBalancedMultipleMarkers(String source, ICollection<char> open, ICollection<char> close, out int unbalancedPosition)
+        /// <param name="source">String to check for balancing.</param>
+        /// <param name="open">An ICollection(T) of opening character markers.</param>
+        /// <param name="close">An ICollection(T) of closing character markers.  The position in the collection will be matched up against the same position in open to get the open-close pair.</param>
+        /// <param name="unbalancedPosition">returns <b>-1</b> if the string is balanced, otherwise returns the zero-based position in the string where the first unbalanced character was found.</param>
+        /// <exception cref="ArgumentNullException">source is null.</exception>
+        /// <exception cref="ArgumentException">source is whitespace.</exception>
+        /// <exception cref="ArgumentNullException">open is null.</exception>
+        /// <exception cref="ArgumentException">open is empty.</exception>
+        /// <exception cref="ArgumentNullException">close is null.</exception>
+        /// <exception cref="ArgumentException">close is empty.</exception>
+        /// <exception cref="ArgumentException">open.Count != close.Count</exception>
+        /// <returns><b>True</b> if opening and closing markers are balanced in the string being searched, <b>False</b> if not</returns>        
+        public static bool IsBalanced(this string source, ICollection<char> open, ICollection<char> close, out int unbalancedPosition)
         {
             Condition.Requires(source, "source").IsNotNullOrWhiteSpace();
             Condition.Requires(open, "open").IsNotEmpty();
             Condition.Requires(close, "close").IsNotEmpty();
-            return this.IsBalancedMultipleMarkers(source.ToCharArray(), open.ToArray(), close.ToArray(), out unbalancedPosition);
+
+            // every opening char needs a closing char
+            if (open.Count != close.Count)
+            {
+                throw new ArgumentException("open and close must have the same number of elments.  Every opening character requires a matching closing character.");
+            }
+
+            return IsBalancedMultipleMarkers(source.ToCharArray(), open.ToArray(), close.ToArray(), out unbalancedPosition);
         }
 
         #endregion
@@ -156,59 +179,64 @@ namespace OBeautifulCode.Libs.String
 
         #region Private Methods
 
-        private static bool CompareArrays(Char[] source, Char[] targetChars, int startPos)
+        /// <summary>
+        /// Determines if one array (to find) is found within another (source) 
+        /// starting at some fixed position within the source array.
+        /// </summary>
+        /// <remarks>
+        /// This is not a traditional search in the sense that the array to find can be found at any
+        /// position within the source array.  The match must happen starting at the given index within
+        /// the source array.  If the first character of the array to find does not match the character
+        /// at the given source index to start at in the source array, then this method will return false.
+        /// </remarks>
+        /// <param name="source">The array to search.</param>
+        /// <param name="toFindWithinSource">The array to find within the source array.</param>
+        /// <param name="sourceIndexToStartAt">The index of the source array to start matching at.</param>
+        /// <returns>
+        /// Returns true if the array to find is found within the source starting at the given source index position.
+        /// </returns>
+        private static bool IsOneArrayInAnother(char[] source, char[] toFindWithinSource, int sourceIndexToStartAt)
         {
-            bool isEqual = true;
-
-            // ReSharper disable LoopCanBeConvertedToQuery
-            for (int index = 0; index < targetChars.Length; index++)
-            {
-                if (targetChars[index] != source[startPos + index])
-                {
-                    isEqual = false;
-                    break;
-                }
-            }
-            // ReSharper restore LoopCanBeConvertedToQuery
-
-            return (isEqual);
+            bool found = !toFindWithinSource.Where((t, index) => t != source[sourceIndexToStartAt + index]).Any();
+            return found;
         }
 
         /// <summary>
         /// Checks for balanced characters in a character array. 
         /// </summary>
-        /// <param name="source">The character array to search for balanced characters</param>
-        /// <param name="open">the opening character to search for ( i.e. '(' )</param>
-        /// <param name="close">the closing character to search for ( i.e. ')' )</param>
-        /// <param name="unbalancedPosition">returns <b>-1</b> if the character array is balanced, otherwise returns the zero-based position in the character array where the first unbalanced character was found.</param>
-        /// <returns><b>True</b> if character is balanced in the character array, <b>False</b> if not</returns>
-        private bool IsBalanced(Char[] source, char open, char close, out int unbalancedPosition)
+        /// <param name="source">The character array to search for balanced characters.</param>
+        /// <param name="open">the opening character to search for ( i.e. '(' ).</param>
+        /// <param name="close">the closing character to search for ( i.e. ')' ).</param>
+        /// <param name="unbalancedPosition">returns -1 if the character array is balanced, otherwise returns the zero-based position in the character array where the first unbalanced character was found.</param>
+        /// <returns>Return true if character is balanced in the character array, false if not</returns>
+        private static bool IsBalanced(char[] source, char open, char close, out int unbalancedPosition)
         {
-            Condition.Requires(source, "source").IsNotEmpty();
-            this.bookMarks.Clear();
+            var bookMarks = new Stack<int>();
 
             for (int index = 0; index < source.Length; index++)
             {
                 if (source[index] == open)
                 {
-                    this.bookMarks.Push(index);
+                    bookMarks.Push(index);
                 }
                 else if (source[index] == close)
                 {
-                    if (this.bookMarks.Count <= 0)
+                    if (bookMarks.Count <= 0)
                     {
                         unbalancedPosition = index;
                         return false;
                     }
-                    this.bookMarks.Pop();
+
+                    bookMarks.Pop();
                 }
             }
 
-            if (this.bookMarks.Count > 0)
+            if (bookMarks.Count > 0)
             {
-                unbalancedPosition = this.bookMarks.Pop();
+                unbalancedPosition = bookMarks.Pop();
                 return false;
             }
+
             unbalancedPosition = -1;
             return true;
         }
@@ -216,47 +244,46 @@ namespace OBeautifulCode.Libs.String
         /// <summary>
         /// Checks for balanced character array (i.e. a tag) in another character array.
         /// </summary>
-        /// <param name="source">The character array being searched</param>
-        /// <param name="open">the opening character array to search for (i.e. &lt;html&gt;)</param>
-        /// <param name="close">the closing character array to search for (i.e. &lt;/html&gt;)</param>
-        /// <param name="unbalancedPosition">returns <b>-1</b> if the character array is balanced, otherwise returns the zero-based position in the character array where the first unbalanced character array was found.</param>
-        /// <returns><b>True</b> if opening and closing character array are balanced in the character array being searched, <b>False</b> if not</returns> 
-        private bool IsBalanced(Char[] source, Char[] open, Char[] close, out int unbalancedPosition)
+        /// <param name="source">The character array being searched.</param>
+        /// <param name="open">the opening character array to search for (i.e. &lt;html&gt;).</param>
+        /// <param name="close">the closing character array to search for (i.e. &lt;/html&gt;).</param>
+        /// <param name="unbalancedPosition">returns -1 if the character array is balanced, otherwise returns the zero-based position in the character array where the first unbalanced character array was found.</param>
+        /// <returns>Returns true if opening and closing character array are balanced in the character array being searched, false if not</returns> 
+        private static bool IsBalanced(char[] source, char[] open, char[] close, out int unbalancedPosition)
         {
-            Condition.Requires(source, "source").IsNotEmpty();
-            Condition.Requires(open, "open").IsNotEmpty();
-            Condition.Requires(close, "close").IsNotEmpty();
-            this.bookMarks.Clear();
+            var bookMarks = new Stack<int>();
 
             for (int index = 0; index < source.Length; index++)
             {
                 if (source[index] == open[0])
                 {
-                    if (CompareArrays(source, open, index))
+                    if (IsOneArrayInAnother(source, open, index))
                     {
-                        this.bookMarks.Push(index);
+                        bookMarks.Push(index);
                     }
                 }
 
                 if (source[index] == close[0])
                 {
-                    if (CompareArrays(source, close, index))
+                    if (IsOneArrayInAnother(source, close, index))
                     {
-                        if (this.bookMarks.Count <= 0)
+                        if (bookMarks.Count <= 0)
                         {
                             unbalancedPosition = index;
-                            return (false);
+                            return false;
                         }
-                        this.bookMarks.Pop();
+
+                        bookMarks.Pop();
                     }
                 }
             }
 
-            if (this.bookMarks.Count > 0)
+            if (bookMarks.Count > 0)
             {
-                unbalancedPosition = this.bookMarks.Pop();
+                unbalancedPosition = bookMarks.Pop();
                 return false;
             }
+
             unbalancedPosition = -1;
             return true;
         }
@@ -264,30 +291,20 @@ namespace OBeautifulCode.Libs.String
         /// <summary>
         /// Checks that a char array is balanced given a set of opening and closing marker characters.
         /// </summary>
-        /// <param name="source">Char array to check for balancing</param>
-        /// <param name="open">An ICollection(T) of opening character markers</param>
-        /// <param name="close">An ICollection(T) of closing character markers.  The position in the colleciton will be matched up against the same position in open to get the open-close pair</param>
-        /// <param name="unbalancedPosition">returns <b>-1</b> if the char array is balanced, otherwise returns the zero-based position in the char array where the first unbalanced character was found.</param>
-        /// <returns><b>True</b> if opening and closing markers are balanced in the char array being searched, <b>False</b> if not</returns>
-        private bool IsBalancedMultipleMarkers(Char[] source, Char[] open, Char[] close, out int unbalancedPosition)
+        /// <param name="source">Char array to check for balancing.</param>
+        /// <param name="open">An ICollection(T) of opening character markers.</param>
+        /// <param name="close">An ICollection(T) of closing character markers.  The position in the collection will be matched up against the same position in open to get the open-close pair.</param>
+        /// <param name="unbalancedPosition">returns -1 if the char array is balanced, otherwise returns the zero-based position in the char array where the first unbalanced character was found.</param>
+        /// <exception cref="ArgumentException">open.Length != close.Length</exception>
+        /// <returns>Returns true if opening and closing markers are balanced in the char array being searched, false if not</returns>
+        private static bool IsBalancedMultipleMarkers(char[] source, char[] open, char[] close, out int unbalancedPosition)
         {
-            // check params
-            Condition.Requires(source, "source").IsNotEmpty();
-            Condition.Requires(open, "open").IsNotEmpty();
-            Condition.Requires(close, "close").IsNotEmpty();
-            
-            // every opening char needs a closing Char
-            if (open.Length != close.Length)
-            {                
-                throw new ArgumentException("open and close must have the same number of elments.  Every opening character requires a matching closing character.");
-            }
-
             // initialize stacks
-            this.bookMarks.Clear();
-            var charStack = new Stack<Char>();
+            var bookMarks = new Stack<int>();
+            var charStack = new Stack<char>();
 
             // create a lookup - key = closing character  value = opening character
-            var openCloseLookup = new Dictionary<Char, Char>();
+            var openCloseLookup = new Dictionary<char, char>();
             for (int index = 0; index < open.Length; index++)
             {
                 openCloseLookup.Add(close[index], open[index]);
@@ -301,7 +318,7 @@ namespace OBeautifulCode.Libs.String
                 // is this character an opening character?
                 if (openCloseLookup.ContainsValue(thischaracter))
                 {
-                    this.bookMarks.Push(index);
+                    bookMarks.Push(index);
                     charStack.Push(thischaracter);
                 }
                 else if (openCloseLookup.ContainsKey(thischaracter))
@@ -312,7 +329,8 @@ namespace OBeautifulCode.Libs.String
                         unbalancedPosition = index;
                         return false;
                     }
-                    this.bookMarks.Pop();
+
+                    bookMarks.Pop();
                     charStack.Pop();
                 }
             }
@@ -320,9 +338,10 @@ namespace OBeautifulCode.Libs.String
             // anything left on stack?
             if (charStack.Count > 0)
             {
-                unbalancedPosition = this.bookMarks.Pop();
+                unbalancedPosition = bookMarks.Pop();
                 return false;
             }
+
             unbalancedPosition = -1;
             return true;
         }
