@@ -20,19 +20,6 @@ namespace OBeautifulCode.Libs.String.Test
     /// </summary>
     public class StringExtensionsTest
     {
-        #region Fields (Private)
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
         // ReSharper disable InconsistentNaming
 
         /// <summary>
@@ -991,19 +978,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(Expected3, actual3);
         }
         
-        // ReSharper restore InconsistentNaming
-        #endregion
-
-        #region Internal Methods
-
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
+        // ReSharper restore InconsistentNaming        
     }
 }

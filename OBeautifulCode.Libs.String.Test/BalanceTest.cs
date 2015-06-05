@@ -20,19 +20,6 @@ namespace OBeautifulCode.Libs.String.Test
     /// </summary>
     public class BalanceTest
     {
-        #region Fields (Private)
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
         // ReSharper disable InconsistentNaming
 
         /// <summary>
@@ -533,19 +520,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(-1, unbalancedPosition);
         }
 
-        // ReSharper restore InconsistentNaming
-        #endregion
-
-        #region Internal Methods
-
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
+        // ReSharper restore InconsistentNaming        
     }
 }
