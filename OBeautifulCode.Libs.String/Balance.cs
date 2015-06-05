@@ -13,7 +13,7 @@ namespace OBeautifulCode.Libs.String
     using System.Collections.Generic;
     using System.Linq;
 
-    using CuttingEdge.Conditions;
+    using Conditions;
 
     /// <summary>
     /// Provides methods to check a strings for balanced parentheses, 

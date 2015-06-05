@@ -16,7 +16,7 @@ namespace OBeautifulCode.Libs.String
     using System.Text;
     using System.Text.RegularExpressions;
 
-    using CuttingEdge.Conditions;
+    using Conditions;
 
     /// <summary>
     /// Adds some convenient extension methods to strings.
