@@ -7,8 +7,8 @@
     <ProjectGuid>{AA019C1F-F078-42C1-AE3B-D1C3BA7EFBDE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OBeautifulCode.Libs.String.Test</RootNamespace>
-    <AssemblyName>OBeautifulCode.Libs.String.Test</AssemblyName>
+    <RootNamespace>OBeautifulCode.String.Test</RootNamespace>
+    <AssemblyName>OBeautifulCode.String.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -57,9 +57,9 @@
     <Compile Include="StringExtensionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OBeautifulCode.Libs.String\OBeautifulCode.Libs.String.csproj">
+    <ProjectReference Include="..\OBeautifulCode.String\OBeautifulCode.String.csproj">
       <Project>{b7b68995-894e-4e78-9f40-32debbf67eb1}</Project>
-      <Name>OBeautifulCode.Libs.String</Name>
+      <Name>OBeautifulCode.String</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OBeautifulCode.Libs.String
+namespace OBeautifulCode.String
 {
     using System;
     using System.Data.Entity.Design.PluralizationServices;

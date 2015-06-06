@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OBeautifulCode.Libs.String.Test
+namespace OBeautifulCode.String.Test
 {
     using System;
     using System.Collections.Generic;
