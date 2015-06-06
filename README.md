@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/h52fhf02jusxj9n8?svg=true)](https://ci.appveyor.com/project/OBeautifulCode/obeautifulcode-libs-string)
+[![Build status](https://ci.appveyor.com/api/projects/status/0axbj72exywm5sjt?svg=true)](https://ci.appveyor.com/project/SurajGupta/obeautifulcode-string)
 
 String Helpers
 ==============
