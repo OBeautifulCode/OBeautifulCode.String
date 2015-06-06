@@ -1,13 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="BalanceTest.cs" company="OBeautifulCode">
-//   Copyright 2014 OBeautifulCode
+//   Copyright 2015 OBeautifulCode
 // </copyright>
-// <summary>
-//   Tests the <see cref="Balance"/> class.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OBeautifulCode.Libs.String.Test
+namespace OBeautifulCode.String.Test
 {
     using System;
     using System.Collections.Generic;
@@ -21,7 +18,6 @@ namespace OBeautifulCode.Libs.String.Test
     public class BalanceTest
     {
         // ReSharper disable InconsistentNaming
-
         [Fact]
         public static void IsBalanced_SingleCharacterOpenAndCloseMarkersAndSourceIsNull_ThrowsArgumentNullException()
         {

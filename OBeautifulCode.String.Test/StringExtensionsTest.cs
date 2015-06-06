@@ -1,13 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="StringExtensionsTest.cs" company="OBeautifulCode">
-//   Copyright 2014 OBeautifulCode
+//   Copyright 2015 OBeautifulCode
 // </copyright>
-// <summary>
-//   Tests the <see cref="StringExtensions"/> class.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OBeautifulCode.Libs.String.Test
+namespace OBeautifulCode.String.Test
 {
     using System;
     using System.Globalization;
@@ -21,7 +18,6 @@ namespace OBeautifulCode.Libs.String.Test
     public class StringExtensionsTest
     {
         // ReSharper disable InconsistentNaming
-
         [Fact]
         public static void AppendMissing_ParameterValueIsNull_ThrowsArgumentNullException()
         {
