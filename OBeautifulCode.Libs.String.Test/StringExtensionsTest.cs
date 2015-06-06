@@ -20,24 +20,8 @@ namespace OBeautifulCode.Libs.String.Test
     /// </summary>
     public class StringExtensionsTest
     {
-        #region Fields (Private)
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
         // ReSharper disable InconsistentNaming
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void AppendMissing_ParameterValueIsNull_ThrowsArgumentNullException()
         {
@@ -46,9 +30,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => StringExtensions.AppendMissing(null, "sometext"));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void AppendMissing_ParameterShouldEndWithIsNull_ThrowsArgumentNullException()
         {
@@ -59,9 +40,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => Base1.AppendMissing(null));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void AppendMissing_StringToAppendIsEmpty_AlwaysReturnBaseString()
         {
@@ -84,9 +62,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(Base4, actual4);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void AppendMissing_BaseStringAlreadyEndsWithStringToAppend_ReturnsBaseString()
         {
@@ -118,9 +93,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(Base5, actual5);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void AppendMissing_BaseStringDoesNotEndWithStringToAppend_ReturnsBaseStringWithEndingStringAppended()
         {
@@ -158,9 +130,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(Base5 + Append5, actual5);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsAlphaNumeric_StringToCheckIsNull_ThrowsArgumentNullException()
         {
@@ -168,9 +137,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => StringExtensions.IsAlphanumeric(null));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsAlphaNumeric_StringToCheckIsEmpty_ReturnsTrue()
         {
@@ -178,9 +144,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.True(string.Empty.IsAlphanumeric());
         }
 
-        /// <summary>
-        /// Tests the IsAlphaNumeric extension method on string
-        /// </summary>
         [Fact]
         public static void IsAlphanumericTest_StringIsNotAlphaNumeric_ReturnsFalse()
         {
@@ -211,9 +174,6 @@ namespace OBeautifulCode.Libs.String.Test
             }
         }
 
-        /// <summary>
-        /// Tests the IsAlphaNumeric extension method on string
-        /// </summary>
         [Fact]
         public static void IsAlphanumericTest_StringIsAlphaNumeric_ReturnsTrue()
         {
@@ -229,9 +189,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.True("1234567890abcdefghijklmnopqrstuvwxyz".IsAlphanumeric());
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void Pluralize_StringToMakePluralIsNull_ReturnsNull()
         {
@@ -239,9 +196,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => StringExtensions.Pluralize(null));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void Pluralize_StringToMakePluralIsEmpty_ReturnsEmptyString()
         {
@@ -249,9 +203,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(string.Empty, string.Empty.Pluralize());
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void Pluralize_StringIsAlreadyPlural_ReturnsOriginalString()
         {
@@ -274,9 +225,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(AlreadyPlural4, actual4);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void Pluralize_StringIsSingular_ReturnsPluralFormOfWord()
         {
@@ -304,9 +252,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(Expected4, actual4);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ReplaceCaseInsensitive_ParameterValueIsNull_ThrowsArgumentNullException()
         {
@@ -315,9 +260,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => StringExtensions.ReplaceCaseInsensitive(null, "text", "EX"));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ReplaceCaseInsensitive_ParameterOldValueIsNull_ThrowsArgumentNullException()
         {
@@ -328,9 +270,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => Original.ReplaceCaseInsensitive(null, "some replacement"));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ReplaceCaseInsensitive_ParameterOldValueIsEmpty_ThrowsArgumentException()
         {
@@ -341,9 +280,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentException>(() => Original.ReplaceCaseInsensitive(string.Empty, "some replacement"));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ReplaceCaseInsensitive_OldValueNotFound_ReturnsStringWithNoReplacements()
         {
@@ -375,9 +311,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(Original5, actual5);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ReplaceCaseInsensitive_OldValueFoundAndNewValueIsNull_RemovesAllOccurencesOfOldValue()
         {
@@ -444,9 +377,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(Expected6, actual6);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ReplaceCaseInsensitive_OldValueFoundAndNewValueIsEmpty_RemovesAllOccurencesOfOldValue()
         {
@@ -513,9 +443,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(Expected6, actual6);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ReplaceCaseInsensitive_OldValueFoundAndNewValueIsNotEmpty_ReplacesAllOccurencesOfOldValueWithNewValue()
         {
@@ -612,9 +539,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(Expected6, actual6);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToBytes_ValueToConvertIsNull_ThrowsArgumentNullException()
         {
@@ -622,9 +546,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => StringExtensions.ToBytes(null, new UnicodeEncoding()));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToBytes_EncodingIsNull_ThrowsArgumentNullException()
         {
@@ -635,9 +556,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => ToEncode.ToBytes(null));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToBytes_StringToEncodeIsEmpty_ReturnsEmptyArray()
         {
@@ -645,9 +563,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Empty(string.Empty.ToBytes(new UnicodeEncoding()));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToBytes_StringToEncodeIsNotEmptyEncodingIsUtf8_ReturnsUtf8Bytes()
         {
@@ -670,9 +585,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(Expected, bytesPrintout.ToString());
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToAsciiBytes_ValueToConvertIsNull_ThrowsArgumentNullException()
         {
@@ -680,9 +592,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => StringExtensions.ToAsciiBytes(null));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToAsciiBytes_StringToEncodIsEmpty_ReturnsEmptyArray()
         {
@@ -690,9 +599,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Empty(string.Empty.ToAsciiBytes());
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToAsciiBytes_StringToEncodeIsNotEmpty_ReturnsAsciiBytes()
         {
@@ -713,9 +619,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(Expected, bytesPrintout.ToString());
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToUnicodeBytes_ValueToConvertIsNull_ThrowsArgumentNullException()
         {
@@ -723,9 +626,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => StringExtensions.ToUnicodeBytes(null));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToUnicodeBytes_StringToEncodeIsEmpty_ReturnsEmptyArray()
         {
@@ -733,9 +633,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Empty(string.Empty.ToUnicodeBytes());
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToUnicodeBytes_StringToEncodeIsNotEmpty_ReturnsUnicodeBytes()
         {
@@ -758,9 +655,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(Expected, bytesPrintout.ToString());
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToUtf8Bytes_ValueToConvertIsNull_ThrowsArgumentNullException()
         {
@@ -768,9 +662,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => StringExtensions.ToUtf8Bytes(null));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToUtf8Bytes_StringToEncodeIsEmpty_ReturnsEmptyArray()
         {
@@ -778,9 +669,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Empty(string.Empty.ToUtf8Bytes());
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToUtf8Bytes_StringToEncodeIsNotEmpty_ReturnsUtf8Bytes()
         {
@@ -803,9 +691,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(Expected, bytesPrintout.ToString());
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToCsvSafe_StringIsNull_ThrowsArgumentNullException()
         {
@@ -813,9 +698,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => StringExtensions.ToCsvSafe(null));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToCsvSafe_StringIsEmpty_ReturnsEmptyString()
         {
@@ -823,9 +705,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(string.Empty, string.Empty.ToCsvSafe());
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToCsvSafe_StringIsAlreadyCsvSafe_ReturnsOriginalString()
         {
@@ -851,9 +730,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(safe5, actual5);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToCsvSafe_StringIsNotCsvSave_ReturnsCsvSafeVersionOfString()
         {
@@ -928,9 +804,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(Expected13, actual13);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToLowerTrimmed_StringIsNull_ThrowsArgumentNullException()
         {
@@ -938,9 +811,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => StringExtensions.ToLowerTrimmed(null));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void ToLowerTrimmed_StringIsEmpty_ReturnsEmptyString()
         {
@@ -948,9 +818,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(string.Empty, string.Empty.ToLowerTrimmed());
         }
 
-        /// <summary>
-        /// Tests the ToLowerTrimmed extension method on String
-        /// </summary>
         [Fact]
         public static void ToLowerTrimmed_StringIsAlreadyLowerCaseAndTrimmed_ReturnsOriginalString()
         {
@@ -964,9 +831,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(String1, actual1);
         }
 
-        /// <summary>
-        /// Tests the ToLowerTrimmed extension method on String
-        /// </summary>
         [Fact]
         public static void ToLowerTrimmed_StringNotLowerCaseOrStringIsNotTrimmedOrBoth_ReturnsLowerCaseTrimmedString()
         {
@@ -991,19 +855,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(Expected3, actual3);
         }
         
-        // ReSharper restore InconsistentNaming
-        #endregion
-
-        #region Internal Methods
-
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
+        // ReSharper restore InconsistentNaming        
     }
 }

@@ -13,7 +13,7 @@ namespace OBeautifulCode.Libs.String
     using System.Collections.Generic;
     using System.Linq;
 
-    using CuttingEdge.Conditions;
+    using Conditions;
 
     /// <summary>
     /// Provides methods to check a strings for balanced parentheses, 
@@ -21,20 +21,6 @@ namespace OBeautifulCode.Libs.String
     /// </summary>
     public static class Balance
     {
-        #region Fields (Private)
-        
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
-
         /// <summary>
         /// Checks for balanced characters in a string.
         /// </summary>
@@ -181,18 +167,6 @@ namespace OBeautifulCode.Libs.String
 
             return IsBalancedMultipleMarkers(source.ToCharArray(), openArray, closeArray, out unbalancedPosition);
         }
-
-        #endregion
-
-        #region Internal Methods
-
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Private Methods
 
         /// <summary>
         /// Determines if one array (to find) is found within another (source) 
@@ -360,7 +334,5 @@ namespace OBeautifulCode.Libs.String
             unbalancedPosition = -1;
             return true;
         }
-
-        #endregion
     }
 }

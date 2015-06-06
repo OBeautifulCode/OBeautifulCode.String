@@ -20,24 +20,8 @@ namespace OBeautifulCode.Libs.String.Test
     /// </summary>
     public class BalanceTest
     {
-        #region Fields (Private)
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
         // ReSharper disable InconsistentNaming
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_SingleCharacterOpenAndCloseMarkersAndSourceIsNull_ThrowsArgumentNullException()
         {
@@ -51,9 +35,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => Balance.IsBalanced(null, Open, Close, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_SingleCharacterOpenAndCloseMarkersAndSourceIsWhitespace_ThrowsArgumentException()
         {
@@ -76,9 +57,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentException>(() => Source3.IsBalanced(Open, Close, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_SingleCharacterOpenAndCloseMarkersAndOpenEqualsClose_ThrowsArgumentException()
         {
@@ -93,13 +71,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open, Close, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
-        /// <param name="toValidate">The string to validate.</param>
-        /// <param name="opening">The opening marker(s).</param>
-        /// <param name="closing">The closing marker(s).</param>
-        /// <param name="expectedUnbalancedPosition">The expected unbalanced position.</param>
         [Theory]
         [InlineData("to) validate", '(', ')', 2)]
         [InlineData("to)(validate", '(', ')', 2)]
@@ -117,12 +88,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(expectedUnbalancedPosition, unbalancedPosition);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
-        /// <param name="toValidate">The string to validate.</param>
-        /// <param name="opening">The opening marker(s).</param>
-        /// <param name="closing">The closing marker(s).</param>
         [Theory]
         [InlineData("to validate", '(', ')')]
         [InlineData("to()validate", '(', ')')]
@@ -142,9 +107,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(-1, unbalancedPosition);
         }
         
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_OpenAndCloseMarkersAreStringsAndSourceIsNull_ThrowsArgumentNullException()
         {
@@ -158,9 +120,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => Balance.IsBalanced(null, Open, Close, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_OpenAndCloseMarkersAreStringsAndSourceIsWhitespace_ThrowsArgumentException()
         {
@@ -183,9 +142,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentException>(() => Source3.IsBalanced(Open, Close, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_OpenAndCloseMarkersAreStringsAndOpenIsNull_ThrowsArgumentNullException()
         {
@@ -199,9 +155,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => Source.IsBalanced(null, Close, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_OpenAndCloseMarkersAreStringsAndOpenIsWhitespace_ThrowsArgumentException()
         {
@@ -224,9 +177,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open3, Close, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_OpenAndCloseMarkersAreStringsAndCloseIsNull_ThrowsArgumentNullException()
         {
@@ -240,9 +190,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => Source.IsBalanced(Open, null, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_OpenAndCloseMarkersAreStringsAndCloseIsWhitespace_ThrowsArgumentException()
         {
@@ -265,9 +212,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open, Close3, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_OpenAndCloseMarkersAreStringsAndOpenEqualsClose_ThrowsArgumentException()
         {
@@ -282,13 +226,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open, Close, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
-        /// <param name="toValidate">The string to validate.</param>
-        /// <param name="opening">The opening marker(s).</param>
-        /// <param name="closing">The closing marker(s).</param>
-        /// <param name="expectedUnbalancedPosition">The expected unbalanced position.</param>
         [Theory]
         [InlineData("</b>to validate<b>", "<b>", "</b>", 0)]
         [InlineData("t[{o val[{id}]ate", "[{", "}]", 1)]
@@ -303,12 +240,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(expectedUnbalancedPosition, unbalancedPosition);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
-        /// <param name="toValidate">The string to validate.</param>
-        /// <param name="opening">The opening marker(s).</param>
-        /// <param name="closing">The closing marker(s).</param>
         [Theory]
         [InlineData("to validate", "<b>", "</b>")]
         [InlineData("<b>to validate</b>", "<b>", "</b>")]
@@ -326,9 +257,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(-1, unbalancedPosition);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_MultipleOpenAndCloseMarkersAndSourceIsNull_ThrowsArgumentNullException()
         {
@@ -342,9 +270,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => Balance.IsBalanced(null, open, close, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_MultipleOpenAndCloseMarkersAndSourceIsWhitespace_ThrowsArgumentException()
         {
@@ -367,9 +292,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentException>(() => Source3.IsBalanced(open, close, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_MultipleOpenAndCloseMarkersAndOpenIsNull_ThrowsArgumentNullException()
         {
@@ -383,9 +305,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => Source.IsBalanced(null, close, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_MultipleOpenAndCloseMarkersAndOpenIsEmpty_ThrowsArgumentException()
         {
@@ -400,9 +319,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentException>(() => Source.IsBalanced(open, close, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_MultipleOpenAndCloseMarkersAndCloseIsNull_ThrowsArgumentNullException()
         {
@@ -416,9 +332,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentNullException>(() => Source.IsBalanced(open, null, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_MultipleOpenAndCloseMarkersAndCloseIsEmpty_ThrowsArgumentException()
         {
@@ -433,9 +346,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentException>(() => Source.IsBalanced(open, close, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_MultipleOpenAndCloseMarkersAndCloseAndOpenContainDifferentNumberOfMarkers_ThrowsArgumentException()
         {
@@ -457,9 +367,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentException>(() => Source.IsBalanced(open2, close2, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void IsBalanced_MultipleOpenAndCloseMarkersAndAtLeastOneOfTheOpenAndCorrespondingCloseMarkersAreEqual_ThrowsArgumentException()
         {
@@ -487,13 +394,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Throws<ArgumentException>(() => Source.IsBalanced(open3, close3, out unbalancedPosition));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
-        /// <param name="toValidate">The string to validate.</param>
-        /// <param name="opening">The opening marker(s).</param>
-        /// <param name="closing">The closing marker(s).</param>
-        /// <param name="expectedUnbalancedPosition">The expected unbalanced position.</param>
         [Theory]
         [InlineData("to v[a(li]da)te", new[] { '(', '[' }, new[] { ')', ']' }, 9)]
         [InlineData("t<o v>a{l()i}date{}[", new[] { '(', '[', '<' }, new[] { ')', ']', '>' }, 19)]
@@ -509,12 +409,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(expectedUnbalancedPosition, unbalancedPosition);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
-        /// <param name="toValidate">The string to validate.</param>
-        /// <param name="opening">The opening marker(s).</param>
-        /// <param name="closing">The closing marker(s).</param>
         [Theory]
         [InlineData("to validate", new[] { '(' }, new[] { ')' })]
         [InlineData("to (v)alidate", new[] { '(', '[' }, new[] { ')', ']' })]
@@ -533,19 +427,6 @@ namespace OBeautifulCode.Libs.String.Test
             Assert.Equal(-1, unbalancedPosition);
         }
 
-        // ReSharper restore InconsistentNaming
-        #endregion
-
-        #region Internal Methods
-
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
+        // ReSharper restore InconsistentNaming        
     }
 }

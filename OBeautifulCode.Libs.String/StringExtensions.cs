@@ -16,15 +16,13 @@ namespace OBeautifulCode.Libs.String
     using System.Text;
     using System.Text.RegularExpressions;
 
-    using CuttingEdge.Conditions;
+    using Conditions;
 
     /// <summary>
     /// Adds some convenient extension methods to strings.
     /// </summary>
     public static class StringExtensions
     {
-        #region Fields (Private)
-
         /// <summary>
         /// Lock object for the pluralization service.
         /// </summary>
@@ -49,18 +47,6 @@ namespace OBeautifulCode.Libs.String
         /// The service to make word plural.
         /// </summary>
         private static PluralizationService pluralizationService;
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
 
         /// <summary>
         /// Appends one string to the another (base) if the base string 
@@ -292,20 +278,6 @@ namespace OBeautifulCode.Libs.String
         {
             Condition.Requires(value, "value").IsNotNull();
             return value.ToLower(CultureInfo.CurrentCulture).Trim();
-        }
-
-        #endregion
-
-        #region Internal Methods
-
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
+        }        
     }
 }
