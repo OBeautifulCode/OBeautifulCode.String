@@ -47,8 +47,8 @@ namespace OBeautifulCode.String
         /// <returns>Returns true if character is balanced in the string, false if not</returns>
         public static bool IsBalanced(this string source, char open, char close, out int unbalancedPosition)
         {
-            Condition.Requires(source, "source").IsNotNullOrWhiteSpace();
-            Condition.Requires(open, "open").IsNotEqualTo(close, "close");
+            Condition.Requires(source, nameof(source)).IsNotNullOrWhiteSpace();
+            Condition.Requires(open, nameof(open)).IsNotEqualTo(close, nameof(close));
             return IsBalanced(source.ToCharArray(), open, close, out unbalancedPosition);
         }
 
@@ -89,10 +89,10 @@ namespace OBeautifulCode.String
         /// <returns>Returns true if opening and closing strings are is balanced in the string being searched, false if not</returns> 
         public static bool IsBalanced(this string source, string open, string close, out int unbalancedPosition)
         {
-            Condition.Requires(source, "source").IsNotNullOrWhiteSpace();
-            Condition.Requires(open, "open").IsNotNullOrWhiteSpace();
-            Condition.Requires(close, "close").IsNotNullOrWhiteSpace();
-            Condition.Requires(open, "open").IsNotEqualTo(close, "close");
+            Condition.Requires(source, nameof(source)).IsNotNullOrWhiteSpace();
+            Condition.Requires(open, nameof(open)).IsNotNullOrWhiteSpace();
+            Condition.Requires(close, nameof(close)).IsNotNullOrWhiteSpace();
+            Condition.Requires(open, nameof(open)).IsNotEqualTo(close, nameof(close));
             return IsBalanced(source.ToCharArray(), open.ToCharArray(), close.ToCharArray(), out unbalancedPosition);
         }
 
@@ -145,9 +145,9 @@ namespace OBeautifulCode.String
         /// <returns>Returns true if opening and closing markers are balanced in the string being searched, false if not</returns>        
         public static bool IsBalanced(this string source, ICollection<char> open, ICollection<char> close, out int unbalancedPosition)
         {
-            Condition.Requires(source, "source").IsNotNullOrWhiteSpace();
-            Condition.Requires(open, "open").IsNotEmpty();
-            Condition.Requires(close, "close").IsNotEmpty();
+            Condition.Requires(source, nameof(source)).IsNotNullOrWhiteSpace();
+            Condition.Requires(open, nameof(open)).IsNotEmpty();
+            Condition.Requires(close, nameof(close)).IsNotEmpty();
 
             // every opening char needs a closing char
             if (open.Count != close.Count)
