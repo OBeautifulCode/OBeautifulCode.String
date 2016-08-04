@@ -1,0 +1,31 @@
+version: 1.0.{build}
+os: Visual Studio 2015
+configuration:
+- Release
+- Debug
+platform: Any CPU
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+nuget:
+  account_feed: true
+before_build:
+- nuget restore
+build:
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
+  verbosity: minimal
+after_build:
+- 7z a OBeautifulCode.String.zip %APPVEYOR_BUILD_FOLDER%\OBeautifulCode.String\bin\%CONFIGURATION%\*.* -r
+artifacts:
+- path: OBeautifulCode.String.zip
+deploy:
+  provider: NuGet
+  api_key:
+    secure: aUaOAaFmJX9VJGINuxJ86ljfbXzi6I748PR0zL8VdZElrdh7C0sbPoFRKl8eciDY
+  skip_symbols: true
+  artifact: /.*\.nupkg/
