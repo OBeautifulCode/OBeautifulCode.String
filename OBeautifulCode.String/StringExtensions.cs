@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="StringExtensions.cs" company="OBeautifulCode">
-//   Copyright 2015 OBeautifulCode
+//   Copyright (c) OBeautifulCode. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -46,7 +46,7 @@ namespace OBeautifulCode.String
         private static PluralizationService pluralizationService;
 
         /// <summary>
-        /// Appends one string to the another (base) if the base string 
+        /// Appends one string to the another (base) if the base string
         /// doesn't already end with the string to append.
         /// </summary>
         /// <param name="value">The base string.</param>
@@ -226,7 +226,7 @@ namespace OBeautifulCode.String
         }
 
         /// <summary>
-        /// Makes a string safe to insert as a value into a 
+        /// Makes a string safe to insert as a value into a
         /// comma separated values (CSV) object such as a file.
         /// </summary>
         /// <remarks>
@@ -275,6 +275,6 @@ namespace OBeautifulCode.String
         {
             Condition.Requires(value, "value").IsNotNull();
             return value.ToLower(CultureInfo.CurrentCulture).Trim();
-        }        
+        }
     }
 }

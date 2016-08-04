@@ -1,19 +1,19 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Balance.cs" company="OBeautifulCode">
-//   Copyright 2015 OBeautifulCode
+//   Copyright (c) OBeautifulCode. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace OBeautifulCode.String
 {
-    using System;    
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
     using Conditions;
 
     /// <summary>
-    /// Provides methods to check a strings for balanced parentheses, 
+    /// Provides methods to check a strings for balanced parentheses,
     /// other characters, strings, tags, etc.
     /// </summary>
     public static class Balance
@@ -45,6 +45,7 @@ namespace OBeautifulCode.String
         /// <exception cref="ArgumentException">source is whitespace.</exception>
         /// <exception cref="ArgumentException">open == close</exception>
         /// <returns>Returns true if character is balanced in the string, false if not</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "3#", Justification = "This is a good use of an out parameter.")]
         public static bool IsBalanced(this string source, char open, char close, out int unbalancedPosition)
         {
             Condition.Requires(source, nameof(source)).IsNotNullOrWhiteSpace();
@@ -65,7 +66,7 @@ namespace OBeautifulCode.String
         /// <exception cref="ArgumentNullException">close is null.</exception>
         /// <exception cref="ArgumentException">close is whitespace.</exception>
         /// <exception cref="ArgumentException">open == close</exception>
-        /// <returns>Returns true if opening and closing strings are is balanced in the string being searched, false if not.</returns> 
+        /// <returns>Returns true if opening and closing strings are is balanced in the string being searched, false if not.</returns>
         public static bool IsBalanced(this string source, string open, string close)
         {
             int unbalancedPosition;
@@ -86,7 +87,8 @@ namespace OBeautifulCode.String
         /// <exception cref="ArgumentNullException">close is null.</exception>
         /// <exception cref="ArgumentException">close is whitespace.</exception>
         /// <exception cref="ArgumentException">open == close</exception>
-        /// <returns>Returns true if opening and closing strings are is balanced in the string being searched, false if not</returns> 
+        /// <returns>Returns true if opening and closing strings are is balanced in the string being searched, false if not</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "3#", Justification = "This is a good use of an out parameter.")]
         public static bool IsBalanced(this string source, string open, string close, out int unbalancedPosition)
         {
             Condition.Requires(source, nameof(source)).IsNotNullOrWhiteSpace();
@@ -142,7 +144,8 @@ namespace OBeautifulCode.String
         /// <exception cref="ArgumentException">close is empty.</exception>
         /// <exception cref="ArgumentException">open.Count != close.Count</exception>
         /// <exception cref="ArgumentException">An opening marker is the same as the corresponding closing marker.</exception>
-        /// <returns>Returns true if opening and closing markers are balanced in the string being searched, false if not</returns>        
+        /// <returns>Returns true if opening and closing markers are balanced in the string being searched, false if not</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "3#", Justification = "This is a good use of an out parameter.")]
         public static bool IsBalanced(this string source, ICollection<char> open, ICollection<char> close, out int unbalancedPosition)
         {
             Condition.Requires(source, nameof(source)).IsNotNullOrWhiteSpace();
@@ -166,7 +169,7 @@ namespace OBeautifulCode.String
         }
 
         /// <summary>
-        /// Determines if one array (to find) is found within another (source) 
+        /// Determines if one array (to find) is found within another (source)
         /// starting at some fixed position within the source array.
         /// </summary>
         /// <remarks>
@@ -188,7 +191,7 @@ namespace OBeautifulCode.String
         }
 
         /// <summary>
-        /// Checks for balanced characters in a character array. 
+        /// Checks for balanced characters in a character array.
         /// </summary>
         /// <param name="source">The character array to search for balanced characters.</param>
         /// <param name="open">the opening character to search for ( i.e. '(' ).</param>
@@ -234,7 +237,7 @@ namespace OBeautifulCode.String
         /// <param name="open">the opening character array to search for (i.e. &lt;html&gt;).</param>
         /// <param name="close">the closing character array to search for (i.e. &lt;/html&gt;).</param>
         /// <param name="unbalancedPosition">returns -1 if the character array is balanced, otherwise returns the zero-based position in the character array where the first unbalanced character array was found.</param>
-        /// <returns>Returns true if opening and closing character array are balanced in the character array being searched, false if not</returns> 
+        /// <returns>Returns true if opening and closing character array are balanced in the character array being searched, false if not</returns>
         private static bool IsBalanced(char[] source, char[] open, char[] close, out int unbalancedPosition)
         {
             var bookMarks = new Stack<int>();

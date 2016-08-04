@@ -1,0 +1,10 @@
+{
+  "settings": {
+    "documentationRules": {
+      "companyName": "OBeautifulCode",
+      "copyrightText": "Copyright (c) {companyName}. All rights reserved.",
+      "variables": {
+      }
+    }
+  }
+}

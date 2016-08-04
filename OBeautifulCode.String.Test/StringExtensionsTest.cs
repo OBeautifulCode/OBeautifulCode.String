@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="StringExtensionsTest.cs" company="OBeautifulCode">
-//   Copyright 2015 OBeautifulCode
+//   Copyright (c) OBeautifulCode. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -15,7 +15,7 @@ namespace OBeautifulCode.String.Test
     /// <summary>
     /// Tests the <see cref="StringExtensions"/> class.
     /// </summary>
-    public class StringExtensionsTest
+    public static class StringExtensionsTest
     {
         // ReSharper disable InconsistentNaming
         [Fact]
@@ -127,21 +127,21 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void IsAlphaNumeric_StringToCheckIsNull_ThrowsArgumentNullException()
+        public static void IsAlphanumeric_StringToCheckIsNull_ThrowsArgumentNullException()
         {
             // Arrange, Act, Assert
             Assert.Throws<ArgumentNullException>(() => StringExtensions.IsAlphanumeric(null));
         }
 
         [Fact]
-        public static void IsAlphaNumeric_StringToCheckIsEmpty_ReturnsTrue()
+        public static void IsAlphanumeric_StringToCheckIsEmpty_ReturnsTrue()
         {
             // Arrange, Act, Assert
             Assert.True(string.Empty.IsAlphanumeric());
         }
 
         [Fact]
-        public static void IsAlphanumericTest_StringIsNotAlphaNumeric_ReturnsFalse()
+        public static void IsAlphanumericTest_StringIsNotAlphanumeric_ReturnsFalse()
         {
             // Arrange, Act, Assert
             Assert.False("q9*z".IsAlphanumeric());
@@ -151,27 +151,27 @@ namespace OBeautifulCode.String.Test
             Assert.False("abCd29382-afjKsdf9209283".IsAlphanumeric());
             for (int i = 1; i <= 47; i++)
             {
-                Assert.False(Convert.ToString((char)i).IsAlphanumeric());
+                Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphanumeric());
             }
 
             for (int i = 58; i <= 64; i++)
             {
-                Assert.False(Convert.ToString((char)i).IsAlphanumeric());
+                Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphanumeric());
             }
 
             for (int i = 91; i <= 96; i++)
             {
-                Assert.False(Convert.ToString((char)i).IsAlphanumeric());
+                Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphanumeric());
             }
 
             for (int i = 123; i <= 127; i++)
             {
-                Assert.False(Convert.ToString((char)i).IsAlphanumeric());
+                Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphanumeric());
             }
         }
 
         [Fact]
-        public static void IsAlphanumericTest_StringIsAlphaNumeric_ReturnsTrue()
+        public static void IsAlphanumericTest_StringIsAlphanumeric_ReturnsTrue()
         {
             // Arrange, Act, Assert
             Assert.True("A".IsAlphanumeric());
@@ -308,7 +308,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ReplaceCaseInsensitive_OldValueFoundAndNewValueIsNull_RemovesAllOccurencesOfOldValue()
+        public static void ReplaceCaseInsensitive_OldValueFoundAndNewValueIsNull_RemovesAllOccurrencesOfOldValue()
         {
             // Arrange
             const string Original1 = "   ";
@@ -374,7 +374,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ReplaceCaseInsensitive_OldValueFoundAndNewValueIsEmpty_RemovesAllOccurencesOfOldValue()
+        public static void ReplaceCaseInsensitive_OldValueFoundAndNewValueIsEmpty_RemovesAllOccurrencesOfOldValue()
         {
             // Arrange
             const string Original1 = "   ";
@@ -440,7 +440,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ReplaceCaseInsensitive_OldValueFoundAndNewValueIsNotEmpty_ReplacesAllOccurencesOfOldValueWithNewValue()
+        public static void ReplaceCaseInsensitive_OldValueFoundAndNewValueIsNotEmpty_ReplacesAllOccurrencesOfOldValueWithNewValue()
         {
             // Arrange
             const string Original1 = "     ";
@@ -589,7 +589,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToAsciiBytes_StringToEncodIsEmpty_ReturnsEmptyArray()
+        public static void ToAsciiBytes_StringToEncodeIsEmpty_ReturnsEmptyArray()
         {
             // Arrange, Act, Assert
             Assert.Empty(string.Empty.ToAsciiBytes());
@@ -815,7 +815,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToLowerTrimmed_StringIsAlreadyLowerCaseAndTrimmed_ReturnsOriginalString()
+        public static void ToLowerTrimmed_StringIsAlreadyLowercaseAndTrimmed_ReturnsOriginalString()
         {
             // Arrange
             const string String1 = @"a sdfj !@#$%^\&*()=+_?/.,mn2340-8938m  fkls d";
@@ -828,7 +828,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToLowerTrimmed_StringNotLowerCaseOrStringIsNotTrimmedOrBoth_ReturnsLowerCaseTrimmedString()
+        public static void ToLowerTrimmed_StringNotLowercaseOrStringIsNotTrimmedOrBoth_ReturnsLowercaseTrimmedString()
         {
             // Arrange
             const string String1 = "This Is Not%(#*&! lower CASE";
@@ -850,7 +850,7 @@ namespace OBeautifulCode.String.Test
             Assert.Equal(Expected2, actual2);
             Assert.Equal(Expected3, actual3);
         }
-        
-        // ReSharper restore InconsistentNaming        
+
+        // ReSharper restore InconsistentNaming
     }
 }
