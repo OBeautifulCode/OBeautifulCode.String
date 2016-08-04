@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="BalanceTest.cs" company="OBeautifulCode">
-//   Copyright 2015 OBeautifulCode
+//   Copyright (c) OBeautifulCode. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -15,7 +15,7 @@ namespace OBeautifulCode.String.Test
     /// <summary>
     /// Tests the <see cref="Balance"/> class.
     /// </summary>
-    public class BalanceTest
+    public static class BalanceTest
     {
         // ReSharper disable InconsistentNaming
         [Fact]
@@ -32,7 +32,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void IsBalanced_SingleCharacterOpenAndCloseMarkersAndSourceIsWhitespace_ThrowsArgumentException()
+        public static void IsBalanced_SingleCharacterOpenAndCloseMarkersAndSourceIsWhiteSpace_ThrowsArgumentException()
         {
             // Arrange
             int unbalancedPosition;
@@ -61,7 +61,7 @@ namespace OBeautifulCode.String.Test
             const string Source = "this is my source";
             const char Open = '(';
             const char Close = '(';
-            
+
             // Act, Assert
             Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open, Close));
             Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open, Close, out unbalancedPosition));
@@ -102,7 +102,7 @@ namespace OBeautifulCode.String.Test
             Assert.True(toValidate.IsBalanced(opening, closing, out unbalancedPosition));
             Assert.Equal(-1, unbalancedPosition);
         }
-        
+
         [Fact]
         public static void IsBalanced_OpenAndCloseMarkersAreStringsAndSourceIsNull_ThrowsArgumentNullException()
         {
@@ -117,7 +117,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void IsBalanced_OpenAndCloseMarkersAreStringsAndSourceIsWhitespace_ThrowsArgumentException()
+        public static void IsBalanced_OpenAndCloseMarkersAreStringsAndSourceIsWhiteSpace_ThrowsArgumentException()
         {
             // Arrange
             int unbalancedPosition;
@@ -152,7 +152,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void IsBalanced_OpenAndCloseMarkersAreStringsAndOpenIsWhitespace_ThrowsArgumentException()
+        public static void IsBalanced_OpenAndCloseMarkersAreStringsAndOpenIsWhiteSpace_ThrowsArgumentException()
         {
             // Arrange
             int unbalancedPosition;
@@ -187,7 +187,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void IsBalanced_OpenAndCloseMarkersAreStringsAndCloseIsWhitespace_ThrowsArgumentException()
+        public static void IsBalanced_OpenAndCloseMarkersAreStringsAndCloseIsWhiteSpace_ThrowsArgumentException()
         {
             // Arrange
             int unbalancedPosition;
@@ -267,7 +267,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void IsBalanced_MultipleOpenAndCloseMarkersAndSourceIsWhitespace_ThrowsArgumentException()
+        public static void IsBalanced_MultipleOpenAndCloseMarkersAndSourceIsWhiteSpace_ThrowsArgumentException()
         {
             // Arrange
             int unbalancedPosition;
@@ -423,6 +423,6 @@ namespace OBeautifulCode.String.Test
             Assert.Equal(-1, unbalancedPosition);
         }
 
-        // ReSharper restore InconsistentNaming        
+        // ReSharper restore InconsistentNaming
     }
 }
