@@ -4,6 +4,9 @@
     <description>Adds some convenient extension methods to strings.</description>
     <tags>string extension extensionmethod</tags>
     <developmentDependency>true</developmentDependency>
+    <dependencies>
+      <dependency id="Spritely.Recipes.MustValidation" />
+    </dependencies>
   </metadata>
   <files>
     <file src="StringExtensions.cs" target="content\net45\.OBeautifulCode.Recipes\OBeautifulCode.String\StringExtensions.cs" />

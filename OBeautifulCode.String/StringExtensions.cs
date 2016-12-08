@@ -13,7 +13,7 @@ namespace OBeautifulCode.String
     using System.Text;
     using System.Text.RegularExpressions;
 
-    using Conditions;
+    using Spritely.Recipes;
 
     /// <summary>
     /// Adds some convenient extension methods to strings.
@@ -43,7 +43,9 @@ namespace OBeautifulCode.String
         /// <summary>
         /// The service to make word plural.
         /// </summary>
+        // ReSharper disable InconsistentNaming
         private static PluralizationService pluralizationService;
+        // ReSharper restore InconsistentNaming
 
         /// <summary>
         /// Appends one string to the another (base) if the base string
@@ -61,8 +63,9 @@ namespace OBeautifulCode.String
         /// </returns>
         public static string AppendMissing(this string value, string shouldEndWith)
         {
-            Condition.Requires(value, "value").IsNotNull();
-            Condition.Requires(shouldEndWith, "shouldEndWith").IsNotNull();
+            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
+            shouldEndWith.Named(nameof(shouldEndWith)).Must().NotBeNull().OrThrow();
+
             if (!value.EndsWith(shouldEndWith, StringComparison.CurrentCulture))
             {
                 value = value + shouldEndWith;
@@ -84,7 +87,8 @@ namespace OBeautifulCode.String
         /// </returns>
         public static bool IsAlphanumeric(this string value)
         {
-            Condition.Requires(value, "value").IsNotNull();
+            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
+
             var regexAlphaNum = new Regex("[^a-zA-Z0-9]");
             return !regexAlphaNum.IsMatch(value);
         }
@@ -104,7 +108,8 @@ namespace OBeautifulCode.String
         /// </returns>
         public static string Pluralize(this string value)
         {
-            Condition.Requires(value, "value").IsNotNull();
+            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
+
             if (pluralizationService == null)
             {
                 lock (PluralizationServiceLock)
@@ -137,8 +142,9 @@ namespace OBeautifulCode.String
         /// </returns>
         public static string ReplaceCaseInsensitive(this string value, string oldValue, string newValue)
         {
-            Condition.Requires(value, "value").IsNotNull();
-            Condition.Requires(oldValue, "oldValue").IsNotNullOrEmpty();
+            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
+            oldValue.Named(nameof(oldValue)).Must().NotBeNull().And().NotBeEmptyString().OrThrowFirstFailure();
+
             if (newValue == null)
             {
                 newValue = string.Empty;
@@ -187,8 +193,9 @@ namespace OBeautifulCode.String
         /// <exception cref="ArgumentNullException">value is null.</exception>
         public static byte[] ToBytes(this string value, Encoding encoding)
         {
-            Condition.Requires(value).IsNotNull();
-            Condition.Requires(encoding).IsNotNull();
+            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
+            encoding.Named(nameof(encoding)).Must().NotBeNull().OrThrow();
+
             return encoding.GetBytes(value);
         }
 
@@ -239,7 +246,8 @@ namespace OBeautifulCode.String
         /// </returns>
         public static string ToCsvSafe(this string value)
         {
-            Condition.Requires(value, "value").IsNotNull();
+            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
+
             if (string.IsNullOrEmpty(value))
             {
                 return value;
@@ -273,7 +281,8 @@ namespace OBeautifulCode.String
         /// <exception cref="NullReferenceException">Thrown when value is null.</exception>
         public static string ToLowerTrimmed(this string value)
         {
-            Condition.Requires(value, "value").IsNotNull();
+            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
+
             return value.ToLower(CultureInfo.CurrentCulture).Trim();
         }
     }

@@ -10,7 +10,7 @@ namespace OBeautifulCode.String
     using System.Collections.Generic;
     using System.Linq;
 
-    using Conditions;
+    using Spritely.Recipes;
 
     /// <summary>
     /// Provides methods to check a strings for balanced parentheses,
@@ -48,8 +48,9 @@ namespace OBeautifulCode.String
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "3#", Justification = "This is a good use of an out parameter.")]
         public static bool IsBalanced(this string source, char open, char close, out int unbalancedPosition)
         {
-            Condition.Requires(source, nameof(source)).IsNotNullOrWhiteSpace();
-            Condition.Requires(open, nameof(open)).IsNotEqualTo(close, nameof(close));
+            source.Named(nameof(source)).Must().NotBeNull().And().NotBeWhiteSpace().OrThrowFirstFailure();
+            open.Named(nameof(open)).Must().NotBeEqualTo(close).OrThrow<ArgumentException>();
+
             return IsBalanced(source.ToCharArray(), open, close, out unbalancedPosition);
         }
 
@@ -91,10 +92,11 @@ namespace OBeautifulCode.String
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "3#", Justification = "This is a good use of an out parameter.")]
         public static bool IsBalanced(this string source, string open, string close, out int unbalancedPosition)
         {
-            Condition.Requires(source, nameof(source)).IsNotNullOrWhiteSpace();
-            Condition.Requires(open, nameof(open)).IsNotNullOrWhiteSpace();
-            Condition.Requires(close, nameof(close)).IsNotNullOrWhiteSpace();
-            Condition.Requires(open, nameof(open)).IsNotEqualTo(close, nameof(close));
+            source.Named(nameof(source)).Must().NotBeNull().And().NotBeWhiteSpace().OrThrowFirstFailure();
+            open.Named(nameof(open)).Must().NotBeNull().And().NotBeWhiteSpace().OrThrowFirstFailure();
+            close.Named(nameof(close)).Must().NotBeNull().And().NotBeWhiteSpace().OrThrowFirstFailure();
+            open.Named(nameof(open)).Must().NotBeEqualTo(close).OrThrow<ArgumentException>();
+
             return IsBalanced(source.ToCharArray(), open.ToCharArray(), close.ToCharArray(), out unbalancedPosition);
         }
 
@@ -148,9 +150,9 @@ namespace OBeautifulCode.String
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "3#", Justification = "This is a good use of an out parameter.")]
         public static bool IsBalanced(this string source, ICollection<char> open, ICollection<char> close, out int unbalancedPosition)
         {
-            Condition.Requires(source, nameof(source)).IsNotNullOrWhiteSpace();
-            Condition.Requires(open, nameof(open)).IsNotEmpty();
-            Condition.Requires(close, nameof(close)).IsNotEmpty();
+            source.Named(nameof(source)).Must().NotBeNull().And().NotBeWhiteSpace().OrThrowFirstFailure();
+            open.Named(nameof(open)).Must().NotBeNull().And().NotBeEmptyString().OrThrowFirstFailure();
+            close.Named(nameof(close)).Must().NotBeNull().And().NotBeEmptyString().OrThrowFirstFailure();
 
             // every opening char needs a closing char
             if (open.Count != close.Count)
