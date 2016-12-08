@@ -217,7 +217,7 @@ namespace Spritely.Recipes
         public static Rule NotBeEqualTo<T>(T requirement)
         {
             return MakeRule.That<T>(v => !EqualityComparer<T>.Default.Equals(v, requirement))
-                .OrCreateArgumentOutOfRangeException()
+                .OrCreateArgumentException()
                 .Because($"Value must not be equal to {requirement}.");
         }
 
@@ -232,7 +232,7 @@ namespace Spritely.Recipes
         public static Rule BeEqualTo<T>(T requirement)
         {
             return MakeRule.That<T>(v => EqualityComparer<T>.Default.Equals(v, requirement))
-                .OrCreateArgumentOutOfRangeException()
+                .OrCreateArgumentException()
                 .Because($"Value must be equal to {requirement}.");
         }
 

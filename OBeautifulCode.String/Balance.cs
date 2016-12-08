@@ -57,7 +57,7 @@ namespace OBeautifulCode.String
         public static bool IsBalanced(this string source, char open, char close, out int unbalancedPosition)
         {
             source.Named(nameof(source)).Must().NotBeNull().And().NotBeWhiteSpace().OrThrowFirstFailure();
-            open.Named(nameof(open)).Must().NotBeEqualTo(close).OrThrow<ArgumentException>();
+            open.Named(nameof(open)).Must().NotBeEqualTo(close).OrThrow();
 
             return IsBalanced(source.ToCharArray(), open, close, out unbalancedPosition);
         }
@@ -103,7 +103,7 @@ namespace OBeautifulCode.String
             source.Named(nameof(source)).Must().NotBeNull().And().NotBeWhiteSpace().OrThrowFirstFailure();
             open.Named(nameof(open)).Must().NotBeNull().And().NotBeWhiteSpace().OrThrowFirstFailure();
             close.Named(nameof(close)).Must().NotBeNull().And().NotBeWhiteSpace().OrThrowFirstFailure();
-            open.Named(nameof(open)).Must().NotBeEqualTo(close).OrThrow<ArgumentException>();
+            open.Named(nameof(open)).Must().NotBeEqualTo(close).OrThrow();
 
             return IsBalanced(source.ToCharArray(), open.ToCharArray(), close.ToCharArray(), out unbalancedPosition);
         }
