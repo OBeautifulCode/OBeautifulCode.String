@@ -1,0 +1,14 @@
+﻿<package>
+  <metadata>
+    <id>OBeautifulCode.String.Balance</id>
+    <description>Provides methods to check a strings for balanced parentheses, special characters, tags, etc.</description>
+    <tags>string balance balanced parentheses</tags>
+    <developmentDependency>true</developmentDependency>
+    <dependencies>
+      <dependency id="Spritely.Recipes.MustValidation" version="0.6.1" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Balance.cs" target="content\net45\.OBeautifulCode.Recipes\OBeautifulCode.String\Balance.cs" />
+  </files>
+</package>
