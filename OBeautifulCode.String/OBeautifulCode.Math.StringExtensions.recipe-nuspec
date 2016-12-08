@@ -1,6 +1,6 @@
 ﻿<package>
   <metadata>
-    <id>OBeautifulCode.Math.ThreadSafeRandom</id>
+    <id>OBeautifulCode.String.StringExtensions</id>
     <description>Adds some convenient extension methods to strings.</description>
     <tags>string extension extensionmethod</tags>
     <developmentDependency>true</developmentDependency>
