@@ -186,69 +186,6 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void Pluralize_StringToMakePluralIsNull_ReturnsNull()
-        {
-            // Arrange, Act, Assert
-            Assert.Throws<ArgumentNullException>(() => StringExtensions.Pluralize(null));
-        }
-
-        [Fact]
-        public static void Pluralize_StringToMakePluralIsEmpty_ReturnsEmptyString()
-        {
-            // Arrange, Act, Assert
-            Assert.Equal(string.Empty, string.Empty.Pluralize());
-        }
-
-        [Fact]
-        public static void Pluralize_StringIsAlreadyPlural_ReturnsOriginalString()
-        {
-            // Arrange
-            const string AlreadyPlural1 = "people";
-            const string AlreadyPlural2 = "cars";
-            const string AlreadyPlural3 = "fish";
-            const string AlreadyPlural4 = "series";
-
-            // Act
-            string actual1 = AlreadyPlural1.Pluralize();
-            string actual2 = AlreadyPlural2.Pluralize();
-            string actual3 = AlreadyPlural3.Pluralize();
-            string actual4 = AlreadyPlural4.Pluralize();
-
-            // Assert
-            Assert.Equal(AlreadyPlural1, actual1);
-            Assert.Equal(AlreadyPlural2, actual2);
-            Assert.Equal(AlreadyPlural3, actual3);
-            Assert.Equal(AlreadyPlural4, actual4);
-        }
-
-        [Fact]
-        public static void Pluralize_StringIsSingular_ReturnsPluralFormOfWord()
-        {
-            // Arrange
-            const string Word1 = "person";
-            const string Word2 = "car";
-            const string Word3 = "axis";
-            const string Word4 = "cargo";
-
-            const string Expected1 = "people";
-            const string Expected2 = "cars";
-            const string Expected3 = "axes";
-            const string Expected4 = "cargoes";
-
-            // Act
-            string actual1 = Word1.Pluralize();
-            string actual2 = Word2.Pluralize();
-            string actual3 = Word3.Pluralize();
-            string actual4 = Word4.Pluralize();
-
-            // Assert
-            Assert.Equal(Expected1, actual1);
-            Assert.Equal(Expected2, actual2);
-            Assert.Equal(Expected3, actual3);
-            Assert.Equal(Expected4, actual4);
-        }
-
-        [Fact]
         public static void ReplaceCaseInsensitive_ParameterValueIsNull_ThrowsArgumentNullException()
         {
             // Arrange, Act, Assert

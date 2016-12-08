@@ -44,7 +44,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data.Entity.Design" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include=".Spritely.Recipes\MustValidation\MakeRule.cs" />

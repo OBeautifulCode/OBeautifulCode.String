@@ -10,7 +10,6 @@
 namespace OBeautifulCode.String
 {
     using System;
-    using System.Data.Entity.Design.PluralizationServices;
     using System.Globalization;
     using System.Linq;
     using System.Text;
@@ -29,11 +28,6 @@ namespace OBeautifulCode.String
     public static class StringExtensions
     {
         /// <summary>
-        /// Lock object for the pluralization service.
-        /// </summary>
-        private static readonly object PluralizationServiceLock = new object();
-
-        /// <summary>
         /// Represents an ASCII character encoding of Unicode characters
         /// </summary>
         private static readonly Encoding AsciiEncoding = new ASCIIEncoding();
@@ -47,13 +41,6 @@ namespace OBeautifulCode.String
         /// Represents a UTF-8 encoding of Unicode characters.
         /// </summary>
         private static readonly Encoding Utf8Encoding = new UTF8Encoding();
-
-        /// <summary>
-        /// The service to make word plural.
-        /// </summary>
-        // ReSharper disable InconsistentNaming
-        private static PluralizationService pluralizationService;
-        // ReSharper restore InconsistentNaming
 
         /// <summary>
         /// Appends one string to the another (base) if the base string
@@ -99,37 +86,6 @@ namespace OBeautifulCode.String
 
             var regexAlphaNum = new Regex("[^a-zA-Z0-9]");
             return !regexAlphaNum.IsMatch(value);
-        }
-
-        /// <summary>
-        /// Pluralizes a word.
-        /// </summary>
-        /// <remarks>
-        /// This method is a wrapper around <see cref="System.Data.Entity.Design.PluralizationServices.PluralizationService.Pluralize"/>
-        /// It provides the convenience of creating the pluralization service once, on demand, and using that instance of the service
-        /// for the life of the app domain.
-        /// </remarks>
-        /// <param name="value">The word to pluralize.</param>
-        /// <exception cref="ArgumentNullException">value is null.</exception>
-        /// <returns>
-        /// The plural form of the input parameter.
-        /// </returns>
-        public static string Pluralize(this string value)
-        {
-            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
-
-            if (pluralizationService == null)
-            {
-                lock (PluralizationServiceLock)
-                {
-                    if (pluralizationService == null)
-                    {
-                        pluralizationService = PluralizationService.CreateService(CultureInfo.CurrentCulture);
-                    }
-                }
-            }
-
-            return pluralizationService.Pluralize(value);
         }
 
         /// <summary>
