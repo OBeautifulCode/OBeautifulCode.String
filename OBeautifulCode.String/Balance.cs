@@ -24,7 +24,7 @@ namespace OBeautifulCode.String
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.String", "See package version number")]
 #endif
-    public static class Balance
+    internal static class Balance
     {
         /// <summary>
         /// Checks for balanced characters in a string.
