@@ -7,7 +7,7 @@
 // </auto-generated>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OBeautifulCode.String
+namespace OBeautifulCode.String.Recipes
 {
     using System;
     using System.Globalization;

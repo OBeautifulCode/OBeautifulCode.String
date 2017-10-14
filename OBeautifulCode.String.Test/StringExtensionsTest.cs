@@ -10,11 +10,10 @@ namespace OBeautifulCode.String.Test
     using System.Globalization;
     using System.Text;
 
+    using OBeautifulCode.String.Recipes;
+
     using Xunit;
 
-    /// <summary>
-    /// Tests the <see cref="StringExtensions"/> class.
-    /// </summary>
     public static class StringExtensionsTest
     {
         // ReSharper disable InconsistentNaming

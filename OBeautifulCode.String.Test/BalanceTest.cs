@@ -9,12 +9,11 @@ namespace OBeautifulCode.String.Test
     using System;
     using System.Collections.Generic;
 
+    using OBeautifulCode.String.Recipes;
+
     using Xunit;
     using Xunit.Extensions;
 
-    /// <summary>
-    /// Tests the <see cref="Balance"/> class.
-    /// </summary>
     public static class BalanceTest
     {
         // ReSharper disable InconsistentNaming

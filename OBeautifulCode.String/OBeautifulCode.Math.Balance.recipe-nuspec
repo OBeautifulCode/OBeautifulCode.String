@@ -5,10 +5,10 @@
     <tags>string balance balanced parentheses</tags>
     <developmentDependency>true</developmentDependency>
     <dependencies>
-      <dependency id="Spritely.Recipes.MustValidation" version="0.6.1" />
+      <dependency id="Spritely.Recipes.MustValidation" version="0.6.3" />
     </dependencies>
   </metadata>
   <files>
-    <file src="Balance.cs" target="content\net45\.OBeautifulCode.Recipes\OBeautifulCode.String\Balance.cs" />
+    <file src="Balance.cs" target="content\net45\.recipes\OBeautifulCode.String\Balance.cs" />
   </files>
 </package>
