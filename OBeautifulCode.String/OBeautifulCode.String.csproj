@@ -57,8 +57,8 @@
     <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="OBeautifulCode.Math.Balance.recipe-nuspec" />
-    <None Include="OBeautifulCode.Math.StringExtensions.recipe-nuspec" />
+    <None Include="OBeautifulCode.String.Recipes..Balance.recipe-nuspec" />
+    <None Include="OBeautifulCode.String.Recipes.StringExtensions.recipe-nuspec" />
     <None Include="packages.config" />
     <None Include="OBeautifulCode.String.template-nuspec">
       <SubType>Designer</SubType>

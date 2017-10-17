@@ -1,6 +1,6 @@
 ﻿<package>
   <metadata>
-    <id>OBeautifulCode.String.Balance</id>
+    <id>OBeautifulCode.String.Recipes.Balance</id>
     <description>Provides methods to check a strings for balanced parentheses, special characters, tags, etc.</description>
     <tags>string balance balanced parentheses</tags>
     <developmentDependency>true</developmentDependency>

@@ -1,6 +1,6 @@
 ﻿<package>
   <metadata>
-    <id>OBeautifulCode.String.StringExtensions</id>
+    <id>OBeautifulCode.String.Recipes.StringExtensions</id>
     <description>Adds some convenient extension methods to strings.</description>
     <tags>string extension extensionmethod</tags>
     <developmentDependency>true</developmentDependency>
