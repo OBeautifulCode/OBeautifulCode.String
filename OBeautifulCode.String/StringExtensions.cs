@@ -10,6 +10,7 @@
 namespace OBeautifulCode.String.Recipes
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Text;
@@ -21,26 +22,20 @@ namespace OBeautifulCode.String.Recipes
     /// Adds some convenient extension methods to strings.
     /// </summary>
 #if !OBeautifulCodeStringRecipesProject
-    [System.Diagnostics.DebuggerStepThrough]
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.String", "See package version number")]
 #endif
     internal static class StringExtensions
     {
-        /// <summary>
-        /// Represents an ASCII character encoding of Unicode characters
-        /// </summary>
         private static readonly Encoding AsciiEncoding = new ASCIIEncoding();
 
-        /// <summary>
-        /// Represents a UTF-16 encoding of Unicode characters
-        /// </summary>
         private static readonly Encoding UnicodeEncoding = new UnicodeEncoding();
 
-        /// <summary>
-        /// Represents a UTF-8 encoding of Unicode characters.
-        /// </summary>
         private static readonly Encoding Utf8Encoding = new UTF8Encoding();
+
+        private static readonly Regex CsvParsingRegex = new Regex("(?:,\"|^\")(\"\"|[\\w\\W]*?)(?=\",|\"$)|(?:,(?!\")|^(?!\"))([^,]*?)(?=$|,)|(\r\n|\n)", RegexOptions.Compiled);
+
+        private static readonly Regex AlphaNumericRegex = new Regex("[^a-zA-Z0-9]", RegexOptions.Compiled);
 
         /// <summary>
         /// Appends one string to the another (base) if the base string
@@ -56,7 +51,9 @@ namespace OBeautifulCode.String.Recipes
         /// <returns>
         /// The inputted string where the last character is a backslash.
         /// </returns>
-        public static string AppendMissing(this string value, string shouldEndWith)
+        public static string AppendMissing(
+            this string value, 
+            string shouldEndWith)
         {
             value.Named(nameof(value)).Must().NotBeNull().OrThrow();
             shouldEndWith.Named(nameof(shouldEndWith)).Must().NotBeNull().OrThrow();
@@ -80,12 +77,13 @@ namespace OBeautifulCode.String.Recipes
         /// <returns>
         /// Returns true if the string is alpha-numeric, false if not.
         /// </returns>
-        public static bool IsAlphanumeric(this string value)
+        public static bool IsAlphanumeric(
+            this string value)
         {
             value.Named(nameof(value)).Must().NotBeNull().OrThrow();
 
-            var regexAlphaNum = new Regex("[^a-zA-Z0-9]");
-            return !regexAlphaNum.IsMatch(value);
+            var result = !AlphaNumericRegex.IsMatch(value);
+            return result;
         }
 
         /// <summary>
@@ -104,7 +102,10 @@ namespace OBeautifulCode.String.Recipes
         /// <returns>
         /// A string where the case-insensitive string replacement has been applied.
         /// </returns>
-        public static string ReplaceCaseInsensitive(this string value, string oldValue, string newValue)
+        public static string ReplaceCaseInsensitive(
+            this string value, 
+            string oldValue, 
+            string newValue)
         {
             value.Named(nameof(value)).Must().NotBeNull().OrThrow();
             oldValue.Named(nameof(oldValue)).Must().NotBeNull().And().NotBeEmptyString().OrThrowFirstFailure();
@@ -114,20 +115,21 @@ namespace OBeautifulCode.String.Recipes
                 newValue = string.Empty;
             }
 
-            int count = 0, position0 = 0;
+            var count = 0;
+            var position0 = 0;
             int position1;
-            string upperString = value.ToUpper(CultureInfo.CurrentCulture);
-            string upperPattern = oldValue.ToUpper(CultureInfo.CurrentCulture);
-            int inc = (value.Length / oldValue.Length) * (newValue.Length - oldValue.Length);
+            var upperString = value.ToUpper(CultureInfo.CurrentCulture);
+            var upperPattern = oldValue.ToUpper(CultureInfo.CurrentCulture);
+            var inc = (value.Length / oldValue.Length) * (newValue.Length - oldValue.Length);
             var chars = new char[value.Length + Math.Max(0, inc)];
             while ((position1 = upperString.IndexOf(upperPattern, position0, StringComparison.CurrentCulture)) != -1)
             {
-                for (int i = position0; i < position1; ++i)
+                for (var i = position0; i < position1; ++i)
                 {
                     chars[count++] = value[i];
                 }
 
-                foreach (char t in newValue)
+                foreach (var t in newValue)
                 {
                     chars[count++] = t;
                 }
@@ -140,12 +142,13 @@ namespace OBeautifulCode.String.Recipes
                 return value;
             }
 
-            for (int i = position0; i < value.Length; ++i)
+            for (var i = position0; i < value.Length; ++i)
             {
                 chars[count++] = value[i];
             }
 
-            return new string(chars, 0, count);
+            var result = new string(chars, 0, count);
+            return result;
         }
 
         /// <summary>
@@ -155,12 +158,15 @@ namespace OBeautifulCode.String.Recipes
         /// <param name="encoding">The encoding to use.</param>
         /// <returns>byte array representing the string in a given encoding.</returns>
         /// <exception cref="ArgumentNullException">value is null.</exception>
-        public static byte[] ToBytes(this string value, Encoding encoding)
+        public static byte[] ToBytes(
+            this string value, 
+            Encoding encoding)
         {
             value.Named(nameof(value)).Must().NotBeNull().OrThrow();
             encoding.Named(nameof(encoding)).Must().NotBeNull().OrThrow();
 
-            return encoding.GetBytes(value);
+            var result = encoding.GetBytes(value);
+            return result;
         }
 
         /// <summary>
@@ -169,9 +175,11 @@ namespace OBeautifulCode.String.Recipes
         /// <param name="value">The string to encode.</param>
         /// <returns>byte array representing the string in ASCII.</returns>
         /// <exception cref="ArgumentNullException">value is null.</exception>
-        public static byte[] ToAsciiBytes(this string value)
+        public static byte[] ToAsciiBytes(
+            this string value)
         {
-            return value.ToBytes(AsciiEncoding);
+            var result = value.ToBytes(AsciiEncoding);
+            return result;
         }
 
         /// <summary>
@@ -180,9 +188,11 @@ namespace OBeautifulCode.String.Recipes
         /// <param name="value">The string to encode.</param>
         /// <returns>byte array representing the string in unicode.</returns>
         /// <exception cref="ArgumentNullException">value is null.</exception>
-        public static byte[] ToUnicodeBytes(this string value)
+        public static byte[] ToUnicodeBytes(
+            this string value)
         {
-            return value.ToBytes(UnicodeEncoding);
+            var result = value.ToBytes(UnicodeEncoding);
+            return result;
         }
 
         /// <summary>
@@ -191,9 +201,11 @@ namespace OBeautifulCode.String.Recipes
         /// <param name="value">The string to encode.</param>
         /// <returns>byte array representing the string in UTF-8.</returns>
         /// <exception cref="ArgumentNullException">value is null.</exception>
-        public static byte[] ToUtf8Bytes(this string value)
+        public static byte[] ToUtf8Bytes(
+            this string value)
         {
-            return value.ToBytes(Utf8Encoding);
+            var result = value.ToBytes(Utf8Encoding);
+            return result;
         }
 
         /// <summary>
@@ -208,7 +220,8 @@ namespace OBeautifulCode.String.Recipes
         /// <returns>
         /// Returns a string that is safe to insert into a CSV object.
         /// </returns>
-        public static string ToCsvSafe(this string value)
+        public static string ToCsvSafe(
+            this string value)
         {
             value.Named(nameof(value)).Must().NotBeNull().OrThrow();
 
@@ -217,12 +230,12 @@ namespace OBeautifulCode.String.Recipes
                 return value;
             }
 
-            bool containsCommas = value.Contains(",");
-            bool containsDoubleQuotes = value.Contains("\"");
-            bool containsLineBreak = value.Contains(Environment.NewLine);
+            var containsCommas = value.Contains(",");
+            var containsDoubleQuotes = value.Contains("\"");
+            var containsLineBreak = value.Contains(Environment.NewLine);
             containsLineBreak = containsLineBreak || value.Contains("\n");
-            bool hasLeadingSpace = value.First() == ' ';
-            bool hasTrailingSpace = value.Last() == ' ';
+            var hasLeadingSpace = value.First() == ' ';
+            var hasTrailingSpace = value.Last() == ' ';
 
             if (containsDoubleQuotes)
             {
@@ -238,16 +251,54 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
+        /// Parses a CSV string and returns the values.
+        /// </summary>
+        /// <param name="value">The CSV to parse.</param>
+        /// <param name="nullValueEncoding">Optional value indicating how nulls are encoded.  Defaulted to null, which results in a collection that never contains null.</param>
+        /// <returns>
+        /// Returns the values contained within a CSV.
+        /// </returns>
+        public static IReadOnlyCollection<string> FromCsv(
+            this string value,
+            string nullValueEncoding = null)
+        {
+            var result = new List<string>();
+
+            // we return an empty collection because ToCsv returns null when the input is an empty collection.
+            if (value == null)
+            {
+                return result;
+            }
+
+            var matches = CsvParsingRegex.Matches(value);
+            foreach (Match match in matches)
+            {
+                var parsedValue = match.Groups.Cast<Group>().Skip(1).Select(_ => _.Value).Aggregate((working, next) => working + next);
+                parsedValue = parsedValue.Replace("\"\"", "\"");
+                if (parsedValue == nullValueEncoding)
+                {
+                    parsedValue = null;
+                }
+
+                result.Add(parsedValue);
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Performs both ToLower() and Trim() on a String
         /// </summary>
         /// <param name="value">The string to operate on.</param>
         /// <returns>Lower-case, trimmed string</returns>
         /// <exception cref="NullReferenceException">Thrown when value is null.</exception>
-        public static string ToLowerTrimmed(this string value)
+        public static string ToLowerTrimmed(
+            this string value)
         {
             value.Named(nameof(value)).Must().NotBeNull().OrThrow();
 
-            return value.ToLower(CultureInfo.CurrentCulture).Trim();
+            var result = value.ToLower(CultureInfo.CurrentCulture).Trim();
+            return result;
         }
     }
 }

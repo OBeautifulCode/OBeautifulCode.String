@@ -20,7 +20,6 @@ namespace OBeautifulCode.String.Recipes
     /// other characters, strings, tags, etc.
     /// </summary>
 #if !OBeautifulCodeStringRecipesProject
-    [System.Diagnostics.DebuggerStepThrough]
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.String", "See package version number")]
 #endif

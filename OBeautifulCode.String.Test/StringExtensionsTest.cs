@@ -8,7 +8,10 @@ namespace OBeautifulCode.String.Test
 {
     using System;
     using System.Globalization;
+    using System.Linq;
     using System.Text;
+
+    using FluentAssertions;
 
     using OBeautifulCode.String.Recipes;
 
@@ -638,102 +641,128 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToCsvSafe_StringIsAlreadyCsvSafe_ReturnsOriginalString()
+        public static void ToCsvSafe___Should_return_original_string___When_value_is_already_CSV_safe()
         {
             // Arrange
-            const string Safe1 = "asdoiouwerzvkjdfm";
-            const string Safe2 = "g       O";
-            const string Safe3 = "g       O";
-            const string Safe4 = @"!@#$%^&*()_+-=';/?.`~_+\";
-            string safe5 = string.Empty;
+            var expected = new[] { "asdoiouwerzvkjdfm", "g       O", @"!@#$%^&*()_+-=';/?.`~_+\", string.Empty };
 
             // Act
-            string actual1 = Safe1.ToCsvSafe();
-            string actual2 = Safe2.ToCsvSafe();
-            string actual3 = Safe3.ToCsvSafe();
-            string actual4 = Safe4.ToCsvSafe();
-            string actual5 = safe5.ToCsvSafe();
+            var actual = expected.Select(_ => _.ToCsvSafe());
 
             // Assert
-            Assert.Equal(Safe1, actual1);
-            Assert.Equal(Safe2, actual2);
-            Assert.Equal(Safe3, actual3);
-            Assert.Equal(Safe4, actual4);
-            Assert.Equal(safe5, actual5);
+            actual.Should().Equal(expected);
         }
 
         [Fact]
-        public static void ToCsvSafe_StringIsNotCsvSave_ReturnsCsvSafeVersionOfString()
+        public static void ToCsvSafe___Should_return_CSV_safe_version_of_value___When_value_is_not_CSV_safe()
         {
             // Arrange
-            const string NotSafe1 = " ";
-            const string Expected1 = "\" \"";
+            var tests = new[]
+            {
+                new { Original = " ", Expected = "\" \"" },
+                new { Original = "\"", Expected = "\"\"\"\"" },
+                new { Original = ",", Expected = "\",\"" },
+                new { Original = "Super, luxurious truck", Expected = "\"Super, luxurious truck\"" },
+                new { Original = "Super \"luxurious\" truck", Expected = "\"Super \"\"luxurious\"\" truck\"" },
+                new { Original = "Go get one now\r\nthey are going fast", Expected = "\"Go get one now\r\nthey are going fast\"" },
+                new { Original = "Go get one now\nthey are going fast", Expected = "\"Go get one now\nthey are going fast\"" },
+                new { Original = "Go get one now" + Environment.NewLine + "they are going fast", Expected = "\"Go get one now" + Environment.NewLine + "they are going fast\"" },
+                new { Original = "Super luxurious truck    ", Expected = "\"Super luxurious truck    \"" },
+                new { Original = "  Super luxurious truck", Expected = "\"  Super luxurious truck\"" },
+                new { Original = "  Super luxurious truck    ", Expected = "\"  Super luxurious truck    \"" },
+                new { Original = " Super, luxurious truck ", Expected = "\" Super, luxurious truck \"" },
+                new { Original = " Super, \"luxurious\" truck ", Expected = "\" Super, \"\"luxurious\"\" truck \"" },
+            };
 
-            const string NotSafe2 = "\"";
-            const string Expected2 = "\"\"\"\"";
+            var expected = tests.Select(_ => _.Expected);
 
-            const string NotSafe3 = ",";
-            const string Expected3 = "\",\"";
-
-            const string NotSafe4 = "Super, luxurious truck";
-            const string Expected4 = "\"Super, luxurious truck\"";
-
-            const string NotSafe5 = "Super \"luxurious\" truck";
-            const string Expected5 = "\"Super \"\"luxurious\"\" truck\"";
-
-            const string NotSafe6 = "Go get one now\r\nthey are going fast";
-            const string Expected6 = "\"Go get one now\r\nthey are going fast\"";
-
-            const string NotSafe7 = "Go get one now\nthey are going fast";
-            const string Expected7 = "\"Go get one now\nthey are going fast\"";
-
-            string notSafe8 = "Go get one now" + Environment.NewLine + "they are going fast";
-            string expected8 = "\"Go get one now" + Environment.NewLine + "they are going fast\"";
-
-            const string NotSafe9 = "Super luxurious truck    ";
-            const string Expected9 = "\"Super luxurious truck    \"";
-
-            const string NotSafe10 = "  Super luxurious truck";
-            const string Expected10 = "\"  Super luxurious truck\"";
-
-            const string NotSafe11 = "  Super luxurious truck    ";
-            const string Expected11 = "\"  Super luxurious truck    \"";
-
-            const string NotSafe12 = " Super, luxurious truck ";
-            const string Expected12 = "\" Super, luxurious truck \"";
-
-            const string NotSafe13 = " Super, \"luxurious\" truck ";
-            const string Expected13 = "\" Super, \"\"luxurious\"\" truck \"";
-
-            // Act
-            string actual1 = NotSafe1.ToCsvSafe();
-            string actual2 = NotSafe2.ToCsvSafe();
-            string actual3 = NotSafe3.ToCsvSafe();
-            string actual4 = NotSafe4.ToCsvSafe();
-            string actual5 = NotSafe5.ToCsvSafe();
-            string actual6 = NotSafe6.ToCsvSafe();
-            string actual7 = NotSafe7.ToCsvSafe();
-            string actual8 = notSafe8.ToCsvSafe();
-            string actual9 = NotSafe9.ToCsvSafe();
-            string actual10 = NotSafe10.ToCsvSafe();
-            string actual11 = NotSafe11.ToCsvSafe();
-            string actual12 = NotSafe12.ToCsvSafe();
-            string actual13 = NotSafe13.ToCsvSafe();
+            // Act,
+            var actual = tests.Select(_ => _.Original.ToCsvSafe());
 
             // Assert
-            Assert.Equal(Expected1, actual1);
-            Assert.Equal(Expected2, actual2);
-            Assert.Equal(Expected3, actual3);
-            Assert.Equal(Expected4, actual4);
-            Assert.Equal(Expected5, actual5);
-            Assert.Equal(Expected6, actual6);
-            Assert.Equal(Expected7, actual7);
-            Assert.Equal(expected8, actual8);
-            Assert.Equal(Expected9, actual9);
-            Assert.Equal(Expected10, actual10);
-            Assert.Equal(Expected11, actual11);
-            Assert.Equal(Expected12, actual12);
-            Assert.Equal(Expected13, actual13);
+            actual.Should().Equal(expected);
+        }
+
+        [Fact]
+        public static void FromCsv___Should_return_empty_collection___When_parameter_value_is_null()
+        {
+            // Arrange, Act
+            var actual = StringExtensions.FromCsv(null);
+
+            // Assert
+            actual.Should().BeEmpty();
+        }
+
+        [Fact]
+        public static void FromCsv___Should_parse_CSV_encoded_string_into_individual_values_treating_empty_string_as_empty_string___When_parameter_nullValueEncoding_is_null()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Original = " ", CsvSafe = "\" \"" },
+                new { Original = "\"", CsvSafe = "\"\"\"\"" },
+                new { Original = ",", CsvSafe = "\",\"" },
+                new { Original = string.Empty, CsvSafe = string.Empty },
+                new { Original = "Super, luxurious truck", CsvSafe = "\"Super, luxurious truck\"" },
+                new { Original = "Super \"luxurious\" truck", CsvSafe = "\"Super \"\"luxurious\"\" truck\"" },
+                new { Original = "Go get one now\r\nthey are going fast", CsvSafe = "\"Go get one now\r\nthey are going fast\"" },
+                new { Original = "Go get one now\nthey are going fast", CsvSafe = "\"Go get one now\nthey are going fast\"" },
+                new { Original = "Go get one now" + Environment.NewLine + "they are going fast", CsvSafe = "\"Go get one now" + Environment.NewLine + "they are going fast\"" },
+                new { Original = "Super luxurious truck    ", CsvSafe = "\"Super luxurious truck    \"" },
+                new { Original = "  Super luxurious truck", CsvSafe = "\"  Super luxurious truck\"" },
+                new { Original = "  Super luxurious truck    ", CsvSafe = "\"  Super luxurious truck    \"" },
+                new { Original = " Super, luxurious truck ", CsvSafe = "\" Super, luxurious truck \"" },
+                new { Original = " Super, \"luxurious\" truck ", CsvSafe = "\" Super, \"\"luxurious\"\" truck \"" },
+                new { Original = "something-boring", CsvSafe = "something-boring" },
+            };
+
+            var csv = tests.Select(_ => _.CsvSafe).Aggregate((working, next) => working + "," + next);
+
+            // Act
+            var actual = csv.FromCsv();
+
+            // Assert
+            actual.Should().Equal(tests.Select(_ => _.Original));
+        }
+
+        [Fact]
+        public static void FromCsv___Should_parse_CSV_encoded_string_into_individual_values_treating_empty_string_as_null___When_parameter_nullValueEncoding_is_empty_string()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Original = " ", CsvSafe = "\" \"" },
+                new { Original = (string)null, CsvSafe = string.Empty },
+                new { Original = "something-boring", CsvSafe = "something-boring" },
+            };
+
+            var csv = tests.Select(_ => _.CsvSafe).Aggregate((working, next) => working + "," + next);
+
+            // Act
+            var actual = csv.FromCsv(nullValueEncoding: string.Empty);
+
+            // Assert
+            actual.Should().Equal(tests.Select(_ => _.Original));
+        }
+
+        [Fact]
+        public static void FromCsv___Should_parse_CSV_encoded_string_into_individual_values_treating_well_known_token_as_null___When_parameter_nullValueEncoding_is_a_well_known_token()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Original = " ", CsvSafe = "\" \"" },
+                new { Original = (string)null, CsvSafe = "<null>" },
+                new { Original = "something-boring", CsvSafe = "something-boring" },
+            };
+
+            var csv = tests.Select(_ => _.CsvSafe).Aggregate((working, next) => working + "," + next);
+
+            // Act
+            var actual = csv.FromCsv(nullValueEncoding: "<null>");
+
+            // Assert
+            actual.Should().Equal(tests.Select(_ => _.Original));
         }
 
         [Fact]
