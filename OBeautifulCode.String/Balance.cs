@@ -7,6 +7,7 @@
 // </auto-generated>
 // --------------------------------------------------------------------------------------------------------------------
 
+// ReSharper disable once CheckNamespace
 namespace OBeautifulCode.String.Recipes
 {
     using System;
@@ -35,10 +36,13 @@ namespace OBeautifulCode.String.Recipes
         /// <exception cref="ArgumentException">source is whitespace.</exception>
         /// <exception cref="ArgumentException">open == close</exception>
         /// <returns>Returns true if character is balanced in the string, false if not</returns>
-        public static bool IsBalanced(this string source, char open, char close)
+        public static bool IsBalanced(
+            this string source, 
+            char open, 
+            char close)
         {
-            int unbalancedPosition;
-            return IsBalanced(source, open, close, out unbalancedPosition);
+            var result = IsBalanced(source, open, close, out _);
+            return result;
         }
 
         /// <summary>
@@ -58,7 +62,8 @@ namespace OBeautifulCode.String.Recipes
             source.Named(nameof(source)).Must().NotBeNull().And().NotBeWhiteSpace().OrThrowFirstFailure();
             open.Named(nameof(open)).Must().NotBeEqualTo(close).OrThrow();
 
-            return IsBalanced(source.ToCharArray(), open, close, out unbalancedPosition);
+            var result = IsBalanced(source.ToCharArray(), open, close, out unbalancedPosition);
+            return result;
         }
 
         /// <summary>
@@ -77,8 +82,8 @@ namespace OBeautifulCode.String.Recipes
         /// <returns>Returns true if opening and closing strings are is balanced in the string being searched, false if not.</returns>
         public static bool IsBalanced(this string source, string open, string close)
         {
-            int unbalancedPosition;
-            return IsBalanced(source, open, close, out unbalancedPosition);
+            var result = IsBalanced(source, open, close, out _);
+            return result;
         }
 
         /// <summary>
@@ -104,7 +109,8 @@ namespace OBeautifulCode.String.Recipes
             close.Named(nameof(close)).Must().NotBeNull().And().NotBeWhiteSpace().OrThrowFirstFailure();
             open.Named(nameof(open)).Must().NotBeEqualTo(close).OrThrow();
 
-            return IsBalanced(source.ToCharArray(), open.ToCharArray(), close.ToCharArray(), out unbalancedPosition);
+            var result = IsBalanced(source.ToCharArray(), open.ToCharArray(), close.ToCharArray(), out unbalancedPosition);
+            return result;
         }
 
         /// <summary>
@@ -129,8 +135,8 @@ namespace OBeautifulCode.String.Recipes
         /// <returns>Returns true if opening and closing markers are balanced in the string being searched, false if not.</returns>
         public static bool IsBalanced(this string source, ICollection<char> open, ICollection<char> close)
         {
-            int unbalancedPosition;
-            return IsBalanced(source, open, close, out unbalancedPosition);
+            var result = IsBalanced(source, open, close, out _);
+            return result;
         }
 
         /// <summary>
@@ -174,7 +180,8 @@ namespace OBeautifulCode.String.Recipes
                 throw new ArgumentException("An opening marker is the same as the corresponding closing marker.");
             }
 
-            return IsBalancedMultipleMarkers(source.ToCharArray(), openArray, closeArray, out unbalancedPosition);
+            var result = IsBalancedMultipleMarkers(source.ToCharArray(), openArray, closeArray, out unbalancedPosition);
+            return result;
         }
 
         /// <summary>
@@ -195,8 +202,8 @@ namespace OBeautifulCode.String.Recipes
         /// </returns>
         private static bool IsOneArrayInAnother(char[] source, char[] toFindWithinSource, int sourceIndexToStartAt)
         {
-            bool found = !toFindWithinSource.Where((t, index) => t != source[sourceIndexToStartAt + index]).Any();
-            return found;
+            var result = !toFindWithinSource.Where((t, index) => t != source[sourceIndexToStartAt + index]).Any();
+            return result;
         }
 
         /// <summary>

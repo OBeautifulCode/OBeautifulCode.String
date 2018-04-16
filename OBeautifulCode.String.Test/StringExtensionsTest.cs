@@ -694,6 +694,34 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
+        public static void FromCsv___Should_return_collection_with_single_empty_element___When_parameter_value_is_the_empty_string()
+        {
+            // Arrange
+            var value = string.Empty;
+
+            // Act
+            var actual = value.FromCsv();
+
+            // Assert
+            actual.Should().ContainSingle();
+            actual.First().Should().Be(value);
+        }
+
+        [Fact]
+        public static void FromCsv___Should_return_collection_with_single_null_element___When_parameter_value_is_the_empty_string_and_nullValueEncoding_is_the_empty_string()
+        {
+            // Arrange
+            var value = string.Empty;
+
+            // Act
+            var actual = value.FromCsv(nullValueEncoding: string.Empty);
+
+            // Assert
+            actual.Should().ContainSingle();
+            actual.First().Should().BeNull();
+        }
+
+        [Fact]
         public static void FromCsv___Should_parse_CSV_encoded_string_into_individual_values_treating_empty_string_as_empty_string___When_parameter_nullValueEncoding_is_null()
         {
             // Arrange

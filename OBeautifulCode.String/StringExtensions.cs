@@ -7,6 +7,7 @@
 // </auto-generated>
 // --------------------------------------------------------------------------------------------------------------------
 
+// ReSharper disable once CheckNamespace
 namespace OBeautifulCode.String.Recipes
 {
     using System;
@@ -257,6 +258,7 @@ namespace OBeautifulCode.String.Recipes
         /// <param name="nullValueEncoding">Optional value indicating how nulls are encoded.  Defaulted to null, which results in a collection that never contains null.</param>
         /// <returns>
         /// Returns the values contained within a CSV.
+        /// If <paramref name="value"/> is null, returns an empty collection.
         /// </returns>
         public static IReadOnlyCollection<string> FromCsv(
             this string value,
