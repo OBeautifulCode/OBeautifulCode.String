@@ -272,6 +272,12 @@ namespace OBeautifulCode.String.Recipes
                 return result;
             }
 
+            // the regex doesn't solve for leading comma
+            if (value.StartsWith(",", StringComparison.OrdinalIgnoreCase))
+            {
+                value = "," + value;
+            }
+
             var matches = CsvParsingRegex.Matches(value);
             foreach (Match match in matches)
             {

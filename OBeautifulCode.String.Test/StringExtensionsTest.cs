@@ -722,6 +722,57 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
+        public static void FromCsv___Should_return_collection_with_empty_string_elements___When_CSV_has_leading_or_trailing_commas()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Csv = ",", Expected = new[] { string.Empty, string.Empty } },
+                new { Csv = ",good,", Expected = new[] { string.Empty, "good", string.Empty } },
+            };
+
+            // Act, Assert
+            foreach (var test in tests)
+            {
+                test.Csv.FromCsv().Should().Equal(test.Expected);
+            }
+        }
+
+        [Fact]
+        public static void FromCsv___Should_return_collection_with_null_elements___When_CSV_has_leading_or_trailing_commas_and_nullValueEncoding_is_empty_string()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Csv = ",", Expected = new[] { (string)null, null } },
+                new { Csv = ",good,", Expected = new[] { null, "good", null } },
+            };
+
+            // Act, Assert
+            foreach (var test in tests)
+            {
+                test.Csv.FromCsv(nullValueEncoding: string.Empty).Should().Equal(test.Expected);
+            }
+        }
+
+        [Fact]
+        public static void FromCsv___Should_return_collection_empty_string_elements___When_CSV_has_leading_or_trailing_commas_and_nullValueEncoding_is_a_well_known_token()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Csv = ",<null>", Expected = new[] { string.Empty, null } },
+                new { Csv = ",<null>,", Expected = new[] { string.Empty, null, string.Empty } },
+            };
+
+            // Act, Assert
+            foreach (var test in tests)
+            {
+                test.Csv.FromCsv(nullValueEncoding: "<null>").Should().Equal(test.Expected);
+            }
+        }
+
+        [Fact]
         public static void FromCsv___Should_parse_CSV_encoded_string_into_individual_values_treating_empty_string_as_empty_string___When_parameter_nullValueEncoding_is_null()
         {
             // Arrange
