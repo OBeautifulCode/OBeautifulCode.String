@@ -36,7 +36,7 @@ namespace OBeautifulCode.String.Recipes
 
         private static readonly Regex CsvParsingRegex = new Regex("(?:,\"|^\")(\"\"|[\\w\\W]*?)(?=\",|\"$)|(?:,(?!\")|^(?!\"))([^,]*?)(?=$|,)|(\r\n|\n)", RegexOptions.Compiled);
 
-        private static readonly Regex AlphaNumericRegex = new Regex("[^a-zA-Z0-9]", RegexOptions.Compiled);
+        private static readonly Regex NotAlphaNumericRegex = new Regex("[^a-zA-Z0-9]", RegexOptions.Compiled);
 
         /// <summary>
         /// Appends one string to the another (base) if the base string
@@ -83,7 +83,28 @@ namespace OBeautifulCode.String.Recipes
         {
             value.Named(nameof(value)).Must().NotBeNull().OrThrow();
 
-            var result = !AlphaNumericRegex.IsMatch(value);
+            var result = !NotAlphaNumericRegex.IsMatch(value);
+            return result;
+        }
+
+        /// <summary>
+        /// Converts the specified string to an alpha-numeric string
+        /// by removing all non-alpha-numeric characters.
+        /// </summary>
+        /// <param name="value">The string to convert.</param>
+        /// <exception cref="ArgumentNullException">Thrown when value is null.</exception>
+        /// <remarks>
+        /// An empty string ("") is considered alpha-numeric.
+        /// </remarks>
+        /// <returns>
+        /// The specified string with all non-alpha-numeric characters removed.
+        /// </returns>
+        public static string ToAlphanumeric(
+            this string value)
+        {
+            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
+
+            var result = NotAlphaNumericRegex.Replace(value, string.Empty);
             return result;
         }
 

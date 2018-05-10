@@ -188,6 +188,36 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
+        public static void ToAlphanumeric___Should_throw_ArgumentNullException___When_parameter_value_is_null()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => StringExtensions.ToLowerTrimmed(null));
+
+            // Assert
+            actual.Should().BeOfType<ArgumentNullException>();
+        }
+
+        [Fact]
+        public static void ToAlphanumeric___Should_return_value_with_non_alphanumeric_characters_removed___When_called()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Value = string.Empty, Expected = string.Empty },
+                new { Value = " ", Expected = string.Empty },
+                new { Value = " asdf ", Expected = "asdf" },
+                new { Value = " as***df ", Expected = "asdf" },
+                new { Value = "someletters==-", Expected = "someletters" },
+            };
+
+            // Act
+            var actuals = tests.Select(_ => _.Value.ToAlphanumeric()).ToList();
+
+            // Assert
+            actuals.Should().Equal(tests.Select(_ => _.Expected));
+        }
+
+        [Fact]
         public static void ReplaceCaseInsensitive_ParameterValueIsNull_ThrowsArgumentNullException()
         {
             // Arrange, Act, Assert
