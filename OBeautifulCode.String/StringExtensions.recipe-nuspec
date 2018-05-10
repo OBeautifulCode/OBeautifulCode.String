@@ -3,7 +3,7 @@
     <id>OBeautifulCode.String.Recipes.StringExtensions</id>
     <description>Adds some convenient extension methods to strings.</description>
     <tags>string extension extensionmethod</tags>
-    <developmentDependency>true</developmentDependency>
+    <iconUrl>https://raw.githubusercontent.com/OBeautifulCode/OBeautifulCode.String/master/OBeautifulCode.String/nuget-icon.png</iconUrl>
     <dependencies>
       <dependency id="Spritely.Recipes.MustValidation" version="0.6.3" />
     </dependencies>
