@@ -23,8 +23,11 @@ namespace OBeautifulCode.String.Recipes
 #if !OBeautifulCodeStringRecipesProject
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.String", "See package version number")]
+    internal
+#else
+    public
 #endif
-    internal static class Balance
+    static class Balance
     {
         /// <summary>
         /// Checks for balanced characters in a string.

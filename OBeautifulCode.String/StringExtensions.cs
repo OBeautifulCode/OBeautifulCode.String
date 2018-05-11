@@ -25,8 +25,11 @@ namespace OBeautifulCode.String.Recipes
 #if !OBeautifulCodeStringRecipesProject
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.String", "See package version number")]
+    internal
+#else
+    public
 #endif
-    internal static class StringExtensions
+    static class StringExtensions
     {
         private static readonly Encoding AsciiEncoding = new ASCIIEncoding();
 
