@@ -55,7 +55,7 @@ namespace OBeautifulCode.String.Recipes
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="shouldEndWith"/> is null.</exception>
         public static string AppendMissing(
-            this string value, 
+            this string value,
             string shouldEndWith)
         {
             new { value }.Must().NotBeNull();
@@ -111,24 +111,24 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Performs a fast case-insensitive string replacement
+        /// Performs a fast case-insensitive string replacement.
         /// </summary>
         /// <remarks>
         /// adapted from <a href="http://www.codeproject.com/KB/string/fastestcscaseinsstringrep.aspx"/>
-        /// If newValue is null, all occurrences of oldValue are removed
+        /// If newValue is null, all occurrences of oldValue are removed.
         /// </remarks>
-        /// <param name="value">the string being searched</param>
-        /// <param name="oldValue">string to be replaced</param>
+        /// <param name="value">the string being searched.</param>
+        /// <param name="oldValue">string to be replaced.</param>
         /// <param name="newValue">string to replace all occurrences of oldValue.</param>
         /// <returns>
         /// A string where the case-insensitive string replacement has been applied.
         /// </returns>
-        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="oldValue"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="oldValue"/> is an empty string.</exception>
         public static string ReplaceCaseInsensitive(
-            this string value, 
-            string oldValue, 
+            this string value,
+            string oldValue,
             string newValue)
         {
             new { value }.Must().NotBeNull();
@@ -184,7 +184,7 @@ namespace OBeautifulCode.String.Recipes
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="encoding"/> is null.</exception>
         public static byte[] ToBytes(
-            this string value, 
+            this string value,
             Encoding encoding)
         {
             new { value }.Must().NotBeNull();
@@ -239,7 +239,7 @@ namespace OBeautifulCode.String.Recipes
         /// </summary>
         /// <remarks>
         /// Here are the rules for making a string CSV safe:
-        /// http://en.wikipedia.org/wiki/Comma-separated_values
+        /// <a href="http://en.wikipedia.org/wiki/Comma-separated_values" />.
         /// </remarks>
         /// <param name="value">The string to make safe.</param>
         /// <returns>
@@ -320,10 +320,10 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Performs both ToLower() and Trim() on a String
+        /// Performs both ToLower() and Trim() on a string.
         /// </summary>
         /// <param name="value">The string to operate on.</param>
-        /// <returns>Lower-case, trimmed string</returns>
+        /// <returns>Lower-case, trimmed string.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public static string ToLowerTrimmed(
             this string value)
