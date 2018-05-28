@@ -48,6 +48,9 @@
       <!-- Plural of Func, a .net type -->
       <Word>funcs</Word>
 
+      <!-- A web-based hosting service for version control using git -->
+      <Word>github</Word>
+
       <!-- Acronym for JavaScript Object Notation -->
       <Word>json</Word>
 
@@ -62,6 +65,9 @@
 
       <!-- The name of an open source organization on GitHub, lead by Suraj Gupta -->
       <Word>OBeautifulCode</Word>
+
+      <!-- Acronym for OBeautifulCode, the name of an open source organization on GitHub, lead by Suraj Gupta -->
+      <Word>OBC</Word>
 
       <!-- Synonym for parenthesis -->
       <Word>parens</Word>
