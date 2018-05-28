@@ -7,7 +7,6 @@
 // </auto-generated>
 // --------------------------------------------------------------------------------------------------------------------
 
-// ReSharper disable once CheckNamespace
 namespace OBeautifulCode.String.Recipes
 {
     using System;
@@ -17,7 +16,7 @@ namespace OBeautifulCode.String.Recipes
     using System.Text;
     using System.Text.RegularExpressions;
 
-    using Spritely.Recipes;
+    using OBeautifulCode.Validation.Recipes;
 
     /// <summary>
     /// Adds some convenient extension methods to strings.
@@ -47,20 +46,20 @@ namespace OBeautifulCode.String.Recipes
         /// </summary>
         /// <param name="value">The base string.</param>
         /// <param name="shouldEndWith">The string to append.</param>
-        /// <exception cref="ArgumentNullException">value is null.</exception>
-        /// <exception cref="ArgumentNullException">shouldEndWith is null.</exception>
         /// <remarks>
         /// If the string to append is the empty string, this method will always return the base string.
         /// </remarks>
         /// <returns>
         /// The inputted string where the last character is a backslash.
         /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="shouldEndWith"/> is null.</exception>
         public static string AppendMissing(
             this string value, 
             string shouldEndWith)
         {
-            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
-            shouldEndWith.Named(nameof(shouldEndWith)).Must().NotBeNull().OrThrow();
+            new { value }.Must().NotBeNull();
+            new { shouldEndWith }.Must().NotBeNull();
 
             if (!value.EndsWith(shouldEndWith, StringComparison.CurrentCulture))
             {
@@ -74,17 +73,17 @@ namespace OBeautifulCode.String.Recipes
         /// Determines if a string is alpha numeric.
         /// </summary>
         /// <param name="value">The string to evaluate.</param>
-        /// <exception cref="ArgumentNullException">Thrown when value is null.</exception>
         /// <remarks>
         /// An empty string ("") is considered alpha-numeric.
         /// </remarks>
         /// <returns>
         /// Returns true if the string is alpha-numeric, false if not.
         /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public static bool IsAlphanumeric(
             this string value)
         {
-            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
+            new { value }.Must().NotBeNull();
 
             var result = !NotAlphaNumericRegex.IsMatch(value);
             return result;
@@ -95,17 +94,17 @@ namespace OBeautifulCode.String.Recipes
         /// by removing all non-alpha-numeric characters.
         /// </summary>
         /// <param name="value">The string to convert.</param>
-        /// <exception cref="ArgumentNullException">Thrown when value is null.</exception>
         /// <remarks>
         /// An empty string ("") is considered alpha-numeric.
         /// </remarks>
         /// <returns>
         /// The specified string with all non-alpha-numeric characters removed.
         /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public static string ToAlphanumeric(
             this string value)
         {
-            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
+            new { value }.Must().NotBeNull();
 
             var result = NotAlphaNumericRegex.Replace(value, string.Empty);
             return result;
@@ -121,19 +120,19 @@ namespace OBeautifulCode.String.Recipes
         /// <param name="value">the string being searched</param>
         /// <param name="oldValue">string to be replaced</param>
         /// <param name="newValue">string to replace all occurrences of oldValue.</param>
-        /// <exception cref="ArgumentNullException">value is null</exception>
-        /// <exception cref="ArgumentNullException">oldValue is null.</exception>
-        /// <exception cref="ArgumentException">oldValue is the empty string ("").</exception>
         /// <returns>
         /// A string where the case-insensitive string replacement has been applied.
         /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="oldValue"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="oldValue"/> is an empty string.</exception>
         public static string ReplaceCaseInsensitive(
             this string value, 
             string oldValue, 
             string newValue)
         {
-            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
-            oldValue.Named(nameof(oldValue)).Must().NotBeNull().And().NotBeEmptyString().OrThrowFirstFailure();
+            new { value }.Must().NotBeNull();
+            new { oldValue }.Must().NotBeNull().And().NotBeEmptyString();
 
             if (newValue == null)
             {
@@ -182,13 +181,14 @@ namespace OBeautifulCode.String.Recipes
         /// <param name="value">The string to encode.</param>
         /// <param name="encoding">The encoding to use.</param>
         /// <returns>byte array representing the string in a given encoding.</returns>
-        /// <exception cref="ArgumentNullException">value is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="encoding"/> is null.</exception>
         public static byte[] ToBytes(
             this string value, 
             Encoding encoding)
         {
-            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
-            encoding.Named(nameof(encoding)).Must().NotBeNull().OrThrow();
+            new { value }.Must().NotBeNull();
+            new { encoding }.Must().NotBeNull();
 
             var result = encoding.GetBytes(value);
             return result;
@@ -199,7 +199,7 @@ namespace OBeautifulCode.String.Recipes
         /// </summary>
         /// <param name="value">The string to encode.</param>
         /// <returns>byte array representing the string in ASCII.</returns>
-        /// <exception cref="ArgumentNullException">value is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public static byte[] ToAsciiBytes(
             this string value)
         {
@@ -212,7 +212,7 @@ namespace OBeautifulCode.String.Recipes
         /// </summary>
         /// <param name="value">The string to encode.</param>
         /// <returns>byte array representing the string in unicode.</returns>
-        /// <exception cref="ArgumentNullException">value is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public static byte[] ToUnicodeBytes(
             this string value)
         {
@@ -225,7 +225,7 @@ namespace OBeautifulCode.String.Recipes
         /// </summary>
         /// <param name="value">The string to encode.</param>
         /// <returns>byte array representing the string in UTF-8.</returns>
-        /// <exception cref="ArgumentNullException">value is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public static byte[] ToUtf8Bytes(
             this string value)
         {
@@ -245,10 +245,11 @@ namespace OBeautifulCode.String.Recipes
         /// <returns>
         /// Returns a string that is safe to insert into a CSV object.
         /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public static string ToCsvSafe(
             this string value)
         {
-            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
+            new { value }.Must().NotBeNull();
 
             if (string.IsNullOrEmpty(value))
             {
@@ -323,11 +324,11 @@ namespace OBeautifulCode.String.Recipes
         /// </summary>
         /// <param name="value">The string to operate on.</param>
         /// <returns>Lower-case, trimmed string</returns>
-        /// <exception cref="NullReferenceException">Thrown when value is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public static string ToLowerTrimmed(
             this string value)
         {
-            value.Named(nameof(value)).Must().NotBeNull().OrThrow();
+            new { value }.Must().NotBeNull();
 
             var result = value.ToLower(CultureInfo.CurrentCulture).Trim();
             return result;

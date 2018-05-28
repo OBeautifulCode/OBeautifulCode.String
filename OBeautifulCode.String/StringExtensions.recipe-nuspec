@@ -9,6 +9,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="StringExtensions.cs" target="content\net45\.recipes\OBeautifulCode.String\StringExtensions.cs" />
+    <file src="StringExtensions.cs" target="content\net462\.recipes\OBeautifulCode.String\StringExtensions.cs" />
   </files>
 </package>

@@ -16,7 +16,6 @@ namespace OBeautifulCode.String.Test
 
     public static class BalanceTest
     {
-        // ReSharper disable InconsistentNaming
         [Fact]
         public static void IsBalanced_SingleCharacterOpenAndCloseMarkersAndSourceIsNull_ThrowsArgumentNullException()
         {
@@ -53,7 +52,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void IsBalanced_SingleCharacterOpenAndCloseMarkersAndOpenEqualsClose_ThrowsArgumentException()
+        public static void IsBalanced_SingleCharacterOpenAndCloseMarkersAndOpenEqualsClose_ThrowsArgumentOutOfRangeException()
         {
             // Arrange
             int unbalancedPosition;
@@ -62,8 +61,8 @@ namespace OBeautifulCode.String.Test
             const char Close = '(';
 
             // Act, Assert
-            Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open, Close));
-            Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open, Close, out unbalancedPosition));
+            Assert.Throws<ArgumentOutOfRangeException>(() => Source.IsBalanced(Open, Close));
+            Assert.Throws<ArgumentOutOfRangeException>(() => Source.IsBalanced(Open, Close, out unbalancedPosition));
         }
 
         [Theory]
@@ -208,7 +207,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void IsBalanced_OpenAndCloseMarkersAreStringsAndOpenEqualsClose_ThrowsArgumentException()
+        public static void IsBalanced_OpenAndCloseMarkersAreStringsAndOpenEqualsClose_ThrowsArgumentOutOfRangeException()
         {
             // Arrange
             int unbalancedPosition;
@@ -217,8 +216,8 @@ namespace OBeautifulCode.String.Test
             const string Close = "(";
 
             // Act, Assert
-            Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open, Close));
-            Assert.Throws<ArgumentException>(() => Source.IsBalanced(Open, Close, out unbalancedPosition));
+            Assert.Throws<ArgumentOutOfRangeException>(() => Source.IsBalanced(Open, Close));
+            Assert.Throws<ArgumentOutOfRangeException>(() => Source.IsBalanced(Open, Close, out unbalancedPosition));
         }
 
         [Theory]
@@ -342,7 +341,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void IsBalanced_MultipleOpenAndCloseMarkersAndCloseAndOpenContainDifferentNumberOfMarkers_ThrowsArgumentException()
+        public static void IsBalanced_MultipleOpenAndCloseMarkersAndCloseAndOpenContainDifferentNumberOfMarkers_ThrowsArgumentOutOfRangeException()
         {
             // Arrange
             int unbalancedPosition;
@@ -355,11 +354,11 @@ namespace OBeautifulCode.String.Test
             var close2 = new[] { ')', ']', '/' };
 
             // Act, Assert
-            Assert.Throws<ArgumentException>(() => Source.IsBalanced(open1, close1));
-            Assert.Throws<ArgumentException>(() => Source.IsBalanced(open1, close1, out unbalancedPosition));
+            Assert.Throws<ArgumentOutOfRangeException>(() => Source.IsBalanced(open1, close1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => Source.IsBalanced(open1, close1, out unbalancedPosition));
 
-            Assert.Throws<ArgumentException>(() => Source.IsBalanced(open2, close2));
-            Assert.Throws<ArgumentException>(() => Source.IsBalanced(open2, close2, out unbalancedPosition));
+            Assert.Throws<ArgumentOutOfRangeException>(() => Source.IsBalanced(open2, close2));
+            Assert.Throws<ArgumentOutOfRangeException>(() => Source.IsBalanced(open2, close2, out unbalancedPosition));
         }
 
         [Fact]
@@ -421,7 +420,5 @@ namespace OBeautifulCode.String.Test
             Assert.True(toValidate.IsBalanced(opening, closing, out unbalancedPosition));
             Assert.Equal(-1, unbalancedPosition);
         }
-
-        // ReSharper restore InconsistentNaming
     }
 }

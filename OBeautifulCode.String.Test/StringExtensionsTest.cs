@@ -19,7 +19,6 @@ namespace OBeautifulCode.String.Test
 
     public static class StringExtensionsTest
     {
-        // ReSharper disable InconsistentNaming
         [Fact]
         public static void AppendMissing_ParameterValueIsNull_ThrowsArgumentNullException()
         {
@@ -924,7 +923,5 @@ namespace OBeautifulCode.String.Test
             Assert.Equal(Expected2, actual2);
             Assert.Equal(Expected3, actual3);
         }
-
-        // ReSharper restore InconsistentNaming
     }
 }
