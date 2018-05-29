@@ -1,8 +1,8 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/0axbj72exywm5sjt?svg=true)](https://ci.appveyor.com/project/SurajGupta/obeautifulcode-string)
 
-![NuGet](https://img.shields.io/nuget/v/OBeautifulCode.String.Recipes.StringExtensions.svg)  OBeautifulCode.String.Recipes.StringExtensions
+[![Nuget status](https://img.shields.io/nuget/v/OBeautifulCode.String.Recipes.StringExtensions.svg)](https://www.nuget.org/packages/OBeautifulCode.String.Recipes.StringExtensions)  OBeautifulCode.String.Recipes.StringExtensions
 
-![NuGet](https://img.shields.io/nuget/v/OBeautifulCode.String.Recipes.Balance.svg)  OBeautifulCode.String.Recipes.Balance
+[![Nuget status](https://img.shields.io/nuget/v/OBeautifulCode.String.Recipes.Balance.svg)](https://www.nuget.org/packages/OBeautifulCode.String.Recipes.Balance)  OBeautifulCode.String.Recipes.Balance
 
 String Helpers
 ==============
