@@ -9,6 +9,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Balance.cs" target="content\net45\.recipes\OBeautifulCode.String\Balance.cs" />
+    <file src="Balance.cs" target="content\net462\.recipes\OBeautifulCode.String\Balance.cs" />
   </files>
 </package>
