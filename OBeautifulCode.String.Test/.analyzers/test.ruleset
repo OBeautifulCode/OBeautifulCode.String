@@ -39,6 +39,18 @@
     <Rule Id="CA1031" Action="None" />
 
     <!--
+      ** Avoid empty interfaces **
+      Empty interfaces are useful in testing.  Sometimes we need an interface Type that serves no purpose 
+      other than being a Type that can be passed around, casted, reflected over, etc.
+      The Code Analysis docs say:
+      "...you are probably using an interface as a marker or a way to identify a group of types..."
+      Even if this is the case, empty interfaces are cheaper and more efficient than attributes for
+      identifying a group of types in test projects because we can use the 'is' and 'as' keywords
+      to evaluate type compatability instead of using reflection.
+    -->
+    <Rule Id="CA1040" Action="None" />
+
+    <!--
       ** Validate arguments of public methods **
       Public methods in test projects do not have external callers and it's too burdensome to require 
       validation of arguments.
@@ -258,6 +270,12 @@
       documenting the partial.
     -->
     <Rule Id="SA1601" Action="None" />
+
+    <!--
+      ** Enumeration items should be documented **
+      See notes in SA0001
+    -->
+    <Rule Id="SA1602" Action="None" />
 
     <!--
       ** Element documentation must not be copied and pasted **
