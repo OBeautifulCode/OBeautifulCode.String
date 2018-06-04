@@ -22,37 +22,26 @@ namespace OBeautifulCode.Validation.Recipes
 #endif
         static partial class ParameterValidation
     {
-        private delegate void ValueValidationHandler(string validationName, object value, Type valueType, string parameterName, string because, bool isElementInEnumerable, params ValidationParameter[] validationParameters);
+        private delegate void ValueValidationHandler(
+            Validation validation);
 
         private static void BeNullInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            if (!ReferenceEquals(value, null))
+            if (!ReferenceEquals(validation.Value, null))
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, BeNullExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, BeNullExceptionMessageSuffix, Include.FailingValue);
                 throw new ArgumentException(exceptionMessage);
             }
         }
 
         private static void NotBeNullInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            if (ReferenceEquals(value, null))
+            if (ReferenceEquals(validation.Value, null))
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotBeNullExceptionMessageSuffix);
-                if (isElementInEnumerable)
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, NotBeNullExceptionMessageSuffix);
+                if (validation.IsElementInEnumerable)
                 {
                     throw new ArgumentException(exceptionMessage);
                 }
@@ -64,141 +53,117 @@ namespace OBeautifulCode.Validation.Recipes
         }
 
         private static void BeTrueInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldThrow = ReferenceEquals(value, null) || ((bool)value != true);
+            var shouldThrow = ReferenceEquals(validation.Value, null) || ((bool)validation.Value != true);
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, BeTrueExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, BeTrueExceptionMessageSuffix, Include.FailingValue);
                 throw new ArgumentException(exceptionMessage);
             }
         }
 
         private static void NotBeTrueInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldNotThrow = ReferenceEquals(value, null) || ((bool)value == false);
+            var shouldNotThrow = ReferenceEquals(validation.Value, null) || ((bool)validation.Value == false);
             if (!shouldNotThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotBeTrueExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, NotBeTrueExceptionMessageSuffix);
                 throw new ArgumentException(exceptionMessage);
             }
         }
 
         private static void BeFalseInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldThrow = ReferenceEquals(value, null) || (bool)value;
+            var shouldThrow = ReferenceEquals(validation.Value, null) || (bool)validation.Value;
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, BeFalseExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, BeFalseExceptionMessageSuffix, Include.FailingValue);
                 throw new ArgumentException(exceptionMessage);
             }
         }
 
         private static void NotBeFalseInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldNotThrow = ReferenceEquals(value, null) || (bool)value;
+            var shouldNotThrow = ReferenceEquals(validation.Value, null) || (bool)validation.Value;
             if (!shouldNotThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotBeFalseExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, NotBeFalseExceptionMessageSuffix);
                 throw new ArgumentException(exceptionMessage);
             }
         }
 
         private static void NotBeNullNorWhiteSpaceInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            NotBeNullInternal(validationName, value, valueType, parameterName, because, isElementInEnumerable);
+            NotBeNullInternal(validation);
 
-            var shouldThrow = string.IsNullOrWhiteSpace((string)value);
+            var shouldThrow = string.IsNullOrWhiteSpace((string)validation.Value);
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotBeNullNorWhiteSpaceExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, NotBeNullNorWhiteSpaceExceptionMessageSuffix, Include.FailingValue);
                 throw new ArgumentException(exceptionMessage);
             }
         }
 
         private static void BeEmptyGuidInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldThrow = ReferenceEquals(value, null) || ((Guid)value != Guid.Empty);
+            var shouldThrow = ReferenceEquals(validation.Value, null) || ((Guid)validation.Value != Guid.Empty);
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, BeEmptyGuidExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, BeEmptyGuidExceptionMessageSuffix, Include.FailingValue);
+                throw new ArgumentException(exceptionMessage);
+            }
+        }
+
+        private static void NotBeEmptyGuidInternal(
+            Validation validation)
+        {
+            var shouldThrow = (!ReferenceEquals(validation.Value, null)) && ((Guid)validation.Value == Guid.Empty);
+            if (shouldThrow)
+            {
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, NotBeEmptyGuidExceptionMessageSuffix);
                 throw new ArgumentException(exceptionMessage);
             }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1820:TestForEmptyStringsUsingStringLength", Justification = "string.IsNullOrEmpty does not work here")]
         private static void BeEmptyStringInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldThrow = (string)value != string.Empty;
+            var shouldThrow = (string)validation.Value != string.Empty;
 
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, BeEmptyStringExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, BeEmptyStringExceptionMessageSuffix, Include.FailingValue);
+                throw new ArgumentException(exceptionMessage);
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1820:TestForEmptyStringsUsingStringLength", Justification = "string.IsNullOrEmpty does not work here")]
+        private static void NotBeEmptyStringInternal(
+            Validation validation)
+        {
+            var shouldThrow = (string)validation.Value == string.Empty;
+
+            if (shouldThrow)
+            {
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, NotBeEmptyStringExceptionMessageSuffix);
                 throw new ArgumentException(exceptionMessage);
             }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "unused", Justification = "Cannot iterate without a local")]
         private static void BeEmptyEnumerableInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            NotBeNullInternal(validationName, value, valueType, parameterName, because, isElementInEnumerable);
+            NotBeNullInternal(validation);
 
-            var valueAsEnumerable = value as IEnumerable;
+            var valueAsEnumerable = validation.Value as IEnumerable;
             var shouldThrow = false;
 
             // ReSharper disable once PossibleNullReferenceException
@@ -210,60 +175,18 @@ namespace OBeautifulCode.Validation.Recipes
 
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, BeEmptyEnumerableExceptionMessageSuffix);
-                throw new ArgumentException(exceptionMessage);
-            }
-        }
-
-        private static void NotBeEmptyGuidInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
-        {
-            var shouldThrow = (!ReferenceEquals(value, null)) && ((Guid)value == Guid.Empty);
-            if (shouldThrow)
-            {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotBeEmptyGuidExceptionMessageSuffix);
-                throw new ArgumentException(exceptionMessage);
-            }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1820:TestForEmptyStringsUsingStringLength", Justification = "string.IsNullOrEmpty does not work here")]
-        private static void NotBeEmptyStringInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
-        {
-            var shouldThrow = (string)value == string.Empty;
-
-            if (shouldThrow)
-            {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotBeEmptyStringExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, BeEmptyEnumerableExceptionMessageSuffix);
                 throw new ArgumentException(exceptionMessage);
             }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "unused", Justification = "Cannot iterate without a local")]
         private static void NotBeEmptyEnumerableInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            NotBeNullInternal(validationName, value, valueType, parameterName, because, isElementInEnumerable);
+            NotBeNullInternal(validation);
 
-            var valueAsEnumerable = value as IEnumerable;
+            var valueAsEnumerable = validation.Value as IEnumerable;
             var shouldThrow = true;
 
             // ReSharper disable once PossibleNullReferenceException
@@ -275,23 +198,17 @@ namespace OBeautifulCode.Validation.Recipes
 
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotBeEmptyEnumerableExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, NotBeEmptyEnumerableExceptionMessageSuffix);
                 throw new ArgumentException(exceptionMessage);
             }
         }
 
         private static void ContainSomeNullsInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            NotBeNullInternal(validationName, value, valueType, parameterName, because, isElementInEnumerable);
+            NotBeNullInternal(validation);
 
-            var valueAsEnumerable = value as IEnumerable;
+            var valueAsEnumerable = validation.Value as IEnumerable;
             var shouldThrow = true;
 
             // ReSharper disable once PossibleNullReferenceException
@@ -306,23 +223,17 @@ namespace OBeautifulCode.Validation.Recipes
 
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, ContainSomeNullsExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, ContainSomeNullsExceptionMessageSuffix);
                 throw new ArgumentException(exceptionMessage);
             }
         }
 
         private static void NotContainAnyNullsInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            NotBeNullInternal(validationName, value, valueType, parameterName, because, isElementInEnumerable);
+            NotBeNullInternal(validation);
 
-            var valueAsEnumerable = value as IEnumerable;
+            var valueAsEnumerable = validation.Value as IEnumerable;
             var shouldThrow = false;
 
             // ReSharper disable once PossibleNullReferenceException
@@ -337,62 +248,44 @@ namespace OBeautifulCode.Validation.Recipes
 
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotContainAnyNullsExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, NotContainAnyNullsExceptionMessageSuffix);
                 throw new ArgumentException(exceptionMessage);
             }
         }
 
         private static void BeDefaultInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var defaultValue = GetDefaultValue(valueType);
-            var shouldThrow = !EqualUsingDefaultEqualityComparer(valueType, value, defaultValue);
+            var defaultValue = GetDefaultValue(validation.ValueType);
+            var shouldThrow = !EqualUsingDefaultEqualityComparer(validation.ValueType, validation.Value, defaultValue);
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, BeDefaultExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, BeDefaultExceptionMessageSuffix, Include.FailingValue | Include.GenericType);
                 throw new ArgumentException(exceptionMessage);
             }
         }
 
         private static void NotBeDefaultInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var defaultValue = GetDefaultValue(valueType);
-            var shouldThrow = EqualUsingDefaultEqualityComparer(valueType, value, defaultValue);
+            var defaultValue = GetDefaultValue(validation.ValueType);
+            var shouldThrow = EqualUsingDefaultEqualityComparer(validation.ValueType, validation.Value, defaultValue);
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotBeDefaultExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, NotBeDefaultExceptionMessageSuffix, Include.GenericType);
                 throw new ArgumentException(exceptionMessage);
             }
         }
 
         private static void BeLessThanInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldThrow = CompareUsingDefaultComparer(valueType, value, validationParameters[0].Value) != CompareOutcome.Value1LessThanValue2;
+            var shouldThrow = CompareUsingDefaultComparer(validation.ValueType, validation.Value, validation.ValidationParameters[0].Value) != CompareOutcome.Value1LessThanValue2;
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, BeLessThanExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, BeLessThanExceptionMessageSuffix, Include.FailingValue | Include.GenericType);
 
-                if (isElementInEnumerable)
+                if (validation.IsElementInEnumerable)
                 {
                     throw new ArgumentException(exceptionMessage);
                 }
@@ -404,20 +297,14 @@ namespace OBeautifulCode.Validation.Recipes
         }
 
         private static void NotBeLessThanInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldThrow = CompareUsingDefaultComparer(valueType, value, validationParameters[0].Value) == CompareOutcome.Value1LessThanValue2;
+            var shouldThrow = CompareUsingDefaultComparer(validation.ValueType, validation.Value, validation.ValidationParameters[0].Value) == CompareOutcome.Value1LessThanValue2;
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotBeLessThanExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, NotBeLessThanExceptionMessageSuffix, Include.FailingValue | Include.GenericType);
 
-                if (isElementInEnumerable)
+                if (validation.IsElementInEnumerable)
                 {
                     throw new ArgumentException(exceptionMessage);
                 }
@@ -429,20 +316,14 @@ namespace OBeautifulCode.Validation.Recipes
         }
 
         private static void BeGreaterThanInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldThrow = CompareUsingDefaultComparer(valueType, value, validationParameters[0].Value) != CompareOutcome.Value1GreaterThanValue2;
+            var shouldThrow = CompareUsingDefaultComparer(validation.ValueType, validation.Value, validation.ValidationParameters[0].Value) != CompareOutcome.Value1GreaterThanValue2;
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, BeGreaterThanExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, BeGreaterThanExceptionMessageSuffix, Include.FailingValue | Include.GenericType);
 
-                if (isElementInEnumerable)
+                if (validation.IsElementInEnumerable)
                 {
                     throw new ArgumentException(exceptionMessage);
                 }
@@ -454,20 +335,14 @@ namespace OBeautifulCode.Validation.Recipes
         }
 
         private static void NotBeGreaterThanInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldThrow = CompareUsingDefaultComparer(valueType, value, validationParameters[0].Value) == CompareOutcome.Value1GreaterThanValue2;
+            var shouldThrow = CompareUsingDefaultComparer(validation.ValueType, validation.Value, validation.ValidationParameters[0].Value) == CompareOutcome.Value1GreaterThanValue2;
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotBeGreaterThanExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, NotBeGreaterThanExceptionMessageSuffix, Include.FailingValue | Include.GenericType);
 
-                if (isElementInEnumerable)
+                if (validation.IsElementInEnumerable)
                 {
                     throw new ArgumentException(exceptionMessage);
                 }
@@ -479,20 +354,14 @@ namespace OBeautifulCode.Validation.Recipes
         }
 
         private static void BeLessThanOrEqualToInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldThrow = CompareUsingDefaultComparer(valueType, value, validationParameters[0].Value) == CompareOutcome.Value1GreaterThanValue2;
+            var shouldThrow = CompareUsingDefaultComparer(validation.ValueType, validation.Value, validation.ValidationParameters[0].Value) == CompareOutcome.Value1GreaterThanValue2;
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, BeLessThanOrEqualToExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, BeLessThanOrEqualToExceptionMessageSuffix, Include.FailingValue | Include.GenericType);
 
-                if (isElementInEnumerable)
+                if (validation.IsElementInEnumerable)
                 {
                     throw new ArgumentException(exceptionMessage);
                 }
@@ -504,20 +373,14 @@ namespace OBeautifulCode.Validation.Recipes
         }
 
         private static void NotBeLessThanOrEqualToInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldThrow = CompareUsingDefaultComparer(valueType, value, validationParameters[0].Value) != CompareOutcome.Value1GreaterThanValue2;
+            var shouldThrow = CompareUsingDefaultComparer(validation.ValueType, validation.Value, validation.ValidationParameters[0].Value) != CompareOutcome.Value1GreaterThanValue2;
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotBeLessThanOrEqualToExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, NotBeLessThanOrEqualToExceptionMessageSuffix, Include.FailingValue | Include.GenericType);
 
-                if (isElementInEnumerable)
+                if (validation.IsElementInEnumerable)
                 {
                     throw new ArgumentException(exceptionMessage);
                 }
@@ -529,20 +392,14 @@ namespace OBeautifulCode.Validation.Recipes
         }
 
         private static void BeGreaterThanOrEqualToInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldThrow = CompareUsingDefaultComparer(valueType, value, validationParameters[0].Value) == CompareOutcome.Value1LessThanValue2;
+            var shouldThrow = CompareUsingDefaultComparer(validation.ValueType, validation.Value, validation.ValidationParameters[0].Value) == CompareOutcome.Value1LessThanValue2;
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, BeGreaterThanOrEqualToExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, BeGreaterThanOrEqualToExceptionMessageSuffix, Include.FailingValue | Include.GenericType);
 
-                if (isElementInEnumerable)
+                if (validation.IsElementInEnumerable)
                 {
                     throw new ArgumentException(exceptionMessage);
                 }
@@ -554,20 +411,14 @@ namespace OBeautifulCode.Validation.Recipes
         }
 
         private static void NotBeGreaterThanOrEqualToInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldThrow = CompareUsingDefaultComparer(valueType, value, validationParameters[0].Value) != CompareOutcome.Value1LessThanValue2;
+            var shouldThrow = CompareUsingDefaultComparer(validation.ValueType, validation.Value, validation.ValidationParameters[0].Value) != CompareOutcome.Value1LessThanValue2;
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotBeGreaterThanOrEqualToExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, NotBeGreaterThanOrEqualToExceptionMessageSuffix, Include.FailingValue | Include.GenericType);
 
-                if (isElementInEnumerable)
+                if (validation.IsElementInEnumerable)
                 {
                     throw new ArgumentException(exceptionMessage);
                 }
@@ -579,19 +430,13 @@ namespace OBeautifulCode.Validation.Recipes
         }
 
         private static void BeEqualToInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldThrow = !EqualUsingDefaultEqualityComparer(valueType, value, validationParameters[0].Value);
+            var shouldThrow = !EqualUsingDefaultEqualityComparer(validation.ValueType, validation.Value, validation.ValidationParameters[0].Value);
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, BeEqualToExceptionMessageSuffix);
-                if (isElementInEnumerable)
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, BeEqualToExceptionMessageSuffix, Include.FailingValue | Include.GenericType);
+                if (validation.IsElementInEnumerable)
                 {
                     throw new ArgumentException(exceptionMessage);
                 }
@@ -603,19 +448,13 @@ namespace OBeautifulCode.Validation.Recipes
         }
 
         private static void NotBeEqualToInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            var shouldThrow = EqualUsingDefaultEqualityComparer(valueType, value, validationParameters[0].Value);
+            var shouldThrow = EqualUsingDefaultEqualityComparer(validation.ValueType, validation.Value, validation.ValidationParameters[0].Value);
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotBeEqualToExceptionMessageSuffix);
-                if (isElementInEnumerable)
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, NotBeEqualToExceptionMessageSuffix, Include.GenericType);
+                if (validation.IsElementInEnumerable)
                 {
                     throw new ArgumentException(exceptionMessage);
                 }
@@ -627,24 +466,18 @@ namespace OBeautifulCode.Validation.Recipes
         }
 
         private static void BeInRangeInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            ThrowIfMalformedRange(validationParameters);
+            ThrowIfMalformedRange(validation.ValidationParameters);
 
-            var shouldThrow = (CompareUsingDefaultComparer(valueType, value, validationParameters[0].Value) == CompareOutcome.Value1LessThanValue2) ||
-                              (CompareUsingDefaultComparer(valueType, value, validationParameters[1].Value) == CompareOutcome.Value1GreaterThanValue2);
+            var shouldThrow = (CompareUsingDefaultComparer(validation.ValueType, validation.Value, validation.ValidationParameters[0].Value) == CompareOutcome.Value1LessThanValue2) ||
+                              (CompareUsingDefaultComparer(validation.ValueType, validation.Value, validation.ValidationParameters[1].Value) == CompareOutcome.Value1GreaterThanValue2);
 
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, BeInRangeExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, BeInRangeExceptionMessageSuffix, Include.FailingValue | Include.GenericType);
 
-                if (isElementInEnumerable)
+                if (validation.IsElementInEnumerable)
                 {
                     throw new ArgumentException(exceptionMessage);
                 }
@@ -656,24 +489,18 @@ namespace OBeautifulCode.Validation.Recipes
         }
 
         private static void NotBeInRangeInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            ThrowIfMalformedRange(validationParameters);
+            ThrowIfMalformedRange(validation.ValidationParameters);
 
-            var shouldThrow = (CompareUsingDefaultComparer(valueType, value, validationParameters[0].Value) != CompareOutcome.Value1LessThanValue2) &&
-                              (CompareUsingDefaultComparer(valueType, value, validationParameters[1].Value) != CompareOutcome.Value1GreaterThanValue2);
+            var shouldThrow = (CompareUsingDefaultComparer(validation.ValueType, validation.Value, validation.ValidationParameters[0].Value) != CompareOutcome.Value1LessThanValue2) &&
+                              (CompareUsingDefaultComparer(validation.ValueType, validation.Value, validation.ValidationParameters[1].Value) != CompareOutcome.Value1GreaterThanValue2);
 
             if (shouldThrow)
             {
-                var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotBeInRangeExceptionMessageSuffix);
+                var exceptionMessage = BuildArgumentExceptionMessage(validation, NotBeInRangeExceptionMessageSuffix, Include.GenericType);
 
-                if (isElementInEnumerable)
+                if (validation.IsElementInEnumerable)
                 {
                     throw new ArgumentException(exceptionMessage);
                 }
@@ -685,19 +512,13 @@ namespace OBeautifulCode.Validation.Recipes
         }
 
         private static void ContainInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            NotBeNullInternal(validationName, value, valueType, parameterName, because, isElementInEnumerable);
+            NotBeNullInternal(validation);
 
-            var valueAsEnumerable = (IEnumerable)value;
-            var searchForItem = validationParameters[0].Value;
-            var elementType = validationParameters[0].ValueType;
+            var valueAsEnumerable = (IEnumerable)validation.Value;
+            var searchForItem = validation.ValidationParameters[0].Value;
+            var elementType = validation.ValidationParameters[0].ValueType;
             foreach (var element in valueAsEnumerable)
             {
                 if (EqualUsingDefaultEqualityComparer(elementType, element, searchForItem))
@@ -706,29 +527,23 @@ namespace OBeautifulCode.Validation.Recipes
                 }
             }
 
-            var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, ContainExceptionMessageSuffix);
+            var exceptionMessage = BuildArgumentExceptionMessage(validation, ContainExceptionMessageSuffix, Include.GenericType, genericTypeOverride: elementType);
             throw new ArgumentException(exceptionMessage);
         }
 
         private static void NotContainInternal(
-            string validationName,
-            object value,
-            Type valueType,
-            string parameterName,
-            string because,
-            bool isElementInEnumerable,
-            params ValidationParameter[] validationParameters)
+            Validation validation)
         {
-            NotBeNullInternal(validationName, value, valueType, parameterName, because, isElementInEnumerable);
+            NotBeNullInternal(validation);
 
-            var valueAsEnumerable = (IEnumerable)value;
-            var searchForItem = validationParameters[0].Value;
-            var elementType = validationParameters[0].ValueType;
+            var valueAsEnumerable = (IEnumerable)validation.Value;
+            var searchForItem = validation.ValidationParameters[0].Value;
+            var elementType = validation.ValidationParameters[0].ValueType;
             foreach (var element in valueAsEnumerable)
             {
                 if (EqualUsingDefaultEqualityComparer(elementType, element, searchForItem))
                 {
-                    var exceptionMessage = BuildArgumentExceptionMessage(parameterName, because, isElementInEnumerable, NotContainExceptionMessageSuffix);
+                    var exceptionMessage = BuildArgumentExceptionMessage(validation, NotContainExceptionMessageSuffix, Include.GenericType, genericTypeOverride: elementType);
                     throw new ArgumentException(exceptionMessage);
                 }
             }

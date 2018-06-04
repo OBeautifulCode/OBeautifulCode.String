@@ -10,8 +10,6 @@
 namespace OBeautifulCode.Validation.Recipes
 {
     using System;
-    using System.CodeDom;
-    using System.CodeDom.Compiler;
     using System.Collections;
 
     /// <summary>
@@ -27,13 +25,6 @@ namespace OBeautifulCode.Validation.Recipes
 #endif
         static class ParameterValidator
     {
-        /// <summary>
-        /// Exception message that's thrown when there is an improper usage of the framework.
-        /// </summary>
-        public const string ImproperUseOfFrameworkExceptionMessage = "The parameter validation framework is being used improperly.  See: https://github.com/OBeautifulCode/OBeautifulCode.Validation for documentation on proper usage.";
-
-        private static readonly CodeDomProvider CodeDomProvider = CodeDomProvider.CreateProvider("CSharp");
-
         /// <summary>
         /// Specifies the name of the parameter.
         /// </summary>
@@ -239,23 +230,8 @@ namespace OBeautifulCode.Validation.Recipes
             //   - if parameter != null then the user doesn't understand how the framework is designed to be used
             //     and what the framework's limiations are.  Some negative outcome might occur (throwing when
             //     not expected or not throwing when expected).
-            message = message == null ? ImproperUseOfFrameworkExceptionMessage : message + "  " + ImproperUseOfFrameworkExceptionMessage;
+            message = message == null ? ParameterValidation.ImproperUseOfFrameworkExceptionMessage : message + "  " + ParameterValidation.ImproperUseOfFrameworkExceptionMessage;
             throw new InvalidOperationException(message);
-        }
-
-        /// <summary>
-        /// Gets a friendly name for the specified type.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>
-        /// A friendly name for the specified type.
-        /// </returns>
-        internal static string GetFriendlyTypeName(
-            this Type type)
-        {
-            // adapted from: https://stackoverflow.com/a/6402967/356790
-            var result = CodeDomProvider.GetTypeOutput(new CodeTypeReference(type.FullName?.Replace(type.Namespace + ".", string.Empty)));
-            return result;
         }
     }
 }
