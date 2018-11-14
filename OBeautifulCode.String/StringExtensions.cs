@@ -73,12 +73,12 @@ namespace OBeautifulCode.String.Recipes
         /// Parses a CSV string and returns the values.
         /// </summary>
         /// <param name="value">The CSV to parse.</param>
-        /// <param name="nullValueEncoding">Optional value indicating how nulls are encoded.  Defaulted to null, which results in a collection that never contains null.</param>
+        /// <param name="nullValueEncoding">Optional value indicating how nulls are encoded.  Defaulted to null, which results in a list that never contains null.</param>
         /// <returns>
         /// Returns the values contained within a CSV.
-        /// If <paramref name="value"/> is null, returns an empty collection.
+        /// If <paramref name="value"/> is null, returns an empty list.
         /// </returns>
-        public static IReadOnlyCollection<string> FromCsv(
+        public static IReadOnlyList<string> FromCsv(
             this string value,
             string nullValueEncoding = null)
         {
