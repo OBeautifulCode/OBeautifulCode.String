@@ -198,6 +198,37 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
+        /// Splits a string into chunks of a specified length.
+        /// </summary>
+        /// <param name="value">The string to split.</param>
+        /// <param name="lengthPerChunk">The length of each chunk when splitting the specified string.</param>
+        /// <returns>
+        /// <paramref name="value"/> split into an ordered list of chunks, where each chunk is of length <paramref name="lengthPerChunk"/>.
+        /// If the length of <paramref name="value"/> cannot be evenly divided by <paramref name="lengthPerChunk"/>, then the last
+        /// chunk will contain less characters.  No characters are truncated.  If <paramref name="value"/> is the empty string
+        /// then an empty list is returned.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="lengthPerChunk"/> is &lt;= 0.</exception>
+        public static IReadOnlyList<string> SplitIntoChunksOfLength(
+            this string value,
+            int lengthPerChunk)
+        {
+            new { value }.Must().NotBeNull();
+            new { lengthPerChunk }.Must().BeGreaterThan(0);
+
+            var result = new List<string>((value.Length / lengthPerChunk) + 1);
+
+            for (int i = 0; i < value.Length; i += lengthPerChunk)
+            {
+                var chunk = value.Substring(i, Math.Min(lengthPerChunk, value.Length - i));
+                result.Add(chunk);
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Converts the specified string to an alpha-numeric string
         /// by removing all non-alpha-numeric characters.
         /// </summary>

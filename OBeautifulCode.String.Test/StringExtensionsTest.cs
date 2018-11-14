@@ -11,8 +11,11 @@ namespace OBeautifulCode.String.Test
     using System.Linq;
     using System.Text;
 
+    using FakeItEasy;
+
     using FluentAssertions;
 
+    using OBeautifulCode.AutoFakeItEasy;
     using OBeautifulCode.String.Recipes;
 
     using Xunit;
@@ -632,6 +635,124 @@ namespace OBeautifulCode.String.Test
             Assert.Equal(Expected5b, actual5b);
             Assert.Equal(Expected5c, actual5c);
             Assert.Equal(Expected6, actual6);
+        }
+
+        [Fact]
+        public static void SplitIntoChunksOfLength___Should_throw_ArgumentNullException___When_parameter_value_is_null()
+        {
+            // Arrange
+            var lengthPerChunk = A.Dummy<int>().ThatIs(_ => _ > 0);
+
+            // Act
+            var actual = Record.Exception(() => StringExtensions.SplitIntoChunksOfLength(null, lengthPerChunk));
+
+            // Assert
+            actual.Should().BeOfType<ArgumentNullException>();
+            actual.Message.Should().Contain("value");
+        }
+
+        [Fact]
+        public static void SplitIntoChunksOfLength___Should_throw_ArgumentOutOfRangeException___When_parameter_lengthPerChunk_is_less_than_or_equal_to_0()
+        {
+            // Arrange
+            var value = A.Dummy<string>();
+            var lengthPerChunk = A.Dummy<int>().ThatIs(_ => _ < 0);
+
+            // Act
+            var actual1 = Record.Exception(() => value.SplitIntoChunksOfLength(0));
+            var actual2 = Record.Exception(() => value.SplitIntoChunksOfLength(lengthPerChunk));
+
+            // Assert
+            actual1.Should().BeOfType<ArgumentOutOfRangeException>();
+            actual1.Message.Should().Contain("lengthPerChunk");
+
+            actual2.Should().BeOfType<ArgumentOutOfRangeException>();
+            actual2.Message.Should().Contain("lengthPerChunk");
+        }
+
+        [Fact]
+        public static void SplitIntoChunksOfLength___Should_return_empty_list___When_value_is_an_empty_string()
+        {
+            // Arrange
+            var lengthPerChunk = A.Dummy<int>().ThatIs(_ => _ > 0);
+
+            // Act
+            var actual = string.Empty.SplitIntoChunksOfLength(lengthPerChunk);
+
+            // Assert
+            actual.Should().BeEmpty();
+        }
+
+        [Fact]
+        public static void SplitIntoChunksOfLength___Should_return_chunks___When_length_of_value_divides_evenly_by_lengthPerChunk()
+        {
+            // Arrange
+            var value = " some brown cows  ";
+
+            var lengthPerChunk1 = 1;
+            var expected1 = new[] { " ", "s", "o", "m", "e", " ", "b", "r", "o", "w", "n", " ", "c", "o", "w", "s", " ", " " };
+
+            var lengthPerChunk2 = 6;
+            var expected2 = new[] { " some ", "brown ", "cows  " };
+
+            var lengthPerChunk3 = 9;
+            var expected3 = new[] { " some bro", "wn cows  " };
+
+            var lengthPerChunk4 = 18;
+            var expected4 = new[] { value };
+
+            // Act
+            var actual1 = value.SplitIntoChunksOfLength(lengthPerChunk1);
+            var actual2 = value.SplitIntoChunksOfLength(lengthPerChunk2);
+            var actual3 = value.SplitIntoChunksOfLength(lengthPerChunk3);
+            var actual4 = value.SplitIntoChunksOfLength(lengthPerChunk4);
+
+            // Assert
+            actual1.Should().Equal(expected1);
+            actual2.Should().Equal(expected2);
+            actual3.Should().Equal(expected3);
+            actual4.Should().Equal(expected4);
+        }
+
+        [Fact]
+        public static void SplitIntoChunksOfLength___Should_return_chunks___When_length_of_value_does_not_divide_evenly_by_lengthPerChunk()
+        {
+            // Arrange
+            var value = " some brown cows ";
+
+            var lengthPerChunk1 = 3;
+            var expected1 = new[] { " so", "me ", "bro", "wn ", "cow", "s " };
+
+            var lengthPerChunk2 = 5;
+            var expected2 = new[] { " some", " brow", "n cow", "s " };
+
+            var lengthPerChunk3 = 9;
+            var expected3 = new[] { " some bro", "wn cows " };
+
+            var lengthPerChunk4 = 16;
+            var expected4 = new[] { " some brown cows", " " };
+
+            var lengthPerChunk5 = 18;
+            var expected5 = new[] { value };
+
+            var lengthPerChunk6 = int.MaxValue;
+            var expected6 = new[] { value };
+
+            // Act
+            var actual1 = value.SplitIntoChunksOfLength(lengthPerChunk1);
+            var actual2 = value.SplitIntoChunksOfLength(lengthPerChunk2);
+            var actual3 = value.SplitIntoChunksOfLength(lengthPerChunk3);
+            var actual4 = value.SplitIntoChunksOfLength(lengthPerChunk4);
+            var actual5 = value.SplitIntoChunksOfLength(lengthPerChunk5);
+            var actual6 = value.SplitIntoChunksOfLength(lengthPerChunk6);
+
+            // Assert
+            actual1.Should().Equal(expected1);
+            actual2.Should().Equal(expected2);
+            actual3.Should().Equal(expected3);
+            actual4.Should().Equal(expected4);
+            actual5.Should().Equal(expected5);
+            actual6.Should().Equal(expected6);
         }
 
         [Fact]
