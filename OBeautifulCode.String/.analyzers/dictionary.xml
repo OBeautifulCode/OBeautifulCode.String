@@ -93,6 +93,9 @@
       <!-- Acronym for Public Key Cryptography Standards -->
       <Word>PKCS</Word>
 
+      <!-- Acronym for Request For Comments -->
+      <Word>RFC</Word>
+
       <!-- Acronym for Secure Hash Algorithm. -->
       <Word>SHA</Word>
 

@@ -93,9 +93,9 @@
     <!--
       ** File may only contain a single type **
       In practice we typically only put a single type in a file, but often enough it's handy to group types
-      together to improve comprehension of the code.  For example, when we use Spritely.ReadModel it's
-      better to put a Query and it's QueryHandler in the same file rather than split them up because they are
-      highly related.
+      together to improve comprehension of the code.  For example, if we have some code that queries a database
+      it's better to put the Query (parameter object) and it's QueryHandler (the code that executes the query)
+      in the same file rather than split them up because they are highly related.
     -->
     <Rule Id="SA1402" Action="None" />
 
