@@ -70,6 +70,49 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
+        /// Parses a CSV string and returns the values.
+        /// </summary>
+        /// <param name="value">The CSV to parse.</param>
+        /// <param name="nullValueEncoding">Optional value indicating how nulls are encoded.  Defaulted to null, which results in a collection that never contains null.</param>
+        /// <returns>
+        /// Returns the values contained within a CSV.
+        /// If <paramref name="value"/> is null, returns an empty collection.
+        /// </returns>
+        public static IReadOnlyCollection<string> FromCsv(
+            this string value,
+            string nullValueEncoding = null)
+        {
+            var result = new List<string>();
+
+            // we return an empty collection because ToCsv returns null when the input is an empty collection.
+            if (value == null)
+            {
+                return result;
+            }
+
+            // the regex doesn't solve for leading comma
+            if (value.StartsWith(",", StringComparison.OrdinalIgnoreCase))
+            {
+                value = "," + value;
+            }
+
+            var matches = CsvParsingRegex.Matches(value);
+            foreach (Match match in matches)
+            {
+                var parsedValue = match.Groups.Cast<Group>().Skip(1).Select(_ => _.Value).Aggregate((working, next) => working + next);
+                parsedValue = parsedValue.Replace("\"\"", "\"");
+                if (parsedValue == nullValueEncoding)
+                {
+                    parsedValue = null;
+                }
+
+                result.Add(parsedValue);
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Determines if a string is alpha numeric.
         /// </summary>
         /// <param name="value">The string to evaluate.</param>
@@ -86,27 +129,6 @@ namespace OBeautifulCode.String.Recipes
             new { value }.Must().NotBeNull();
 
             var result = !NotAlphaNumericRegex.IsMatch(value);
-            return result;
-        }
-
-        /// <summary>
-        /// Converts the specified string to an alpha-numeric string
-        /// by removing all non-alpha-numeric characters.
-        /// </summary>
-        /// <param name="value">The string to convert.</param>
-        /// <remarks>
-        /// An empty string ("") is considered alpha-numeric.
-        /// </remarks>
-        /// <returns>
-        /// The specified string with all non-alpha-numeric characters removed.
-        /// </returns>
-        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-        public static string ToAlphanumeric(
-            this string value)
-        {
-            new { value }.Must().NotBeNull();
-
-            var result = NotAlphaNumericRegex.Replace(value, string.Empty);
             return result;
         }
 
@@ -176,21 +198,23 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Converts a string to a byte-array with a given encoding.
+        /// Converts the specified string to an alpha-numeric string
+        /// by removing all non-alpha-numeric characters.
         /// </summary>
-        /// <param name="value">The string to encode.</param>
-        /// <param name="encoding">The encoding to use.</param>
-        /// <returns>byte array representing the string in a given encoding.</returns>
+        /// <param name="value">The string to convert.</param>
+        /// <remarks>
+        /// An empty string ("") is considered alpha-numeric.
+        /// </remarks>
+        /// <returns>
+        /// The specified string with all non-alpha-numeric characters removed.
+        /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="encoding"/> is null.</exception>
-        public static byte[] ToBytes(
-            this string value,
-            Encoding encoding)
+        public static string ToAlphanumeric(
+            this string value)
         {
             new { value }.Must().NotBeNull();
-            new { encoding }.Must().NotBeNull();
 
-            var result = encoding.GetBytes(value);
+            var result = NotAlphaNumericRegex.Replace(value, string.Empty);
             return result;
         }
 
@@ -208,28 +232,21 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Encodes all characters in a given string to an array of bytes encoded in unicode.
+        /// Converts a string to a byte-array with a given encoding.
         /// </summary>
         /// <param name="value">The string to encode.</param>
-        /// <returns>byte array representing the string in unicode.</returns>
+        /// <param name="encoding">The encoding to use.</param>
+        /// <returns>byte array representing the string in a given encoding.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-        public static byte[] ToUnicodeBytes(
-            this string value)
+        /// <exception cref="ArgumentNullException"><paramref name="encoding"/> is null.</exception>
+        public static byte[] ToBytes(
+            this string value,
+            Encoding encoding)
         {
-            var result = value.ToBytes(UnicodeEncoding);
-            return result;
-        }
+            new { value }.Must().NotBeNull();
+            new { encoding }.Must().NotBeNull();
 
-        /// <summary>
-        /// Encodes all characters in a given string to an array of bytes encoded in UTF-8.
-        /// </summary>
-        /// <param name="value">The string to encode.</param>
-        /// <returns>byte array representing the string in UTF-8.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-        public static byte[] ToUtf8Bytes(
-            this string value)
-        {
-            var result = value.ToBytes(Utf8Encoding);
+            var result = encoding.GetBytes(value);
             return result;
         }
 
@@ -277,49 +294,6 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Parses a CSV string and returns the values.
-        /// </summary>
-        /// <param name="value">The CSV to parse.</param>
-        /// <param name="nullValueEncoding">Optional value indicating how nulls are encoded.  Defaulted to null, which results in a collection that never contains null.</param>
-        /// <returns>
-        /// Returns the values contained within a CSV.
-        /// If <paramref name="value"/> is null, returns an empty collection.
-        /// </returns>
-        public static IReadOnlyCollection<string> FromCsv(
-            this string value,
-            string nullValueEncoding = null)
-        {
-            var result = new List<string>();
-
-            // we return an empty collection because ToCsv returns null when the input is an empty collection.
-            if (value == null)
-            {
-                return result;
-            }
-
-            // the regex doesn't solve for leading comma
-            if (value.StartsWith(",", StringComparison.OrdinalIgnoreCase))
-            {
-                value = "," + value;
-            }
-
-            var matches = CsvParsingRegex.Matches(value);
-            foreach (Match match in matches)
-            {
-                var parsedValue = match.Groups.Cast<Group>().Skip(1).Select(_ => _.Value).Aggregate((working, next) => working + next);
-                parsedValue = parsedValue.Replace("\"\"", "\"");
-                if (parsedValue == nullValueEncoding)
-                {
-                    parsedValue = null;
-                }
-
-                result.Add(parsedValue);
-            }
-
-            return result;
-        }
-
-        /// <summary>
         /// Performs both ToLower() and Trim() on a string.
         /// </summary>
         /// <param name="value">The string to operate on.</param>
@@ -331,6 +305,32 @@ namespace OBeautifulCode.String.Recipes
             new { value }.Must().NotBeNull();
 
             var result = value.ToLower(CultureInfo.CurrentCulture).Trim();
+            return result;
+        }
+
+        /// <summary>
+        /// Encodes all characters in a given string to an array of bytes encoded in unicode.
+        /// </summary>
+        /// <param name="value">The string to encode.</param>
+        /// <returns>byte array representing the string in unicode.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
+        public static byte[] ToUnicodeBytes(
+            this string value)
+        {
+            var result = value.ToBytes(UnicodeEncoding);
+            return result;
+        }
+
+        /// <summary>
+        /// Encodes all characters in a given string to an array of bytes encoded in UTF-8.
+        /// </summary>
+        /// <param name="value">The string to encode.</param>
+        /// <returns>byte array representing the string in UTF-8.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
+        public static byte[] ToUtf8Bytes(
+            this string value)
+        {
+            var result = value.ToBytes(Utf8Encoding);
             return result;
         }
     }

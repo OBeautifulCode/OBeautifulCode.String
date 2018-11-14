@@ -128,6 +128,167 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
+        public static void FromCsv___Should_return_empty_collection___When_parameter_value_is_null()
+        {
+            // Arrange, Act
+            var actual = StringExtensions.FromCsv(null);
+
+            // Assert
+            actual.Should().BeEmpty();
+        }
+
+        [Fact]
+        public static void FromCsv___Should_return_collection_with_single_empty_element___When_parameter_value_is_the_empty_string()
+        {
+            // Arrange
+            var value = string.Empty;
+
+            // Act
+            var actual = value.FromCsv();
+
+            // Assert
+            actual.Should().ContainSingle();
+            actual.First().Should().Be(value);
+        }
+
+        [Fact]
+        public static void FromCsv___Should_return_collection_with_single_null_element___When_parameter_value_is_the_empty_string_and_nullValueEncoding_is_the_empty_string()
+        {
+            // Arrange
+            var value = string.Empty;
+
+            // Act
+            var actual = value.FromCsv(nullValueEncoding: string.Empty);
+
+            // Assert
+            actual.Should().ContainSingle();
+            actual.First().Should().BeNull();
+        }
+
+        [Fact]
+        public static void FromCsv___Should_return_collection_with_empty_string_elements___When_CSV_has_leading_or_trailing_commas()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Csv = ",", Expected = new[] { string.Empty, string.Empty } },
+                new { Csv = ",good,", Expected = new[] { string.Empty, "good", string.Empty } },
+            };
+
+            // Act, Assert
+            foreach (var test in tests)
+            {
+                test.Csv.FromCsv().Should().Equal(test.Expected);
+            }
+        }
+
+        [Fact]
+        public static void FromCsv___Should_return_collection_with_null_elements___When_CSV_has_leading_or_trailing_commas_and_nullValueEncoding_is_empty_string()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Csv = ",", Expected = new[] { (string)null, null } },
+                new { Csv = ",good,", Expected = new[] { null, "good", null } },
+            };
+
+            // Act, Assert
+            foreach (var test in tests)
+            {
+                test.Csv.FromCsv(nullValueEncoding: string.Empty).Should().Equal(test.Expected);
+            }
+        }
+
+        [Fact]
+        public static void FromCsv___Should_return_collection_empty_string_elements___When_CSV_has_leading_or_trailing_commas_and_nullValueEncoding_is_a_well_known_token()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Csv = ",<null>", Expected = new[] { string.Empty, null } },
+                new { Csv = ",<null>,", Expected = new[] { string.Empty, null, string.Empty } },
+            };
+
+            // Act, Assert
+            foreach (var test in tests)
+            {
+                test.Csv.FromCsv(nullValueEncoding: "<null>").Should().Equal(test.Expected);
+            }
+        }
+
+        [Fact]
+        public static void FromCsv___Should_parse_CSV_encoded_string_into_individual_values_treating_empty_string_as_empty_string___When_parameter_nullValueEncoding_is_null()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Original = " ", CsvSafe = "\" \"" },
+                new { Original = "\"", CsvSafe = "\"\"\"\"" },
+                new { Original = ",", CsvSafe = "\",\"" },
+                new { Original = string.Empty, CsvSafe = string.Empty },
+                new { Original = "Super, luxurious truck", CsvSafe = "\"Super, luxurious truck\"" },
+                new { Original = "Super \"luxurious\" truck", CsvSafe = "\"Super \"\"luxurious\"\" truck\"" },
+                new { Original = "Go get one now\r\nthey are going fast", CsvSafe = "\"Go get one now\r\nthey are going fast\"" },
+                new { Original = "Go get one now\nthey are going fast", CsvSafe = "\"Go get one now\nthey are going fast\"" },
+                new { Original = "Go get one now" + Environment.NewLine + "they are going fast", CsvSafe = "\"Go get one now" + Environment.NewLine + "they are going fast\"" },
+                new { Original = "Super luxurious truck    ", CsvSafe = "\"Super luxurious truck    \"" },
+                new { Original = "  Super luxurious truck", CsvSafe = "\"  Super luxurious truck\"" },
+                new { Original = "  Super luxurious truck    ", CsvSafe = "\"  Super luxurious truck    \"" },
+                new { Original = " Super, luxurious truck ", CsvSafe = "\" Super, luxurious truck \"" },
+                new { Original = " Super, \"luxurious\" truck ", CsvSafe = "\" Super, \"\"luxurious\"\" truck \"" },
+                new { Original = "something-boring", CsvSafe = "something-boring" },
+            };
+
+            var csv = tests.Select(_ => _.CsvSafe).Aggregate((working, next) => working + "," + next);
+
+            // Act
+            var actual = csv.FromCsv();
+
+            // Assert
+            actual.Should().Equal(tests.Select(_ => _.Original));
+        }
+
+        [Fact]
+        public static void FromCsv___Should_parse_CSV_encoded_string_into_individual_values_treating_empty_string_as_null___When_parameter_nullValueEncoding_is_empty_string()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Original = " ", CsvSafe = "\" \"" },
+                new { Original = (string)null, CsvSafe = string.Empty },
+                new { Original = "something-boring", CsvSafe = "something-boring" },
+            };
+
+            var csv = tests.Select(_ => _.CsvSafe).Aggregate((working, next) => working + "," + next);
+
+            // Act
+            var actual = csv.FromCsv(nullValueEncoding: string.Empty);
+
+            // Assert
+            actual.Should().Equal(tests.Select(_ => _.Original));
+        }
+
+        [Fact]
+        public static void FromCsv___Should_parse_CSV_encoded_string_into_individual_values_treating_well_known_token_as_null___When_parameter_nullValueEncoding_is_a_well_known_token()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Original = " ", CsvSafe = "\" \"" },
+                new { Original = (string)null, CsvSafe = "<null>" },
+                new { Original = "something-boring", CsvSafe = "something-boring" },
+            };
+
+            var csv = tests.Select(_ => _.CsvSafe).Aggregate((working, next) => working + "," + next);
+
+            // Act
+            var actual = csv.FromCsv(nullValueEncoding: "<null>");
+
+            // Assert
+            actual.Should().Equal(tests.Select(_ => _.Original));
+        }
+
+        [Fact]
         public static void IsAlphanumeric_StringToCheckIsNull_ThrowsArgumentNullException()
         {
             // Arrange, Act, Assert
@@ -184,36 +345,6 @@ namespace OBeautifulCode.String.Test
             Assert.True("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ".IsAlphanumeric());
             Assert.True("abcdefghijklmnopqrstuvwxyz1234567890".IsAlphanumeric());
             Assert.True("1234567890abcdefghijklmnopqrstuvwxyz".IsAlphanumeric());
-        }
-
-        [Fact]
-        public static void ToAlphanumeric___Should_throw_ArgumentNullException___When_parameter_value_is_null()
-        {
-            // Arrange, Act
-            var actual = Record.Exception(() => StringExtensions.ToLowerTrimmed(null));
-
-            // Assert
-            actual.Should().BeOfType<ArgumentNullException>();
-        }
-
-        [Fact]
-        public static void ToAlphanumeric___Should_return_value_with_non_alphanumeric_characters_removed___When_called()
-        {
-            // Arrange
-            var tests = new[]
-            {
-                new { Value = string.Empty, Expected = string.Empty },
-                new { Value = " ", Expected = string.Empty },
-                new { Value = " asdf ", Expected = "asdf" },
-                new { Value = " as***df ", Expected = "asdf" },
-                new { Value = "someletters==-", Expected = "someletters" },
-            };
-
-            // Act
-            var actuals = tests.Select(_ => _.Value.ToAlphanumeric()).ToList();
-
-            // Assert
-            actuals.Should().Equal(tests.Select(_ => _.Expected));
         }
 
         [Fact]
@@ -504,6 +635,70 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
+        public static void ToAlphanumeric___Should_throw_ArgumentNullException___When_parameter_value_is_null()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => StringExtensions.ToLowerTrimmed(null));
+
+            // Assert
+            actual.Should().BeOfType<ArgumentNullException>();
+        }
+
+        [Fact]
+        public static void ToAlphanumeric___Should_return_value_with_non_alphanumeric_characters_removed___When_called()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Value = string.Empty, Expected = string.Empty },
+                new { Value = " ", Expected = string.Empty },
+                new { Value = " asdf ", Expected = "asdf" },
+                new { Value = " as***df ", Expected = "asdf" },
+                new { Value = "someletters==-", Expected = "someletters" },
+            };
+
+            // Act
+            var actuals = tests.Select(_ => _.Value.ToAlphanumeric()).ToList();
+
+            // Assert
+            actuals.Should().Equal(tests.Select(_ => _.Expected));
+        }
+
+        [Fact]
+        public static void ToAsciiBytes_ValueToConvertIsNull_ThrowsArgumentNullException()
+        {
+            // Arrange, Act, Assert
+            Assert.Throws<ArgumentNullException>(() => StringExtensions.ToAsciiBytes(null));
+        }
+
+        [Fact]
+        public static void ToAsciiBytes_StringToEncodeIsEmpty_ReturnsEmptyArray()
+        {
+            // Arrange, Act, Assert
+            Assert.Empty(string.Empty.ToAsciiBytes());
+        }
+
+        [Fact]
+        public static void ToAsciiBytes_StringToEncodeIsNotEmpty_ReturnsAsciiBytes()
+        {
+            // Arrange
+            const string ToEncode = "Ascii";
+            const string Expected = "[65][115][99][105][105]";
+
+            // Act
+            byte[] asciiBytes = ToEncode.ToAsciiBytes();
+
+            // Assert
+            var bytesPrintout = new StringBuilder();
+            foreach (byte b in asciiBytes)
+            {
+                bytesPrintout.Append("[" + b.ToString(CultureInfo.CurrentCulture) + "]");
+            }
+
+            Assert.Equal(Expected, bytesPrintout.ToString());
+        }
+
+        [Fact]
         public static void ToBytes_ValueToConvertIsNull_ThrowsArgumentNullException()
         {
             // Arrange, Act, Assert
@@ -550,37 +745,111 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToAsciiBytes_ValueToConvertIsNull_ThrowsArgumentNullException()
+        public static void ToCsvSafe_StringIsNull_ThrowsArgumentNullException()
         {
             // Arrange, Act, Assert
-            Assert.Throws<ArgumentNullException>(() => StringExtensions.ToAsciiBytes(null));
+            Assert.Throws<ArgumentNullException>(() => StringExtensions.ToCsvSafe(null));
         }
 
         [Fact]
-        public static void ToAsciiBytes_StringToEncodeIsEmpty_ReturnsEmptyArray()
+        public static void ToCsvSafe_StringIsEmpty_ReturnsEmptyString()
         {
             // Arrange, Act, Assert
-            Assert.Empty(string.Empty.ToAsciiBytes());
+            Assert.Equal(string.Empty, string.Empty.ToCsvSafe());
         }
 
         [Fact]
-        public static void ToAsciiBytes_StringToEncodeIsNotEmpty_ReturnsAsciiBytes()
+        public static void ToCsvSafe___Should_return_original_string___When_value_is_already_CSV_safe()
         {
             // Arrange
-            const string ToEncode = "Ascii";
-            const string Expected = "[65][115][99][105][105]";
+            var expected = new[] { "asdoiouwerzvkjdfm", "g       O", @"!@#$%^&*()_+-=';/?.`~_+\", string.Empty };
 
             // Act
-            byte[] asciiBytes = ToEncode.ToAsciiBytes();
+            var actual = expected.Select(_ => _.ToCsvSafe());
 
             // Assert
-            var bytesPrintout = new StringBuilder();
-            foreach (byte b in asciiBytes)
-            {
-                bytesPrintout.Append("[" + b.ToString(CultureInfo.CurrentCulture) + "]");
-            }
+            actual.Should().Equal(expected);
+        }
 
-            Assert.Equal(Expected, bytesPrintout.ToString());
+        [Fact]
+        public static void ToCsvSafe___Should_return_CSV_safe_version_of_value___When_value_is_not_CSV_safe()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Original = " ", Expected = "\" \"" },
+                new { Original = "\"", Expected = "\"\"\"\"" },
+                new { Original = ",", Expected = "\",\"" },
+                new { Original = "Super, luxurious truck", Expected = "\"Super, luxurious truck\"" },
+                new { Original = "Super \"luxurious\" truck", Expected = "\"Super \"\"luxurious\"\" truck\"" },
+                new { Original = "Go get one now\r\nthey are going fast", Expected = "\"Go get one now\r\nthey are going fast\"" },
+                new { Original = "Go get one now\nthey are going fast", Expected = "\"Go get one now\nthey are going fast\"" },
+                new { Original = "Go get one now" + Environment.NewLine + "they are going fast", Expected = "\"Go get one now" + Environment.NewLine + "they are going fast\"" },
+                new { Original = "Super luxurious truck    ", Expected = "\"Super luxurious truck    \"" },
+                new { Original = "  Super luxurious truck", Expected = "\"  Super luxurious truck\"" },
+                new { Original = "  Super luxurious truck    ", Expected = "\"  Super luxurious truck    \"" },
+                new { Original = " Super, luxurious truck ", Expected = "\" Super, luxurious truck \"" },
+                new { Original = " Super, \"luxurious\" truck ", Expected = "\" Super, \"\"luxurious\"\" truck \"" },
+            };
+
+            var expected = tests.Select(_ => _.Expected);
+
+            // Act,
+            var actual = tests.Select(_ => _.Original.ToCsvSafe());
+
+            // Assert
+            actual.Should().Equal(expected);
+        }
+
+        [Fact]
+        public static void ToLowerTrimmed_StringIsNull_ThrowsArgumentNullException()
+        {
+            // Arrange, Act, Assert
+            Assert.Throws<ArgumentNullException>(() => StringExtensions.ToLowerTrimmed(null));
+        }
+
+        [Fact]
+        public static void ToLowerTrimmed_StringIsEmpty_ReturnsEmptyString()
+        {
+            // Arrange, Act, Assert
+            Assert.Equal(string.Empty, string.Empty.ToLowerTrimmed());
+        }
+
+        [Fact]
+        public static void ToLowerTrimmed_StringIsAlreadyLowercaseAndTrimmed_ReturnsOriginalString()
+        {
+            // Arrange
+            const string String1 = @"a sdfj !@#$%^\&*()=+_?/.,mn2340-8938m  fkls d";
+
+            // Act
+            string actual1 = String1.ToLowerTrimmed();
+
+            // Assert
+            Assert.Equal(String1, actual1);
+        }
+
+        [Fact]
+        public static void ToLowerTrimmed_StringNotLowercaseOrStringIsNotTrimmedOrBoth_ReturnsLowercaseTrimmedString()
+        {
+            // Arrange
+            const string String1 = "This Is Not%(#*&! lower CASE";
+            const string Expected1 = "this is not%(#*&! lower case";
+
+            const string String2 = "  this needs a trim ";
+            const string Expected2 = "this needs a trim";
+
+            const string String3 = " LoWer Trimmed   ";
+            const string Expected3 = "lower trimmed";
+
+            // Act
+            string actual1 = String1.ToLowerTrimmed();
+            string actual2 = String2.ToLowerTrimmed();
+            string actual3 = String3.ToLowerTrimmed();
+
+            // Assert
+            Assert.Equal(Expected1, actual1);
+            Assert.Equal(Expected2, actual2);
+            Assert.Equal(Expected3, actual3);
         }
 
         [Fact]
@@ -653,275 +922,6 @@ namespace OBeautifulCode.String.Test
             }
 
             Assert.Equal(Expected, bytesPrintout.ToString());
-        }
-
-        [Fact]
-        public static void ToCsvSafe_StringIsNull_ThrowsArgumentNullException()
-        {
-            // Arrange, Act, Assert
-            Assert.Throws<ArgumentNullException>(() => StringExtensions.ToCsvSafe(null));
-        }
-
-        [Fact]
-        public static void ToCsvSafe_StringIsEmpty_ReturnsEmptyString()
-        {
-            // Arrange, Act, Assert
-            Assert.Equal(string.Empty, string.Empty.ToCsvSafe());
-        }
-
-        [Fact]
-        public static void ToCsvSafe___Should_return_original_string___When_value_is_already_CSV_safe()
-        {
-            // Arrange
-            var expected = new[] { "asdoiouwerzvkjdfm", "g       O", @"!@#$%^&*()_+-=';/?.`~_+\", string.Empty };
-
-            // Act
-            var actual = expected.Select(_ => _.ToCsvSafe());
-
-            // Assert
-            actual.Should().Equal(expected);
-        }
-
-        [Fact]
-        public static void ToCsvSafe___Should_return_CSV_safe_version_of_value___When_value_is_not_CSV_safe()
-        {
-            // Arrange
-            var tests = new[]
-            {
-                new { Original = " ", Expected = "\" \"" },
-                new { Original = "\"", Expected = "\"\"\"\"" },
-                new { Original = ",", Expected = "\",\"" },
-                new { Original = "Super, luxurious truck", Expected = "\"Super, luxurious truck\"" },
-                new { Original = "Super \"luxurious\" truck", Expected = "\"Super \"\"luxurious\"\" truck\"" },
-                new { Original = "Go get one now\r\nthey are going fast", Expected = "\"Go get one now\r\nthey are going fast\"" },
-                new { Original = "Go get one now\nthey are going fast", Expected = "\"Go get one now\nthey are going fast\"" },
-                new { Original = "Go get one now" + Environment.NewLine + "they are going fast", Expected = "\"Go get one now" + Environment.NewLine + "they are going fast\"" },
-                new { Original = "Super luxurious truck    ", Expected = "\"Super luxurious truck    \"" },
-                new { Original = "  Super luxurious truck", Expected = "\"  Super luxurious truck\"" },
-                new { Original = "  Super luxurious truck    ", Expected = "\"  Super luxurious truck    \"" },
-                new { Original = " Super, luxurious truck ", Expected = "\" Super, luxurious truck \"" },
-                new { Original = " Super, \"luxurious\" truck ", Expected = "\" Super, \"\"luxurious\"\" truck \"" },
-            };
-
-            var expected = tests.Select(_ => _.Expected);
-
-            // Act,
-            var actual = tests.Select(_ => _.Original.ToCsvSafe());
-
-            // Assert
-            actual.Should().Equal(expected);
-        }
-
-        [Fact]
-        public static void FromCsv___Should_return_empty_collection___When_parameter_value_is_null()
-        {
-            // Arrange, Act
-            var actual = StringExtensions.FromCsv(null);
-
-            // Assert
-            actual.Should().BeEmpty();
-        }
-
-        [Fact]
-        public static void FromCsv___Should_return_collection_with_single_empty_element___When_parameter_value_is_the_empty_string()
-        {
-            // Arrange
-            var value = string.Empty;
-
-            // Act
-            var actual = value.FromCsv();
-
-            // Assert
-            actual.Should().ContainSingle();
-            actual.First().Should().Be(value);
-        }
-
-        [Fact]
-        public static void FromCsv___Should_return_collection_with_single_null_element___When_parameter_value_is_the_empty_string_and_nullValueEncoding_is_the_empty_string()
-        {
-            // Arrange
-            var value = string.Empty;
-
-            // Act
-            var actual = value.FromCsv(nullValueEncoding: string.Empty);
-
-            // Assert
-            actual.Should().ContainSingle();
-            actual.First().Should().BeNull();
-        }
-
-        [Fact]
-        public static void FromCsv___Should_return_collection_with_empty_string_elements___When_CSV_has_leading_or_trailing_commas()
-        {
-            // Arrange
-            var tests = new[]
-            {
-                new { Csv = ",", Expected = new[] { string.Empty, string.Empty } },
-                new { Csv = ",good,", Expected = new[] { string.Empty, "good", string.Empty } },
-            };
-
-            // Act, Assert
-            foreach (var test in tests)
-            {
-                test.Csv.FromCsv().Should().Equal(test.Expected);
-            }
-        }
-
-        [Fact]
-        public static void FromCsv___Should_return_collection_with_null_elements___When_CSV_has_leading_or_trailing_commas_and_nullValueEncoding_is_empty_string()
-        {
-            // Arrange
-            var tests = new[]
-            {
-                new { Csv = ",", Expected = new[] { (string)null, null } },
-                new { Csv = ",good,", Expected = new[] { null, "good", null } },
-            };
-
-            // Act, Assert
-            foreach (var test in tests)
-            {
-                test.Csv.FromCsv(nullValueEncoding: string.Empty).Should().Equal(test.Expected);
-            }
-        }
-
-        [Fact]
-        public static void FromCsv___Should_return_collection_empty_string_elements___When_CSV_has_leading_or_trailing_commas_and_nullValueEncoding_is_a_well_known_token()
-        {
-            // Arrange
-            var tests = new[]
-            {
-                new { Csv = ",<null>", Expected = new[] { string.Empty, null } },
-                new { Csv = ",<null>,", Expected = new[] { string.Empty, null, string.Empty } },
-            };
-
-            // Act, Assert
-            foreach (var test in tests)
-            {
-                test.Csv.FromCsv(nullValueEncoding: "<null>").Should().Equal(test.Expected);
-            }
-        }
-
-        [Fact]
-        public static void FromCsv___Should_parse_CSV_encoded_string_into_individual_values_treating_empty_string_as_empty_string___When_parameter_nullValueEncoding_is_null()
-        {
-            // Arrange
-            var tests = new[]
-            {
-                new { Original = " ", CsvSafe = "\" \"" },
-                new { Original = "\"", CsvSafe = "\"\"\"\"" },
-                new { Original = ",", CsvSafe = "\",\"" },
-                new { Original = string.Empty, CsvSafe = string.Empty },
-                new { Original = "Super, luxurious truck", CsvSafe = "\"Super, luxurious truck\"" },
-                new { Original = "Super \"luxurious\" truck", CsvSafe = "\"Super \"\"luxurious\"\" truck\"" },
-                new { Original = "Go get one now\r\nthey are going fast", CsvSafe = "\"Go get one now\r\nthey are going fast\"" },
-                new { Original = "Go get one now\nthey are going fast", CsvSafe = "\"Go get one now\nthey are going fast\"" },
-                new { Original = "Go get one now" + Environment.NewLine + "they are going fast", CsvSafe = "\"Go get one now" + Environment.NewLine + "they are going fast\"" },
-                new { Original = "Super luxurious truck    ", CsvSafe = "\"Super luxurious truck    \"" },
-                new { Original = "  Super luxurious truck", CsvSafe = "\"  Super luxurious truck\"" },
-                new { Original = "  Super luxurious truck    ", CsvSafe = "\"  Super luxurious truck    \"" },
-                new { Original = " Super, luxurious truck ", CsvSafe = "\" Super, luxurious truck \"" },
-                new { Original = " Super, \"luxurious\" truck ", CsvSafe = "\" Super, \"\"luxurious\"\" truck \"" },
-                new { Original = "something-boring", CsvSafe = "something-boring" },
-            };
-
-            var csv = tests.Select(_ => _.CsvSafe).Aggregate((working, next) => working + "," + next);
-
-            // Act
-            var actual = csv.FromCsv();
-
-            // Assert
-            actual.Should().Equal(tests.Select(_ => _.Original));
-        }
-
-        [Fact]
-        public static void FromCsv___Should_parse_CSV_encoded_string_into_individual_values_treating_empty_string_as_null___When_parameter_nullValueEncoding_is_empty_string()
-        {
-            // Arrange
-            var tests = new[]
-            {
-                new { Original = " ", CsvSafe = "\" \"" },
-                new { Original = (string)null, CsvSafe = string.Empty },
-                new { Original = "something-boring", CsvSafe = "something-boring" },
-            };
-
-            var csv = tests.Select(_ => _.CsvSafe).Aggregate((working, next) => working + "," + next);
-
-            // Act
-            var actual = csv.FromCsv(nullValueEncoding: string.Empty);
-
-            // Assert
-            actual.Should().Equal(tests.Select(_ => _.Original));
-        }
-
-        [Fact]
-        public static void FromCsv___Should_parse_CSV_encoded_string_into_individual_values_treating_well_known_token_as_null___When_parameter_nullValueEncoding_is_a_well_known_token()
-        {
-            // Arrange
-            var tests = new[]
-            {
-                new { Original = " ", CsvSafe = "\" \"" },
-                new { Original = (string)null, CsvSafe = "<null>" },
-                new { Original = "something-boring", CsvSafe = "something-boring" },
-            };
-
-            var csv = tests.Select(_ => _.CsvSafe).Aggregate((working, next) => working + "," + next);
-
-            // Act
-            var actual = csv.FromCsv(nullValueEncoding: "<null>");
-
-            // Assert
-            actual.Should().Equal(tests.Select(_ => _.Original));
-        }
-
-        [Fact]
-        public static void ToLowerTrimmed_StringIsNull_ThrowsArgumentNullException()
-        {
-            // Arrange, Act, Assert
-            Assert.Throws<ArgumentNullException>(() => StringExtensions.ToLowerTrimmed(null));
-        }
-
-        [Fact]
-        public static void ToLowerTrimmed_StringIsEmpty_ReturnsEmptyString()
-        {
-            // Arrange, Act, Assert
-            Assert.Equal(string.Empty, string.Empty.ToLowerTrimmed());
-        }
-
-        [Fact]
-        public static void ToLowerTrimmed_StringIsAlreadyLowercaseAndTrimmed_ReturnsOriginalString()
-        {
-            // Arrange
-            const string String1 = @"a sdfj !@#$%^\&*()=+_?/.,mn2340-8938m  fkls d";
-
-            // Act
-            string actual1 = String1.ToLowerTrimmed();
-
-            // Assert
-            Assert.Equal(String1, actual1);
-        }
-
-        [Fact]
-        public static void ToLowerTrimmed_StringNotLowercaseOrStringIsNotTrimmedOrBoth_ReturnsLowercaseTrimmedString()
-        {
-            // Arrange
-            const string String1 = "This Is Not%(#*&! lower CASE";
-            const string Expected1 = "this is not%(#*&! lower case";
-
-            const string String2 = "  this needs a trim ";
-            const string Expected2 = "this needs a trim";
-
-            const string String3 = " LoWer Trimmed   ";
-            const string Expected3 = "lower trimmed";
-
-            // Act
-            string actual1 = String1.ToLowerTrimmed();
-            string actual2 = String2.ToLowerTrimmed();
-            string actual3 = String3.ToLowerTrimmed();
-
-            // Assert
-            Assert.Equal(Expected1, actual1);
-            Assert.Equal(Expected2, actual2);
-            Assert.Equal(Expected3, actual3);
         }
     }
 }
