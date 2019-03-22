@@ -7,6 +7,7 @@
 namespace OBeautifulCode.String.Test
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Text;
@@ -314,7 +315,7 @@ namespace OBeautifulCode.String.Test
             Assert.False("q9@z".IsAlphanumeric());
             Assert.False("q9asdfz+".IsAlphanumeric());
             Assert.False("abCd29382-afjKsdf9209283".IsAlphanumeric());
-            for (int i = 1; i <= 47; i++)
+            for (int i = 0; i <= 47; i++)
             {
                 Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphanumeric());
             }
@@ -348,6 +349,70 @@ namespace OBeautifulCode.String.Test
             Assert.True("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ".IsAlphanumeric());
             Assert.True("abcdefghijklmnopqrstuvwxyz1234567890".IsAlphanumeric());
             Assert.True("1234567890abcdefghijklmnopqrstuvwxyz".IsAlphanumeric());
+        }
+
+        [Fact]
+        public static void IsPrintable___Should_throw_ArgumentNullException___When_value_is_null()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => StringExtensions.IsPrintable(null));
+
+            // Assert
+            actual.Should().BeOfType<ArgumentNullException>();
+        }
+
+        [Fact]
+        public static void IsPrintable___Should_return_true___When_value_is_the_empty_string()
+        {
+            // Arrange, Act
+            var actual = string.Empty.IsPrintable();
+
+            // Assert
+            actual.Should().BeTrue();
+        }
+
+        [Fact]
+        public static void IsPrintable___Should_return_true___When_value_contains_all_printable_characters()
+        {
+            // Arrange
+            var value = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !""#$%&'()*+,-./0123456789:;<=>?@[\]^_`{|}~";
+            var actuals = new List<bool>();
+
+            // Act
+            var actual = value.IsPrintable();
+            foreach (var character in value)
+            {
+                actuals.Add(character.ToString().IsPrintable());
+            }
+
+            // Assert
+            actual.Should().BeTrue();
+            actuals.Should().AllBeEquivalentTo(true);
+        }
+
+        [Fact]
+        public static void IsPrintable___Should_return_false___When_value_contains_characters_not_in_the_printable_set()
+        {
+            // Arrange
+            var value = $@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !""#$%&'()*+{Environment.NewLine},-./0123456789:;<=>?@[\]^_`{{|}}~";
+
+            // Act
+            var actual = value.IsPrintable();
+            var actuals = new List<bool>();
+
+            for (int i = 0; i <= 31; i++)
+            {
+                actuals.Add(Convert.ToChar(i).ToString().IsPrintable());
+            }
+
+            for (int i = 127; i <= 127; i++)
+            {
+                actuals.Add(Convert.ToChar(i).ToString().IsPrintable());
+            }
+
+            // Assert
+            actual.Should().BeFalse();
+            actuals.Should().AllBeEquivalentTo(false);
         }
 
         [Fact]
