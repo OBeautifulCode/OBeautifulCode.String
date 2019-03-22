@@ -146,7 +146,7 @@ namespace OBeautifulCode.String.Recipes
         /// Returns true if all of the characters in the string are printable; otherwise false.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-        public static bool IsPrintable(
+        public static bool IsAsciiPrintable(
             this string value)
         {
             new { value }.Must().NotBeNull();

@@ -352,37 +352,37 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void IsPrintable___Should_throw_ArgumentNullException___When_value_is_null()
+        public static void IsAsciiPrintable___Should_throw_ArgumentNullException___When_value_is_null()
         {
             // Arrange, Act
-            var actual = Record.Exception(() => StringExtensions.IsPrintable(null));
+            var actual = Record.Exception(() => StringExtensions.IsAsciiPrintable(null));
 
             // Assert
             actual.Should().BeOfType<ArgumentNullException>();
         }
 
         [Fact]
-        public static void IsPrintable___Should_return_true___When_value_is_the_empty_string()
+        public static void IsAsciiPrintable___Should_return_true___When_value_is_the_empty_string()
         {
             // Arrange, Act
-            var actual = string.Empty.IsPrintable();
+            var actual = string.Empty.IsAsciiPrintable();
 
             // Assert
             actual.Should().BeTrue();
         }
 
         [Fact]
-        public static void IsPrintable___Should_return_true___When_value_contains_all_printable_characters()
+        public static void IsAsciiPrintable___Should_return_true___When_value_contains_all_printable_characters()
         {
             // Arrange
             var value = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !""#$%&'()*+,-./0123456789:;<=>?@[\]^_`{|}~";
             var actuals = new List<bool>();
 
             // Act
-            var actual = value.IsPrintable();
+            var actual = value.IsAsciiPrintable();
             foreach (var character in value)
             {
-                actuals.Add(character.ToString().IsPrintable());
+                actuals.Add(character.ToString().IsAsciiPrintable());
             }
 
             // Assert
@@ -391,23 +391,23 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void IsPrintable___Should_return_false___When_value_contains_characters_not_in_the_printable_set()
+        public static void IsAsciiPrintable___Should_return_false___When_value_contains_characters_not_in_the_printable_set()
         {
             // Arrange
             var value = $@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !""#$%&'()*+{Environment.NewLine},-./0123456789:;<=>?@[\]^_`{{|}}~";
 
             // Act
-            var actual = value.IsPrintable();
+            var actual = value.IsAsciiPrintable();
             var actuals = new List<bool>();
 
             for (int i = 0; i <= 31; i++)
             {
-                actuals.Add(Convert.ToChar(i).ToString().IsPrintable());
+                actuals.Add(Convert.ToChar(i).ToString().IsAsciiPrintable());
             }
 
             for (int i = 127; i <= 127; i++)
             {
-                actuals.Add(Convert.ToChar(i).ToString().IsPrintable());
+                actuals.Add(Convert.ToChar(i).ToString().IsAsciiPrintable());
             }
 
             // Assert
