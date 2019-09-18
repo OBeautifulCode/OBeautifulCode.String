@@ -1038,7 +1038,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToLowerTrimmed___Should_return_same_string_passed_to_method___When_string_is_already_lower_case_and_trimmed()
+        public static void ToLowerTrimmed___Should_return_same_string_passed_to_method___When_string_is_already_lowercase_and_trimmed()
         {
             // Arrange
             const string expected = @"a sdfj !@#$%^\&*()=+_?/.,mn2340-8938m  fkls d";
@@ -1051,7 +1051,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToLowerTrimmed_cultureInfo___Should_return_same_string_passed_to_method___When_string_is_already_lower_case_and_trimmed()
+        public static void ToLowerTrimmed_cultureInfo___Should_return_same_string_passed_to_method___When_string_is_already_lowercase_and_trimmed()
         {
             // Arrange
             const string expected = @"a sdfj !@#$%^\&*()=+_?/.,mn2340-8938m  fkls d";
@@ -1064,7 +1064,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToLowerTrimmed___Should_convert_value_to_lower_case_and_remove_leading_and_trailing_white_space___When_called()
+        public static void ToLowerTrimmed___Should_convert_value_to_lowercase_and_remove_leading_and_trailing_white_space___When_called()
         {
             // Arrange
             const string value1 = "This Is Not%(#*&! lower CASE";
@@ -1088,7 +1088,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToLowerTrimmed_cultureInfo___Should_convert_value_to_lower_case_and_remove_leading_and_trailing_white_space___When_called()
+        public static void ToLowerTrimmed_cultureInfo___Should_convert_value_to_lowercase_and_remove_leading_and_trailing_white_space___When_called()
         {
             // Arrange
             const string value1 = "This Is Not%(#*&! lower CASE";
@@ -1162,7 +1162,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToUpperTrimmed___Should_return_same_string_passed_to_method___When_string_is_already_upper_case_and_trimmed()
+        public static void ToUpperTrimmed___Should_return_same_string_passed_to_method___When_string_is_already_uppercase_and_trimmed()
         {
             // Arrange
             const string expected = @"A SDFJ !@#$%^\&*()=+_?/.,MN2340-8938M  FKLS D";
@@ -1175,7 +1175,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToUpperTrimmed_cultureInfo___Should_return_same_string_passed_to_method___When_string_is_already_upper_case_and_trimmed()
+        public static void ToUpperTrimmed_cultureInfo___Should_return_same_string_passed_to_method___When_string_is_already_uppercase_and_trimmed()
         {
             // Arrange
             const string expected = @"A SDFJ !@#$%^\&*()=+_?/.,MN2340-8938M  FKLS D";
@@ -1188,7 +1188,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToUpperTrimmed___Should_convert_value_to_upper_case_and_remove_leading_and_trailing_white_space___When_called()
+        public static void ToUpperTrimmed___Should_convert_value_to_uppercase_and_remove_leading_and_trailing_white_space___When_called()
         {
             // Arrange
             const string value1 = "This Is Not%(#*&! upper CASE";
@@ -1212,7 +1212,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToUpperTrimmed_cultureInfo___Should_convert_value_to_upper_case_and_remove_leading_and_trailing_white_space___When_called()
+        public static void ToUpperTrimmed_cultureInfo___Should_convert_value_to_uppercase_and_remove_leading_and_trailing_white_space___When_called()
         {
             // Arrange
             const string value1 = "This Is Not%(#*&! upper CASE";
@@ -1286,7 +1286,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToLowerFirstCharacter___Should_return_same_string_passed_to_method___When_string_first_character_is_already_lower_case()
+        public static void ToLowerFirstCharacter___Should_return_same_string_passed_to_method___When_string_first_character_is_already_lowercase()
         {
             // Arrange
             const string expected1 = @"a";
@@ -1305,7 +1305,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToLowerFirstCharacter_cultureInfo___Should_return_same_string_passed_to_method___When_string_first_character_is_already_lower_case()
+        public static void ToLowerFirstCharacter_cultureInfo___Should_return_same_string_passed_to_method___When_string_first_character_is_already_lowercase()
         {
             // Arrange
             const string expected1 = @"a";
@@ -1324,7 +1324,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToLowerFirstCharacter___Should_convert_first_character_of_string_to_lower_case___When_called()
+        public static void ToLowerFirstCharacter___Should_convert_first_character_of_string_to_lowercase___When_called()
         {
             // Arrange
             const string value1 = "T";
@@ -1343,7 +1343,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToLowerFirstCharacter_cultureInfo___Should_convert_first_character_of_string_to_lower_case___When_called()
+        public static void ToLowerFirstCharacter_cultureInfo___Should_convert_first_character_of_string_to_lowercase___When_called()
         {
             // Arrange
             const string value1 = "T";
@@ -1412,7 +1412,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToUpperFirstCharacter___Should_return_same_string_passed_to_method___When_string_first_character_is_already_upper_case()
+        public static void ToUpperFirstCharacter___Should_return_same_string_passed_to_method___When_string_first_character_is_already_uppercase()
         {
             // Arrange
             const string expected1 = @"A";
@@ -1431,7 +1431,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToUpperFirstCharacter_cultureInfo___Should_return_same_string_passed_to_method___When_string_first_character_is_already_upper_case()
+        public static void ToUpperFirstCharacter_cultureInfo___Should_return_same_string_passed_to_method___When_string_first_character_is_already_uppercase()
         {
             // Arrange
             const string expected1 = @"A";
@@ -1450,7 +1450,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToUpperFirstCharacter___Should_convert_first_character_of_string_to_upper_case___When_called()
+        public static void ToUpperFirstCharacter___Should_convert_first_character_of_string_to_uppercase___When_called()
         {
             // Arrange
             const string value1 = "t";
@@ -1469,7 +1469,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToUpperFirstCharacter_cultureInfo___Should_convert_first_character_of_string_to_upper_case___When_called()
+        public static void ToUpperFirstCharacter_cultureInfo___Should_convert_first_character_of_string_to_uppercase___When_called()
         {
             // Arrange
             const string value1 = "t";
