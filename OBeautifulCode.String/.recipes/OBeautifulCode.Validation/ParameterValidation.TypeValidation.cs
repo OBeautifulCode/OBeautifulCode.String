@@ -31,6 +31,8 @@ namespace OBeautifulCode.Validation.Recipes
             Validation validation,
             TypeValidation typeValidation);
 
+        private static readonly Type EnumerableType = typeof(IEnumerable);
+
         private static readonly Type UnboundGenericEnumerableType = typeof(IEnumerable<>);
 
         private static readonly Type ComparableType = typeof(IComparable);
@@ -38,6 +40,24 @@ namespace OBeautifulCode.Validation.Recipes
         private static readonly Type UnboundGenericComparableType = typeof(IComparable<>);
 
         private static readonly Type ObjectType = typeof(object);
+
+        private static readonly Type BoolType = typeof(bool);
+
+        private static readonly Type NullableBoolType = typeof(bool?);
+
+        private static readonly Type StringType = typeof(string);
+
+        private static readonly Type GuidType = typeof(Guid);
+
+        private static readonly Type NullableGuidType = typeof(Guid?);
+
+        private static readonly Type DictionaryType = typeof(IDictionary);
+
+        private static readonly Type UnboundGenericDictionaryType = typeof(IDictionary<,>);
+
+        private static readonly Type UnboundGenericReadOnlyDictionaryType = typeof(IReadOnlyDictionary<,>);
+
+        private static readonly Type NullableType = typeof(Nullable<>);
 
         private static readonly IReadOnlyCollection<TypeValidation> MustBeNullableTypeValidations = new[]
         {
@@ -52,7 +72,7 @@ namespace OBeautifulCode.Validation.Recipes
             new TypeValidation
             {
                 TypeValidationHandler = ThrowIfNotOfType,
-                ReferenceTypes = new[] { typeof(bool), typeof(bool?) },
+                ReferenceTypes = new[] { BoolType, NullableBoolType },
             },
         };
 
@@ -61,7 +81,7 @@ namespace OBeautifulCode.Validation.Recipes
             new TypeValidation
             {
                 TypeValidationHandler = ThrowIfNotOfType,
-                ReferenceTypes = new[] { typeof(string) },
+                ReferenceTypes = new[] { StringType },
             },
         };
 
@@ -70,7 +90,7 @@ namespace OBeautifulCode.Validation.Recipes
             new TypeValidation
             {
                 TypeValidationHandler = ThrowIfNotOfType,
-                ReferenceTypes = new[] { typeof(Guid), typeof(Guid?) },
+                ReferenceTypes = new[] { GuidType, NullableGuidType },
             },
         };
 
@@ -79,7 +99,7 @@ namespace OBeautifulCode.Validation.Recipes
             new TypeValidation
             {
                 TypeValidationHandler = ThrowIfNotOfType,
-                ReferenceTypes = new[] { typeof(IEnumerable) },
+                ReferenceTypes = new[] { EnumerableType },
             },
         };
 
@@ -88,7 +108,7 @@ namespace OBeautifulCode.Validation.Recipes
             new TypeValidation
             {
                 TypeValidationHandler = ThrowIfNotOfType,
-                ReferenceTypes = new[] { typeof(IEnumerable) },
+                ReferenceTypes = new[] { EnumerableType },
             },
             new TypeValidation
             {
@@ -96,11 +116,34 @@ namespace OBeautifulCode.Validation.Recipes
             },
         };
 
+        private static readonly IReadOnlyCollection<TypeValidation> MustBeDictionaryTypeValidations = new[]
+        {
+            new TypeValidation
+            {
+                TypeValidationHandler = ThrowIfNotOfType,
+                ReferenceTypes = new[] { DictionaryType, UnboundGenericDictionaryType, UnboundGenericReadOnlyDictionaryType },
+            },
+        };
+
+        private static readonly IReadOnlyCollection<TypeValidation> MustBeDictionaryOfNullableTypeValidations = new[]
+        {
+            new TypeValidation
+            {
+                TypeValidationHandler = ThrowIfNotOfType,
+                ReferenceTypes = new[] { DictionaryType, UnboundGenericDictionaryType, UnboundGenericReadOnlyDictionaryType },
+            },
+            new TypeValidation
+            {
+                TypeValidationHandler = ThrowIfDictionaryTypeCannotBeNull,
+            },
+        };
+
         private static readonly IReadOnlyCollection<TypeValidation> InequalityTypeValidations = new[]
         {
             new TypeValidation
             {
-                TypeValidationHandler = ThrowIfNotComparable,
+                TypeValidationHandler = ThrowIfNotOfType,
+                ReferenceTypes = new[] { ComparableType, UnboundGenericComparableType, NullableType },
             },
             new TypeValidation
             {
@@ -129,7 +172,7 @@ namespace OBeautifulCode.Validation.Recipes
             new TypeValidation
             {
                 TypeValidationHandler = ThrowIfNotOfType,
-                ReferenceTypes = new[] { typeof(IEnumerable) },
+                ReferenceTypes = new[] { EnumerableType },
             },
             new TypeValidation
             {
@@ -146,7 +189,6 @@ namespace OBeautifulCode.Validation.Recipes
             throw new InvalidCastException(Invariant($"validationName: {validation.ValidationName}, isElementInEnumerable: {validation.IsElementInEnumerable}, parameterValueTypeName: {parameterValueTypeName}"));
         }
 
-        // ReSharper disable once UnusedParameter.Local
         private static void ThrowIfTypeCannotBeNull(
             Validation validation,
             TypeValidation typeValidation)
@@ -159,7 +201,6 @@ namespace OBeautifulCode.Validation.Recipes
             }
         }
 
-        // ReSharper disable once UnusedParameter.Local
         private static void ThrowIfEnumerableTypeCannotBeNull(
             Validation validation,
             TypeValidation typeValidation)
@@ -170,11 +211,28 @@ namespace OBeautifulCode.Validation.Recipes
 
             if (enumerableType.IsValueType && (Nullable.GetUnderlyingType(enumerableType) == null))
             {
-                ThrowParameterUnexpectedType(validation, nameof(IEnumerable), EnumerableOfAnyReferenceTypeName, EnumerableOfNullableGenericTypeName);
+                // Nullable<T> is a struct, not a reference type, which is why we explicitly call it out
+                // see: https://stackoverflow.com/a/3149180/356790
+                ThrowParameterUnexpectedType(validation, EnumerableOfAnyReferenceTypeName, EnumerableOfNullableGenericTypeName, EnumerableWhenNotEnumerableOfAnyValueTypeName);
             }
         }
 
-        // ReSharper disable once UnusedParameter.Local
+        private static void ThrowIfDictionaryTypeCannotBeNull(
+            Validation validation,
+            TypeValidation typeValidation)
+        {
+            var valueType = validation.ValueType;
+
+            var dictionaryValueType = GetDictionaryGenericValueType(valueType);
+
+            if (dictionaryValueType.IsValueType && (Nullable.GetUnderlyingType(dictionaryValueType) == null))
+            {
+                // Nullable<T> is a struct, not a reference type, which is why we explicitly call it out
+                // see: https://stackoverflow.com/a/3149180/356790
+                ThrowParameterUnexpectedType(validation, DictionaryTypeName, DictionaryWithValueOfAnyReferenceTypeName, DictionaryWithValueOfNullableGenericTypeName, ReadOnlyDictionaryWithValueOfAnyReferenceTypeName, ReadOnlyDictionaryWithValueOfNullableGenericTypeName);
+            }
+        }
+
         private static void ThrowIfNotOfType(
             Validation validation,
             TypeValidation typeValidation)
@@ -182,43 +240,12 @@ namespace OBeautifulCode.Validation.Recipes
             var valueType = validation.ValueType;
             var validTypes = typeValidation.ReferenceTypes;
 
-            if ((!validTypes.Contains(valueType)) && (!validTypes.Any(_ => _.IsAssignableFrom(valueType))))
+            if (!validTypes.Any(_ => valueType.IsAssignableTo(_, treatUnboundGenericAsAssignableTo: true)))
             {
                 ThrowParameterUnexpectedType(validation, validTypes);
             }
         }
 
-        // ReSharper disable once UnusedParameter.Local
-        private static void ThrowIfNotComparable(
-            Validation validation,
-            TypeValidation typeValidation)
-        {
-            var valueType = validation.ValueType;
-
-            // type is nullable
-            if (Nullable.GetUnderlyingType(valueType) == null)
-            {
-                // type is IComparable or can be assigned to IComparable
-                if ((valueType != ComparableType) && (!ComparableType.IsAssignableFrom(valueType)))
-                {
-                    // type is IComparable<T>
-                    if ((!valueType.IsGenericType) || (valueType.GetGenericTypeDefinition() != UnboundGenericComparableType))
-                    {
-                        // type implements IComparable<T>
-                        var comparableType = valueType.GetInterfaces().FirstOrDefault(_ => _.IsGenericType && (_.GetGenericTypeDefinition() == UnboundGenericEnumerableType));
-                        if (comparableType == null)
-                        {
-                            // note that, for completeness, we should recurse through all interface implementations
-                            // and check whether any of those are IComparable<>
-                            // see: https://stackoverflow.com/questions/5461295/using-isassignablefrom-with-open-generic-types
-                            ThrowParameterUnexpectedType(validation, nameof(IComparable), ComparableGenericTypeName, NullableGenericTypeName);
-                        }
-                    }
-                }
-            }
-        }
-
-        // ReSharper disable once UnusedParameter.Local
         private static void ThrowIfAnyValidationParameterTypeDoesNotEqualValueType(
             Validation validation,
             TypeValidation typeValidation)
@@ -265,7 +292,7 @@ namespace OBeautifulCode.Validation.Recipes
             var validationName = validation.ValidationName;
             var isElementInEnumerable = validation.IsElementInEnumerable;
 
-            var expectedTypesMessage = expectedTypes.Select(_ => isElementInEnumerable ? Invariant($"IEnumerable<{_}>") : _).Aggregate((running, item) => running + ", " + item);
+            var expectedTypesMessage = string.Join(", ", expectedTypes.Select(_ => isElementInEnumerable ? Invariant($"IEnumerable<{_}>") : _));
             var valueTypeMessage = isElementInEnumerable ? Invariant($"IEnumerable<{valueType.GetFriendlyTypeName()}>") : valueType.GetFriendlyTypeName();
             var exceptionMessage = Invariant($"Called {validationName}() on a parameter of type {valueTypeMessage}, which is not one of the following expected type(s): {expectedTypesMessage}.");
             throw new InvalidCastException(exceptionMessage);
@@ -278,7 +305,7 @@ namespace OBeautifulCode.Validation.Recipes
             params Type[] expectedTypes)
         {
             var expectedTypesStrings = expectedTypes.Select(_ => _.GetFriendlyTypeName()).ToArray();
-            var expectedTypesMessage = expectedTypesStrings.Aggregate((running, item) => running + ", " + item);
+            var expectedTypesMessage = string.Join(", ", expectedTypesStrings);
             var exceptionMessage = Invariant($"Called {validationName}({validationParameterName}:) where '{validationParameterName}' is of type {validationParameterType.GetFriendlyTypeName()}, which is not one of the following expected type(s): {expectedTypesMessage}.");
             throw new InvalidCastException(exceptionMessage);
         }

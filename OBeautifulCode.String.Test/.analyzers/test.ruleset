@@ -19,7 +19,7 @@
       our methods are most often doing work.  In practice, this rule almost always produces false positives.  
     -->
     <Rule Id="CA1024" Action="None" />
-
+    
     <!--
       ** Use events where appropriate **
       This rule is triggered by methods that start with certain terms (e.g. Fire). There's is no examination
@@ -217,7 +217,30 @@
       because it is clear from the class and method names what is being tested.
     -->
     <Rule Id="SA0001" Action="None" />
+    
+    <!--
+      ** Code should not contain multiple whitespace characters in a row. **
+      This becomes a problem with alignment of variables like below,
+      because there are multiple spaces between the name and the '=' symbol:
+      
+        public ProcessDescription(
+            string name,
+            string filePath,
+            string fileVersion,
+            string productVersion,
+            bool   runningAsAdmin)
+        {
+            new { name }.Must().NotBeNullNorWhiteSpace();
 
+            this.Name           = name;
+            this.FilePath       = filePath;
+            this.FileVersion    = fileVersion;
+            this.ProductVersion = productVersion;
+            this.RunningAsAdmin = runningAsAdmin;
+        }
+    -->
+    <Rule Id="SA1025" Action="None" />
+    
     <!--
       ** Parameters must not span multiple lines **
       This rule flags cases where we construct an object in-line and use an initializer.  Consider...
