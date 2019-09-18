@@ -359,7 +359,7 @@ namespace OBeautifulCode.String.Recipes
         /// trailing white-space characters, using <see cref="CultureInfo.InvariantCulture"/>.
         /// </summary>
         /// <param name="value">The string to operate on.</param>
-        /// <returns>The string in lower-case with all leading and trailing white-space characters removed.</returns>
+        /// <returns>The string converted to lower-case with all leading and trailing white-space characters removed.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public static string ToLowerTrimmed(
             this string value)
@@ -375,7 +375,7 @@ namespace OBeautifulCode.String.Recipes
         /// </summary>
         /// <param name="value">The string to operate on.</param>
         /// <param name="cultureInfo">Provides information about the specific culture.</param>
-        /// <returns>The string in lower-case with all leading and trailing white-space characters removed.</returns>
+        /// <returns>The string converted to lower-case with all leading and trailing white-space characters removed.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="cultureInfo"/> is null.</exception>
         public static string ToLowerTrimmed(
@@ -394,7 +394,7 @@ namespace OBeautifulCode.String.Recipes
         /// trailing white-space characters, using <see cref="CultureInfo.InvariantCulture"/>.
         /// </summary>
         /// <param name="value">The string to operate on.</param>
-        /// <returns>The string in upper-case with all leading and trailing white-space characters removed.</returns>
+        /// <returns>The string converted to upper-case with all leading and trailing white-space characters removed.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public static string ToUpperTrimmed(
             this string value)
@@ -410,7 +410,7 @@ namespace OBeautifulCode.String.Recipes
         /// </summary>
         /// <param name="value">The string to operate on.</param>
         /// <param name="cultureInfo">Provides information about the specific culture.</param>
-        /// <returns>The string in upper-case with all leading and trailing white-space characters removed.</returns>
+        /// <returns>The string converted to upper-case with all leading and trailing white-space characters removed.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="cultureInfo"/> is null.</exception>
         public static string ToUpperTrimmed(
