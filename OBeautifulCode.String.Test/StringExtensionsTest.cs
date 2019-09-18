@@ -1038,7 +1038,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToLowerTrimmed___Should_return_same_string_passed_to_method___When_string_is_already_lower_cae_and_trimmed()
+        public static void ToLowerTrimmed___Should_return_same_string_passed_to_method___When_string_is_already_lower_case_and_trimmed()
         {
             // Arrange
             const string expected = @"a sdfj !@#$%^\&*()=+_?/.,mn2340-8938m  fkls d";
@@ -1051,7 +1051,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToLowerTrimmed_cultureInfo___Should_return_same_string_passed_to_method___When_string_is_already_lower_cae_and_trimmed()
+        public static void ToLowerTrimmed_cultureInfo___Should_return_same_string_passed_to_method___When_string_is_already_lower_case_and_trimmed()
         {
             // Arrange
             const string expected = @"a sdfj !@#$%^\&*()=+_?/.,mn2340-8938m  fkls d";
@@ -1162,7 +1162,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToUpperTrimmed___Should_return_same_string_passed_to_method___When_string_is_already_upper_cae_and_trimmed()
+        public static void ToUpperTrimmed___Should_return_same_string_passed_to_method___When_string_is_already_upper_case_and_trimmed()
         {
             // Arrange
             const string expected = @"A SDFJ !@#$%^\&*()=+_?/.,MN2340-8938M  FKLS D";
@@ -1175,7 +1175,7 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToUpperTrimmed_cultureInfo___Should_return_same_string_passed_to_method___When_string_is_already_upper_cae_and_trimmed()
+        public static void ToUpperTrimmed_cultureInfo___Should_return_same_string_passed_to_method___When_string_is_already_upper_case_and_trimmed()
         {
             // Arrange
             const string expected = @"A SDFJ !@#$%^\&*()=+_?/.,MN2340-8938M  FKLS D";
@@ -1233,6 +1233,258 @@ namespace OBeautifulCode.String.Test
             actual1.Should().Be(expected1);
             actual2.Should().Be(expected2);
             actual3.Should().Be(expected3);
+        }
+
+        [Fact]
+        public static void ToLowerFirstCharacter___Should_throw_ArgumentNullException___When_parameter_value_is_null()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => StringExtensions.ToLowerFirstCharacter(null));
+
+            // Assert
+            actual.Should().BeOfType<ArgumentNullException>();
+        }
+
+        [Fact]
+        public static void ToLowerFirstCharacter_cultureInfo___Should_throw_ArgumentNullException___When_parameter_value_is_null()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => StringExtensions.ToLowerFirstCharacter(null, CultureInfo.CurrentCulture));
+
+            // Assert
+            actual.Should().BeOfType<ArgumentNullException>();
+        }
+
+        [Fact]
+        public static void ToLowerFirstCharacter_cultureInfo___Should_throw_ArgumentNullException___When_parameter_cultureInfo_is_null()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => A.Dummy<string>().ToLowerFirstCharacter(null));
+
+            // Assert
+            actual.Should().BeOfType<ArgumentNullException>();
+        }
+
+        [Fact]
+        public static void ToLowerFirstCharacter___Should_return_empty_string___When_parameter_value_is_an_empty_string()
+        {
+            // Arrange, Act
+            var actual = string.Empty.ToLowerFirstCharacter();
+
+            // Assert
+            actual.Should().BeEmpty();
+        }
+
+        [Fact]
+        public static void ToLowerFirstCharacter_cultureInfo___Should_return_empty_string___When_parameter_value_is_an_empty_string()
+        {
+            // Arrange, Act
+            var actual = string.Empty.ToLowerFirstCharacter(CultureInfo.CurrentCulture);
+
+            // Assert
+            actual.Should().BeEmpty();
+        }
+
+        [Fact]
+        public static void ToLowerFirstCharacter___Should_return_same_string_passed_to_method___When_string_first_character_is_already_lower_case()
+        {
+            // Arrange
+            const string expected1 = @"a";
+            const string expected2 = @"a sdFj !@#$%^\&*()=+_?/.,MN2340-8938m";
+            const string expected3 = @" ASDF";
+
+            // Act
+            var actual1 = expected1.ToLowerFirstCharacter();
+            var actual2 = expected2.ToLowerFirstCharacter();
+            var actual3 = expected3.ToLowerFirstCharacter();
+
+            // Assert
+            actual1.Should().Be(expected1);
+            actual2.Should().Be(expected2);
+            actual3.Should().Be(expected3);
+        }
+
+        [Fact]
+        public static void ToLowerFirstCharacter_cultureInfo___Should_return_same_string_passed_to_method___When_string_first_character_is_already_lower_case()
+        {
+            // Arrange
+            const string expected1 = @"a";
+            const string expected2 = @"a sdFj !@#$%^\&*()=+_?/.,MN2340-8938m";
+            const string expected3 = @" ASDF";
+
+            // Act
+            var actual1 = expected1.ToLowerFirstCharacter(CultureInfo.CurrentCulture);
+            var actual2 = expected2.ToLowerFirstCharacter(CultureInfo.CurrentCulture);
+            var actual3 = expected3.ToLowerFirstCharacter(CultureInfo.CurrentCulture);
+
+            // Assert
+            actual1.Should().Be(expected1);
+            actual2.Should().Be(expected2);
+            actual3.Should().Be(expected3);
+        }
+
+        [Fact]
+        public static void ToLowerFirstCharacter___Should_convert_first_character_of_string_to_lower_case___When_called()
+        {
+            // Arrange
+            const string value1 = "T";
+            const string expected1 = "t";
+
+            const string value2 = "Some String";
+            const string expected2 = "some String";
+
+            // Act
+            var actual1 = value1.ToLowerFirstCharacter();
+            var actual2 = value2.ToLowerFirstCharacter();
+
+            // Assert
+            actual1.Should().Be(expected1);
+            actual2.Should().Be(expected2);
+        }
+
+        [Fact]
+        public static void ToLowerFirstCharacter_cultureInfo___Should_convert_first_character_of_string_to_lower_case___When_called()
+        {
+            // Arrange
+            const string value1 = "T";
+            const string expected1 = "t";
+
+            const string value2 = "Some String";
+            const string expected2 = "some String";
+
+            // Act
+            var actual1 = value1.ToLowerFirstCharacter(CultureInfo.CurrentCulture);
+            var actual2 = value2.ToLowerFirstCharacter(CultureInfo.CurrentCulture);
+
+            // Assert
+            actual1.Should().Be(expected1);
+            actual2.Should().Be(expected2);
+        }
+
+        [Fact]
+        public static void ToUpperFirstCharacter___Should_throw_ArgumentNullException___When_parameter_value_is_null()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => StringExtensions.ToUpperFirstCharacter(null));
+
+            // Assert
+            actual.Should().BeOfType<ArgumentNullException>();
+        }
+
+        [Fact]
+        public static void ToUpperFirstCharacter_cultureInfo___Should_throw_ArgumentNullException___When_parameter_value_is_null()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => StringExtensions.ToUpperFirstCharacter(null, CultureInfo.CurrentCulture));
+
+            // Assert
+            actual.Should().BeOfType<ArgumentNullException>();
+        }
+
+        [Fact]
+        public static void ToUpperFirstCharacter_cultureInfo___Should_throw_ArgumentNullException___When_parameter_cultureInfo_is_null()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => A.Dummy<string>().ToUpperFirstCharacter(null));
+
+            // Assert
+            actual.Should().BeOfType<ArgumentNullException>();
+        }
+
+        [Fact]
+        public static void ToUpperFirstCharacter___Should_return_empty_string___When_parameter_value_is_an_empty_string()
+        {
+            // Arrange, Act
+            var actual = string.Empty.ToUpperFirstCharacter();
+
+            // Assert
+            actual.Should().BeEmpty();
+        }
+
+        [Fact]
+        public static void ToUpperFirstCharacter_cultureInfo___Should_return_empty_string___When_parameter_value_is_an_empty_string()
+        {
+            // Arrange, Act
+            var actual = string.Empty.ToUpperFirstCharacter(CultureInfo.CurrentCulture);
+
+            // Assert
+            actual.Should().BeEmpty();
+        }
+
+        [Fact]
+        public static void ToUpperFirstCharacter___Should_return_same_string_passed_to_method___When_string_first_character_is_already_upper_case()
+        {
+            // Arrange
+            const string expected1 = @"A";
+            const string expected2 = @"A sdFj !@#$%^\&*()=+_?/.,MN2340-8938m";
+            const string expected3 = @" ASDF";
+
+            // Act
+            var actual1 = expected1.ToUpperFirstCharacter();
+            var actual2 = expected2.ToUpperFirstCharacter();
+            var actual3 = expected3.ToUpperFirstCharacter();
+
+            // Assert
+            actual1.Should().Be(expected1);
+            actual2.Should().Be(expected2);
+            actual3.Should().Be(expected3);
+        }
+
+        [Fact]
+        public static void ToUpperFirstCharacter_cultureInfo___Should_return_same_string_passed_to_method___When_string_first_character_is_already_upper_case()
+        {
+            // Arrange
+            const string expected1 = @"A";
+            const string expected2 = @"A sdFj !@#$%^\&*()=+_?/.,MN2340-8938m";
+            const string expected3 = @" ASDF";
+
+            // Act
+            var actual1 = expected1.ToUpperFirstCharacter(CultureInfo.CurrentCulture);
+            var actual2 = expected2.ToUpperFirstCharacter(CultureInfo.CurrentCulture);
+            var actual3 = expected3.ToUpperFirstCharacter(CultureInfo.CurrentCulture);
+
+            // Assert
+            actual1.Should().Be(expected1);
+            actual2.Should().Be(expected2);
+            actual3.Should().Be(expected3);
+        }
+
+        [Fact]
+        public static void ToUpperFirstCharacter___Should_convert_first_character_of_string_to_upper_case___When_called()
+        {
+            // Arrange
+            const string value1 = "t";
+            const string expected1 = "T";
+
+            const string value2 = "some string";
+            const string expected2 = "Some string";
+
+            // Act
+            var actual1 = value1.ToUpperFirstCharacter();
+            var actual2 = value2.ToUpperFirstCharacter();
+
+            // Assert
+            actual1.Should().Be(expected1);
+            actual2.Should().Be(expected2);
+        }
+
+        [Fact]
+        public static void ToUpperFirstCharacter_cultureInfo___Should_convert_first_character_of_string_to_upper_case___When_called()
+        {
+            // Arrange
+            const string value1 = "t";
+            const string expected1 = "T";
+
+            const string value2 = "some string";
+            const string expected2 = "Some string";
+
+            // Act
+            var actual1 = value1.ToUpperFirstCharacter(CultureInfo.CurrentCulture);
+            var actual2 = value2.ToUpperFirstCharacter(CultureInfo.CurrentCulture);
+
+            // Assert
+            actual1.Should().Be(expected1);
+            actual2.Should().Be(expected2);
         }
 
         [Fact]

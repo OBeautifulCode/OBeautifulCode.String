@@ -386,6 +386,7 @@ namespace OBeautifulCode.String.Recipes
             new { cultureInfo }.Must().NotBeNull();
 
             var result = value.ToLower(cultureInfo).Trim();
+
             return result;
         }
 
@@ -421,6 +422,92 @@ namespace OBeautifulCode.String.Recipes
             new { cultureInfo }.Must().NotBeNull();
 
             var result = value.ToUpper(cultureInfo).Trim();
+
+            return result;
+        }
+
+        /// <summary>
+        /// Converts the first character of the specified string to lower-case, using <see cref="CultureInfo.InvariantCulture"/>.
+        /// </summary>
+        /// <param name="value">The string to operate on.</param>
+        /// <returns>The string with the first character converted to lower-case.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
+        public static string ToLowerFirstCharacter(
+            this string value)
+        {
+            var result = value.ToLowerFirstCharacter(CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Converts the first character of the specified string to lower-case, using the specified <see cref="CultureInfo"/>.
+        /// </summary>
+        /// <param name="value">The string to operate on.</param>
+        /// <param name="cultureInfo">Provides information about the specific culture.</param>
+        /// <returns>The string with the first character converted to lower-case.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="cultureInfo"/> is null.</exception>
+        public static string ToLowerFirstCharacter(
+            this string value,
+            CultureInfo cultureInfo)
+        {
+            new { value }.Must().NotBeNull();
+            new { cultureInfo }.Must().NotBeNull();
+
+            string result;
+
+            if (value.Length == 0)
+            {
+                result = value;
+            }
+            else
+            {
+                result = Char.ToLower(value[0], cultureInfo) + value.Substring(1, value.Length - 1);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Converts the first character of the specified string to upper-case, using <see cref="CultureInfo.InvariantCulture"/>.
+        /// </summary>
+        /// <param name="value">The string to operate on.</param>
+        /// <returns>The string with the first character converted to upper-case.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
+        public static string ToUpperFirstCharacter(
+            this string value)
+        {
+            var result = value.ToUpperFirstCharacter(CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Converts the first character of the specified string to upper-case, using the specified <see cref="CultureInfo"/>.
+        /// </summary>
+        /// <param name="value">The string to operate on.</param>
+        /// <param name="cultureInfo">Provides information about the specific culture.</param>
+        /// <returns>The string with the first character converted to upper-case.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="cultureInfo"/> is null.</exception>
+        public static string ToUpperFirstCharacter(
+            this string value,
+            CultureInfo cultureInfo)
+        {
+            new { value }.Must().NotBeNull();
+            new { cultureInfo }.Must().NotBeNull();
+
+            string result;
+
+            if (value.Length == 0)
+            {
+                result = value;
+            }
+            else
+            {
+                result = Char.ToUpper(value[0], cultureInfo) + value.Substring(1, value.Length - 1);
+            }
 
             return result;
         }
