@@ -988,54 +988,251 @@ namespace OBeautifulCode.String.Test
         }
 
         [Fact]
-        public static void ToLowerTrimmed_StringIsNull_ThrowsArgumentNullException()
+        public static void ToLowerTrimmed___Should_throw_ArgumentNullException___When_parameter_value_is_null()
         {
-            // Arrange, Act, Assert
-            Assert.Throws<ArgumentNullException>(() => StringExtensions.ToLowerTrimmed(null));
-        }
-
-        [Fact]
-        public static void ToLowerTrimmed_StringIsEmpty_ReturnsEmptyString()
-        {
-            // Arrange, Act, Assert
-            Assert.Equal(string.Empty, string.Empty.ToLowerTrimmed());
-        }
-
-        [Fact]
-        public static void ToLowerTrimmed_StringIsAlreadyLowercaseAndTrimmed_ReturnsOriginalString()
-        {
-            // Arrange
-            const string String1 = @"a sdfj !@#$%^\&*()=+_?/.,mn2340-8938m  fkls d";
-
-            // Act
-            string actual1 = String1.ToLowerTrimmed();
+            // Arrange, Act
+            var actual = Record.Exception(() => StringExtensions.ToLowerTrimmed(null));
 
             // Assert
-            Assert.Equal(String1, actual1);
+            actual.Should().BeOfType<ArgumentNullException>();
         }
 
         [Fact]
-        public static void ToLowerTrimmed_StringNotLowercaseOrStringIsNotTrimmedOrBoth_ReturnsLowercaseTrimmedString()
+        public static void ToLowerTrimmed_cultureInfo___Should_throw_ArgumentNullException___When_parameter_value_is_null()
         {
-            // Arrange
-            const string String1 = "This Is Not%(#*&! lower CASE";
-            const string Expected1 = "this is not%(#*&! lower case";
-
-            const string String2 = "  this needs a trim ";
-            const string Expected2 = "this needs a trim";
-
-            const string String3 = " LoWer Trimmed   ";
-            const string Expected3 = "lower trimmed";
-
-            // Act
-            string actual1 = String1.ToLowerTrimmed();
-            string actual2 = String2.ToLowerTrimmed();
-            string actual3 = String3.ToLowerTrimmed();
+            // Arrange, Act
+            var actual = Record.Exception(() => StringExtensions.ToLowerTrimmed(null, CultureInfo.CurrentCulture));
 
             // Assert
-            Assert.Equal(Expected1, actual1);
-            Assert.Equal(Expected2, actual2);
-            Assert.Equal(Expected3, actual3);
+            actual.Should().BeOfType<ArgumentNullException>();
+        }
+
+        [Fact]
+        public static void ToLowerTrimmed_cultureInfo___Should_throw_ArgumentNullException___When_parameter_cultureInfo_is_null()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => A.Dummy<string>().ToLowerTrimmed(null));
+
+            // Assert
+            actual.Should().BeOfType<ArgumentNullException>();
+        }
+
+        [Fact]
+        public static void ToLowerTrimmed___Should_return_empty_string___When_parameter_value_is_an_empty_string()
+        {
+            // Arrange, Act
+            var actual = string.Empty.ToLowerTrimmed();
+
+            // Assert
+            actual.Should().BeEmpty();
+        }
+
+        [Fact]
+        public static void ToLowerTrimmed_cultureInfo___Should_return_empty_string___When_parameter_value_is_an_empty_string()
+        {
+            // Arrange, Act
+            var actual = string.Empty.ToLowerTrimmed(CultureInfo.CurrentCulture);
+
+            // Assert
+            actual.Should().BeEmpty();
+        }
+
+        [Fact]
+        public static void ToLowerTrimmed___Should_return_same_string_passed_to_method___When_string_is_already_lower_cae_and_trimmed()
+        {
+            // Arrange
+            const string expected = @"a sdfj !@#$%^\&*()=+_?/.,mn2340-8938m  fkls d";
+
+            // Act
+            var actual = expected.ToLowerTrimmed();
+
+            // Assert
+            actual.Should().Be(expected);
+        }
+
+        [Fact]
+        public static void ToLowerTrimmed_cultureInfo___Should_return_same_string_passed_to_method___When_string_is_already_lower_cae_and_trimmed()
+        {
+            // Arrange
+            const string expected = @"a sdfj !@#$%^\&*()=+_?/.,mn2340-8938m  fkls d";
+
+            // Act
+            var actual = expected.ToLowerTrimmed(CultureInfo.CurrentCulture);
+
+            // Assert
+            actual.Should().Be(expected);
+        }
+
+        [Fact]
+        public static void ToLowerTrimmed___Should_convert_value_to_lower_case_and_remove_leading_and_trailing_white_space___When_called()
+        {
+            // Arrange
+            const string value1 = "This Is Not%(#*&! lower CASE";
+            const string expected1 = "this is not%(#*&! lower case";
+
+            const string value2 = "  this needs a trim ";
+            const string expected2 = "this needs a trim";
+
+            const string value3 = " LoWer Trimmed   ";
+            const string expected3 = "lower trimmed";
+
+            // Act
+            var actual1 = value1.ToLowerTrimmed();
+            var actual2 = value2.ToLowerTrimmed();
+            var actual3 = value3.ToLowerTrimmed();
+
+            // Assert
+            actual1.Should().Be(expected1);
+            actual2.Should().Be(expected2);
+            actual3.Should().Be(expected3);
+        }
+
+        [Fact]
+        public static void ToLowerTrimmed_cultureInfo___Should_convert_value_to_lower_case_and_remove_leading_and_trailing_white_space___When_called()
+        {
+            // Arrange
+            const string value1 = "This Is Not%(#*&! lower CASE";
+            const string expected1 = "this is not%(#*&! lower case";
+
+            const string value2 = "  this needs a trim ";
+            const string expected2 = "this needs a trim";
+
+            const string value3 = " LoWer Trimmed   ";
+            const string expected3 = "lower trimmed";
+
+            // Act
+            var actual1 = value1.ToLowerTrimmed(CultureInfo.CurrentCulture);
+            var actual2 = value2.ToLowerTrimmed(CultureInfo.CurrentCulture);
+            var actual3 = value3.ToLowerTrimmed(CultureInfo.CurrentCulture);
+
+            // Assert
+            actual1.Should().Be(expected1);
+            actual2.Should().Be(expected2);
+            actual3.Should().Be(expected3);
+        }
+
+        [Fact]
+        public static void ToUpperTrimmed___Should_throw_ArgumentNullException___When_parameter_value_is_null()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => StringExtensions.ToUpperTrimmed(null));
+
+            // Assert
+            actual.Should().BeOfType<ArgumentNullException>();
+        }
+
+        [Fact]
+        public static void ToUpperTrimmed_cultureInfo___Should_throw_ArgumentNullException___When_parameter_value_is_null()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => StringExtensions.ToUpperTrimmed(null, CultureInfo.CurrentCulture));
+
+            // Assert
+            actual.Should().BeOfType<ArgumentNullException>();
+        }
+
+        [Fact]
+        public static void ToUpperTrimmed_cultureInfo___Should_throw_ArgumentNullException___When_parameter_cultureInfo_is_null()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => A.Dummy<string>().ToUpperTrimmed(null));
+
+            // Assert
+            actual.Should().BeOfType<ArgumentNullException>();
+        }
+
+        [Fact]
+        public static void ToUpperTrimmed___Should_return_empty_string___When_parameter_value_is_an_empty_string()
+        {
+            // Arrange, Act
+            var actual = string.Empty.ToUpperTrimmed();
+
+            // Assert
+            actual.Should().BeEmpty();
+        }
+
+        [Fact]
+        public static void ToUpperTrimmed_cultureInfo___Should_return_empty_string___When_parameter_value_is_an_empty_string()
+        {
+            // Arrange, Act
+            var actual = string.Empty.ToUpperTrimmed(CultureInfo.CurrentCulture);
+
+            // Assert
+            actual.Should().BeEmpty();
+        }
+
+        [Fact]
+        public static void ToUpperTrimmed___Should_return_same_string_passed_to_method___When_string_is_already_upper_cae_and_trimmed()
+        {
+            // Arrange
+            const string expected = @"A SDFJ !@#$%^\&*()=+_?/.,MN2340-8938M  FKLS D";
+
+            // Act
+            var actual = expected.ToUpperTrimmed();
+
+            // Assert
+            actual.Should().Be(expected);
+        }
+
+        [Fact]
+        public static void ToUpperTrimmed_cultureInfo___Should_return_same_string_passed_to_method___When_string_is_already_upper_cae_and_trimmed()
+        {
+            // Arrange
+            const string expected = @"A SDFJ !@#$%^\&*()=+_?/.,MN2340-8938M  FKLS D";
+
+            // Act
+            var actual = expected.ToUpperTrimmed(CultureInfo.CurrentCulture);
+
+            // Assert
+            actual.Should().Be(expected);
+        }
+
+        [Fact]
+        public static void ToUpperTrimmed___Should_convert_value_to_upper_case_and_remove_leading_and_trailing_white_space___When_called()
+        {
+            // Arrange
+            const string value1 = "This Is Not%(#*&! upper CASE";
+            const string expected1 = "THIS IS NOT%(#*&! UPPER CASE";
+
+            const string value2 = "  THIS NEEDS A TRIM ";
+            const string expected2 = "THIS NEEDS A TRIM";
+
+            const string value3 = " uPpeR TrimMed   ";
+            const string expected3 = "UPPER TRIMMED";
+
+            // Act
+            var actual1 = value1.ToUpperTrimmed();
+            var actual2 = value2.ToUpperTrimmed();
+            var actual3 = value3.ToUpperTrimmed();
+
+            // Assert
+            actual1.Should().Be(expected1);
+            actual2.Should().Be(expected2);
+            actual3.Should().Be(expected3);
+        }
+
+        [Fact]
+        public static void ToUpperTrimmed_cultureInfo___Should_convert_value_to_upper_case_and_remove_leading_and_trailing_white_space___When_called()
+        {
+            // Arrange
+            const string value1 = "This Is Not%(#*&! upper CASE";
+            const string expected1 = "THIS IS NOT%(#*&! UPPER CASE";
+
+            const string value2 = "  THIS NEEDS A TRIM ";
+            const string expected2 = "THIS NEEDS A TRIM";
+
+            const string value3 = " uPpeR TrimMed   ";
+            const string expected3 = "UPPER TRIMMED";
+
+            // Act
+            var actual1 = value1.ToUpperTrimmed(CultureInfo.CurrentCulture);
+            var actual2 = value2.ToUpperTrimmed(CultureInfo.CurrentCulture);
+            var actual3 = value3.ToUpperTrimmed(CultureInfo.CurrentCulture);
+
+            // Assert
+            actual1.Should().Be(expected1);
+            actual2.Should().Be(expected2);
+            actual3.Should().Be(expected3);
         }
 
         [Fact]

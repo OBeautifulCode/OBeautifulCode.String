@@ -269,7 +269,7 @@ namespace OBeautifulCode.String.Recipes
         {
             new { value }.Must().NotBeNull();
 
-            var result = 
+            var result =
                 string.Concat(
                     value.Where(
                         _ =>
@@ -355,17 +355,73 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Performs both ToLower() and Trim() on a string.
+        /// Converts a string to lower-case and removes all leading and
+        /// trailing white-space characters, using <see cref="CultureInfo.InvariantCulture"/>.
         /// </summary>
         /// <param name="value">The string to operate on.</param>
-        /// <returns>Lower-case, trimmed string.</returns>
+        /// <returns>The string in lower-case with all leading and trailing white-space characters removed.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
         public static string ToLowerTrimmed(
             this string value)
         {
-            new { value }.Must().NotBeNull();
+            var result = value.ToLowerTrimmed(CultureInfo.InvariantCulture);
 
-            var result = value.ToLower(CultureInfo.CurrentCulture).Trim();
+            return result;
+        }
+
+        /// <summary>
+        /// Converts a string to lower-case and removes all leading and
+        /// trailing white-space characters, using the specified <see cref="CultureInfo"/>.
+        /// </summary>
+        /// <param name="value">The string to operate on.</param>
+        /// <param name="cultureInfo">Provides information about the specific culture.</param>
+        /// <returns>The string in lower-case with all leading and trailing white-space characters removed.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="cultureInfo"/> is null.</exception>
+        public static string ToLowerTrimmed(
+            this string value,
+            CultureInfo cultureInfo)
+        {
+            new { value }.Must().NotBeNull();
+            new { cultureInfo }.Must().NotBeNull();
+
+            var result = value.ToLower(cultureInfo).Trim();
+            return result;
+        }
+
+        /// <summary>
+        /// Converts a string to upper-case and removes all leading and
+        /// trailing white-space characters, using <see cref="CultureInfo.InvariantCulture"/>.
+        /// </summary>
+        /// <param name="value">The string to operate on.</param>
+        /// <returns>The string in upper-case with all leading and trailing white-space characters removed.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
+        public static string ToUpperTrimmed(
+            this string value)
+        {
+            var result = value.ToUpperTrimmed(CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Converts a string to upper-case and removes all leading and
+        /// trailing white-space characters, using the specified <see cref="CultureInfo"/>.
+        /// </summary>
+        /// <param name="value">The string to operate on.</param>
+        /// <param name="cultureInfo">Provides information about the specific culture.</param>
+        /// <returns>The string in upper-case with all leading and trailing white-space characters removed.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="cultureInfo"/> is null.</exception>
+        public static string ToUpperTrimmed(
+            this string value,
+            CultureInfo cultureInfo)
+        {
+            new { value }.Must().NotBeNull();
+            new { cultureInfo }.Must().NotBeNull();
+
+            var result = value.ToUpper(cultureInfo).Trim();
+
             return result;
         }
 
