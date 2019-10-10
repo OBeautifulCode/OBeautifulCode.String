@@ -1,7 +1,0 @@
-﻿<package>
-  <metadata>
-    <description>Provides string-related convenience/helper methods.</description>
-    <tags>string helper</tags>
-    <iconUrl>https://raw.githubusercontent.com/OBeautifulCode/OBeautifulCode.String/master/OBeautifulCode.String/nuget-icon.png</iconUrl>
-  </metadata>
-</package>
