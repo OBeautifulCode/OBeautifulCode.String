@@ -5,10 +5,11 @@
     <tags>string extension extensionmethod</tags>
     <iconUrl>https://raw.githubusercontent.com/OBeautifulCode/OBeautifulCode.String/master/OBeautifulCode.String.Recipes/nuget-icon.png</iconUrl>
     <dependencies>
-      <dependency id="OBeautifulCode.Assertion.Recipes.Must" version="1.0.9" />
+      <dependency id="OBeautifulCode.Assertion.Recipes.Must" version="1.0.12" />
     </dependencies>
   </metadata>
   <files>
+    <file src=".analyzers\SuppressBecause.cs" target="content\net462\.recipes\OBeautifulCode.String\SuppressBecause.cs" />
     <file src="StringExtensions.cs" target="content\net462\.recipes\OBeautifulCode.String\StringExtensions.cs" />
   </files>
 </package>

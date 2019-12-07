@@ -9,8 +9,10 @@
 
 namespace OBeautifulCode.Equality.Recipes
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.Linq;
 
     /// <summary>
@@ -97,7 +99,54 @@ namespace OBeautifulCode.Equality.Recipes
 
             foreach (var key in item1.Keys)
             {
+                // We rely on the IEqualityComparer<T> contained within the dictionaries to compare keys.
+                // As such, two dictionaries that use a default equality comparer that just compares
+                // object references, will never be equal.  For example, two dictionaries that are keyed on
+                // a List<string> will never be equal, regardless of whether
+                // item1.Keys.IsUnorderedEqualTo(item2.Keys) is true or false unless the keys are the same
+                // object reference.
+                // We took this approach because we wanted to respect the dictionary's contract for comparing
+                // keys.  A dictionary that is keyed on a type that can only be compared by object reference
+                // is rare and it's own smell.  In the example above, two dictionaries may well "look" like
+                // they are equal, but if their List<string> keys are different references, then the dictionaries
+                // cannot be substituted.  Looking-up values using the keys of one dictionary with the other
+                // dictionary would fail.
+                //
+                // Note that two dictionaries keyed on DateTime, having the keys with the same number of Ticks
+                // but with different DateTime.Kind, will be considered equal because here we are using .NET's
+                // default equality comparer and not our own.  There is no way to use our own while solving for
+                // the comments above (the reason why we use the comparer embedded in the dictionary in the first place).
                 if (!item2.ContainsKey(key))
+                {
+                    return false;
+                }
+
+                var item1Value = item1[key];
+                var item2Value = item2[key];
+
+                if (valueEqualityComparerToUse == null)
+                {
+                    valueEqualityComparerToUse = EqualityComparerHelper.GetEqualityComparerToUse(valueComparer);
+                }
+
+                if (!valueEqualityComparerToUse.Equals(item1Value, item2Value))
+                {
+                    return false;
+                }
+            }
+
+            // As mentioned above, we rely on the IEqualityComparer<T> contained within the dictionaries
+            // to compare keys.  As such, we need to check that every item1 key is contained within item2
+            // AND vice-versa and hence the need for the following second loop.  To illustrate the need,
+            // take two dictionaries that are keyed on string where item1 was constructed using
+            // StringComparer.InvariantCulture and item1 was constructed using
+            // StringComparer.InvariantCultureIgnoreCase.  If every item1 key is upper-case and every item2
+            // key is lower-case, but otherwise the keys match, then the loop above would determine that
+            // the dictionaries are equal whereas the loop below would return false and as such these
+            // dictionaries are not substitutable as inputs to some consuming body of code.
+            foreach (var key in item2.Keys)
+            {
+                if (!item1.ContainsKey(key))
                 {
                     return false;
                 }
@@ -158,7 +207,54 @@ namespace OBeautifulCode.Equality.Recipes
 
             foreach (var key in item1.Keys)
             {
+                // We rely on the IEqualityComparer<T> contained within the dictionaries to compare keys.
+                // As such, two dictionaries that use a default equality comparer that just compares
+                // object references, will never be equal.  For example, two dictionaries that are keyed on
+                // a List<string> will never be equal, regardless of whether
+                // item1.Keys.IsUnorderedEqualTo(item2.Keys) is true or false unless the keys are the same
+                // object reference.
+                // We took this approach because we wanted to respect the dictionary's contract for comparing
+                // keys.  A dictionary that is keyed on a type that can only be compared by object reference
+                // is rare and it's own smell.  In the example above, two dictionaries may well "look" like
+                // they are equal, but if their List<string> keys are different references, then the dictionaries
+                // cannot be substituted.  Looking-up values using the keys of one dictionary with the other
+                // dictionary would fail.
+                //
+                // Note that two dictionaries keyed on DateTime, having the keys with the same number of Ticks
+                // but with different DateTime.Kind, will be considered equal because here we are using .NET's
+                // default equality comparer and not our own.  There is no way to use our own while solving for
+                // the comments above (the reason why we use the comparer embedded in the dictionary in the first place).
                 if (!item2.ContainsKey(key))
+                {
+                    return false;
+                }
+
+                var item1Value = item1[key];
+                var item2Value = item2[key];
+
+                if (valueEqualityComparerToUse == null)
+                {
+                    valueEqualityComparerToUse = EqualityComparerHelper.GetEqualityComparerToUse(valueComparer);
+                }
+
+                if (!valueEqualityComparerToUse.Equals(item1Value, item2Value))
+                {
+                    return false;
+                }
+            }
+
+            // As mentioned above, we rely on the IEqualityComparer<T> contained within the dictionaries
+            // to compare keys.  As such, we need to check that every item1 key is contained within item2
+            // AND vice-versa and hence the need for the following second loop.  To illustrate the need,
+            // take two dictionaries that are keyed on string where item1 was constructed using
+            // StringComparer.InvariantCulture and item1 was constructed using
+            // StringComparer.InvariantCultureIgnoreCase.  If every item1 key is upper-case and every item2
+            // key is lower-case, but otherwise the keys match, then the loop above would determine that
+            // the dictionaries are equal whereas the loop below would return false and as such these
+            // dictionaries are not substitutable as inputs to some consuming body of code.
+            foreach (var key in item2.Keys)
+            {
+                if (!item1.ContainsKey(key))
                 {
                     return false;
                 }

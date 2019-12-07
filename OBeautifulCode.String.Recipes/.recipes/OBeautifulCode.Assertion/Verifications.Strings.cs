@@ -39,6 +39,8 @@ namespace OBeautifulCode.Assertion.Recipes
 
         public const string AnyValueTypeName = "Any Value Type";
 
+        public const string AnyTypeWithWorkingDefaultComparerName = "Any Type With A Working (Non-Throwing) Default Comparer";
+
         public const string EnumerableOfAnyReferenceTypeName = "IEnumerable<" + AnyReferenceTypeName + ">";
 
         public const string EnumerableWhenNotEnumerableOfAnyValueTypeName = "IEnumerable when not IEnumerable<" + AnyValueTypeName + ">";
@@ -184,6 +186,10 @@ namespace OBeautifulCode.Assertion.Recipes
         public const string BeOfTypeExceptionMessageSuffix = "is not of the expected type";
 
         public const string NotBeOfTypeExceptionMessageSuffix = "is of the unexpected type";
+
+        public const string BeAssignableToTypeExceptionMessageSuffix = "is not assignable to the specified type";
+
+        public const string NotBeAssignableToTypeExceptionMessageSuffix = "is assignable to the specified type";
 
         public static readonly string SubjectAndOperationSequencingErrorMessage = Invariant($"There is an issue with sequencing of the provided value and the supported assertion operators: {nameof(WorkflowExtensions.AsArg)}, {nameof(WorkflowExtensions.AsOp)}, {nameof(WorkflowExtensions.AsTest)}, {nameof(WorkflowExtensions.Must)}, {nameof(WorkflowExtensions.MustForArg)}, {nameof(WorkflowExtensions.MustForOp)}, {nameof(WorkflowExtensions.MustForTest)}, {nameof(WorkflowExtensions.And)}, {nameof(WorkflowExtensions.Each)}.");
 
