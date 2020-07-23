@@ -13,7 +13,7 @@ namespace OBeautifulCode.String.Recipes
     using System.Collections.Generic;
     using System.Linq;
 
-    using OBeautifulCode.Assertion.Recipes;
+    using static System.FormattableString;
 
     /// <summary>
     /// Provides methods to check a strings for balanced parentheses,
@@ -69,8 +69,20 @@ namespace OBeautifulCode.String.Recipes
             char close,
             out int unbalancedPosition)
         {
-            new { source }.AsArg().Must().NotBeNullNorWhiteSpace();
-            new { open }.AsArg().Must().NotBeEqualTo(close);
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (string.IsNullOrWhiteSpace(source))
+            {
+                throw new ArgumentException(Invariant($"'{nameof(source)}' is white space"));
+            }
+
+            if (open == close)
+            {
+                throw new ArgumentOutOfRangeException(Invariant($"'{nameof(open)}' == '{close}'"), (Exception)null);
+            }
 
             var result = IsBalanced(source.ToCharArray(), open, close, out unbalancedPosition);
             return result;
@@ -124,10 +136,40 @@ namespace OBeautifulCode.String.Recipes
             string close,
             out int unbalancedPosition)
         {
-            new { source }.AsArg().Must().NotBeNullNorWhiteSpace();
-            new { open }.AsArg().Must().NotBeNullNorWhiteSpace();
-            new { close }.AsArg().Must().NotBeNullNorWhiteSpace();
-            new { open }.AsArg().Must().NotBeEqualTo(close);
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (string.IsNullOrWhiteSpace(source))
+            {
+                throw new ArgumentException(Invariant($"'{nameof(source)}' is white space"));
+            }
+
+            if (open == null)
+            {
+                throw new ArgumentNullException(nameof(open));
+            }
+
+            if (string.IsNullOrWhiteSpace(open))
+            {
+                throw new ArgumentException(Invariant($"'{nameof(open)}' is white space"));
+            }
+
+            if (close == null)
+            {
+                throw new ArgumentNullException(nameof(close));
+            }
+
+            if (string.IsNullOrWhiteSpace(close))
+            {
+                throw new ArgumentException(Invariant($"'{nameof(close)}' is white space"));
+            }
+
+            if (open == close)
+            {
+                throw new ArgumentOutOfRangeException(Invariant($"'{nameof(open)}' == '{close}'"), (Exception)null);
+            }
 
             var result = IsBalanced(source.ToCharArray(), open.ToCharArray(), close.ToCharArray(), out unbalancedPosition);
             return result;
@@ -196,10 +238,40 @@ namespace OBeautifulCode.String.Recipes
             ICollection<char> close,
             out int unbalancedPosition)
         {
-            new { source }.AsArg().Must().NotBeNullNorWhiteSpace();
-            new { open }.AsArg().Must().NotBeNull().And().NotBeEmptyEnumerable();
-            new { close }.AsArg().Must().NotBeNull().And().NotBeEmptyEnumerable();
-            open.Count.AsArg().Must().BeEqualTo(close.Count, "open and close must have the same number of elements.  Every opening character requires a matching closing character.");
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (string.IsNullOrWhiteSpace(source))
+            {
+                throw new ArgumentException(Invariant($"'{nameof(source)}' is white space"));
+            }
+
+            if (open == null)
+            {
+                throw new ArgumentNullException(nameof(open));
+            }
+
+            if (!open.Any())
+            {
+                throw new ArgumentException(Invariant($"'{nameof(open)}' is an empty enumerable"));
+            }
+
+            if (close == null)
+            {
+                throw new ArgumentNullException(nameof(close));
+            }
+            
+            if (!close.Any())
+            {
+                throw new ArgumentException(Invariant($"'{nameof(close)}' is an empty enumerable"));
+            }
+
+            if (open.Count != close.Count)
+            {
+                throw new ArgumentOutOfRangeException("open and close must have the same number of elements.  Every opening character requires a matching closing character.", (Exception)null);
+            }
 
             var openArray = open.ToArray();
             var closeArray = close.ToArray();
