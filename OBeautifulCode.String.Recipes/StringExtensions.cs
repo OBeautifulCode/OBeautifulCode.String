@@ -200,7 +200,7 @@ namespace OBeautifulCode.String.Recipes
                 throw new ArgumentNullException(nameof(oldValue));
             }
 
-            if (oldValue == string.Empty)
+            if (oldValue.Length == 0)
             {
                 throw new ArgumentException(Invariant($"'{nameof(oldValue)}' is an empty string"));
             }
