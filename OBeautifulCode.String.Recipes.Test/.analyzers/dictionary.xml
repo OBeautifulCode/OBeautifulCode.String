@@ -123,6 +123,12 @@
       <!-- Refers to some piece of data that has not yet been validated -->
       <Word>unvalidated</Word>
 
+      <!-- Refers to some piece of data that typically has an associated version number but where the current instance is missing the version -->
+      <Word>unversioned</Word>
+
+      <!-- Refers to some piece of data that typically has an associated version number but where the current instance is missing the version -->
+      <Word>versionless</Word>
+
       <!-- The file extension and file format for an Excel file -->
       <Word>xls</Word>
       <Word>xlsx</Word>

@@ -4,9 +4,6 @@
     <description>Adds some convenient extension methods to strings.</description>
     <tags>string extension extensionmethod</tags>
     <iconUrl>https://raw.githubusercontent.com/OBeautifulCode/OBeautifulCode.String/master/OBeautifulCode.String.Recipes/nuget-icon.png</iconUrl>
-    <dependencies>
-      <dependency id="OBeautifulCode.Assertion.Recipes.Must" version="1.0.15" />
-    </dependencies>
   </metadata>
   <files>
     <file src=".analyzers\SuppressBecause.cs" target="content\net462\.recipes\OBeautifulCode.String\SuppressBecause.cs" />

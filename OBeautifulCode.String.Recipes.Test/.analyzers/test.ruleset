@@ -31,6 +31,14 @@
     <Rule Id="CA1024" Action="None" />
     
     <!--
+      ** Default parameters should not be used **
+      The convience of default parameters far outweighs the risk of varying behavior across programming
+      languages because the CLS allows compilers to ignore the values that are assigned to default
+      parameters.
+    -->
+    <Rule Id="CA1026" Action="None" />
+    
+    <!--
       ** Use events where appropriate **
       This rule is triggered by methods that start with certain terms (e.g. Fire). There's is no examination
       of what the method is actually doing.  As such, it produces false positives in test projects where
