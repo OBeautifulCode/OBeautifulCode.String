@@ -38,6 +38,12 @@ namespace OBeautifulCode.String.Recipes
 
         private static readonly Regex CsvParsingRegex = new Regex("(?:,\"|^\")(\"\"|[\\w\\W]*?)(?=\",|\"$)|(?:,(?!\")|^(?!\"))([^,]*?)(?=$|,)|(\r\n|\n)", RegexOptions.Compiled);
 
+        private static readonly HashSet<char> AlphabeticCharactersHashSet =
+            new HashSet<char>(
+                new char[0]
+                    .Concat(Enumerable.Range(65, 26).Select(Convert.ToChar))
+                    .Concat(Enumerable.Range(97, 26).Select(Convert.ToChar)));
+
         /// <summary>
         /// Appends one string to the another (base) if the base string
         /// doesn't already end with the string to append.
@@ -141,6 +147,30 @@ namespace OBeautifulCode.String.Recipes
                     (((int)_ >= 48) && ((int)_ <= 57)) ||
                     (((int)_ >= 65) && ((int)_ <= 90)) ||
                     (((int)_ >= 97) && ((int)_ <= 122)));
+
+            return result;
+        }
+
+        /// <summary>
+        /// Determines if a string is alphabetic.
+        /// </summary>
+        /// <param name="value">The string to evaluate.</param>
+        /// <remarks>
+        /// An empty string ("") is considered alphabetic.
+        /// </remarks>
+        /// <returns>
+        /// Returns true if the string is alphabetic, false if not.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
+        public static bool IsAlphabetic(
+            this string value)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            var result = value.All(_ => AlphabeticCharactersHashSet.Contains(_));
 
             return result;
         }

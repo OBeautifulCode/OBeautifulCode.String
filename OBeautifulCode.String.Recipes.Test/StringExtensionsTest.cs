@@ -16,6 +16,7 @@ namespace OBeautifulCode.String.Recipes.Test
 
     using FluentAssertions;
 
+    using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.AutoFakeItEasy;
 
     using Xunit;
@@ -348,6 +349,66 @@ namespace OBeautifulCode.String.Recipes.Test
             Assert.True("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ".IsAlphanumeric());
             Assert.True("abcdefghijklmnopqrstuvwxyz1234567890".IsAlphanumeric());
             Assert.True("1234567890abcdefghijklmnopqrstuvwxyz".IsAlphanumeric());
+        }
+
+        [Fact]
+        public static void IsAlphabetic___Should_throw_ArgumentNullException___When_parameter_value_is_null()
+        {
+            // Arrange
+            var actual = Record.Exception(() => StringExtensions.IsAlphabetic(null));
+
+            // Act, Assert
+            actual.AsTest().Must().BeOfType<ArgumentNullException>();
+            actual.Message.AsTest().Must().ContainString("value");
+        }
+
+        [Fact]
+        public static void IsAlphabetic___Should_return_true___When_parameter_value_is_an_empty_string()
+        {
+            // Arrange, Act
+            var actual = string.Empty.IsAlphabetic();
+
+            // Assert
+            actual.AsTest().Must().BeTrue();
+        }
+
+        [Fact]
+        public static void IsAlphabetic___Should_return_false___When_value_is_not_alphabetic()
+        {
+            // Arrange, Act, Assert
+            Assert.False("q9".IsAlphabetic());
+
+            Assert.False("9q".IsAlphabetic());
+
+            Assert.False("ab2cd".IsAlphabetic());
+
+            Assert.False("123".IsAlphabetic());
+
+            for (int i = 0; i <= 64; i++)
+            {
+                Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphabetic());
+            }
+
+            for (int i = 91; i <= 96; i++)
+            {
+                Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphabetic());
+            }
+
+            for (int i = 123; i <= 127; i++)
+            {
+                Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphabetic());
+            }
+        }
+
+        [Fact]
+        public static void IsAlphabetic___Should_return_true___When_value_is_alphabetic()
+        {
+            // Arrange, Act, Assert
+            Assert.True("A".IsAlphabetic());
+            Assert.True("a".IsAlphabetic());
+            Assert.True("ABcd".IsAlphabetic());
+            Assert.True("ABCDEFGHIJKLMNOPQRSTUVWXYZ".IsAlphabetic());
+            Assert.True("abcdefghijklmnopqrstuvwxyz".IsAlphabetic());
         }
 
         [Fact]
