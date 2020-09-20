@@ -4,9 +4,11 @@
     <description>Provides methods to check a strings for balanced parentheses, special characters, tags, etc.</description>
     <tags>string balance balanced parentheses</tags>
     <iconUrl>https://raw.githubusercontent.com/OBeautifulCode/OBeautifulCode.String/master/OBeautifulCode.String.Recipes/nuget-icon.png</iconUrl>
+    <dependencies>
+      <dependency id="OBeautifulCode.CodeAnalysis.Recipes.SuppressBecause" version="1.0.6" />
+    </dependencies>
   </metadata>
   <files>
-    <file src=".analyzers\SuppressBecause.cs" target="content\net462\.recipes\OBeautifulCode.String\SuppressBecause.cs" />
     <file src="Balance.cs" target="content\net462\.recipes\OBeautifulCode.String\Balance.cs" />
   </files>
 </package>

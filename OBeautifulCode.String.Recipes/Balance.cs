@@ -9,17 +9,17 @@
 
 namespace OBeautifulCode.String.Recipes
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    using global::System;
+    using global::System.Collections.Generic;
+    using global::System.Linq;
 
-    using static System.FormattableString;
+    using static global::System.FormattableString;
 
     /// <summary>
     /// Provides methods to check a strings for balanced parentheses,
     /// other characters, strings, tags, etc.
     /// </summary>
-#if !OBeautifulCodeStringRecipesProject
+#if !OBeautifulCodeStringSolution
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.String.Recipes", "See package version number")]
     internal

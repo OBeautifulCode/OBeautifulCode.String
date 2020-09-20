@@ -9,19 +9,19 @@
 
 namespace OBeautifulCode.String.Recipes
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Text;
-    using System.Text.RegularExpressions;
+    using global::System;
+    using global::System.Collections.Generic;
+    using global::System.Globalization;
+    using global::System.Linq;
+    using global::System.Text;
+    using global::System.Text.RegularExpressions;
 
-    using static System.FormattableString;
+    using static global::System.FormattableString;
 
     /// <summary>
     /// Adds some convenient extension methods to strings.
     /// </summary>
-#if !OBeautifulCodeStringRecipesProject
+#if !OBeautifulCodeStringSolution
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.String.Recipes", "See package version number")]
     internal

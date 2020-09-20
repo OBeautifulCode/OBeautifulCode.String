@@ -205,7 +205,7 @@ namespace OBeautifulCode.Assertion.Recipes
         {
             var verifiableItemType = verifiableItem.ItemType;
 
-            if (!verifiableItemType.IsAssignableToNull())
+            if (!verifiableItemType.IsClosedTypeAssignableToNull())
             {
                 ThrowSubjectUnexpectedType(verification, verifiableItem, AnyReferenceTypeName, NullableGenericTypeName);
             }
@@ -220,7 +220,7 @@ namespace OBeautifulCode.Assertion.Recipes
 
             var elementType = verifiableItemType.GetClosedEnumerableElementType();
 
-            if (!elementType.IsAssignableToNull())
+            if (!elementType.IsClosedTypeAssignableToNull())
             {
                 ThrowSubjectUnexpectedType(verification, verifiableItem, EnumerableOfAnyReferenceTypeName, EnumerableOfNullableGenericTypeName, EnumerableWhenNotEnumerableOfAnyValueTypeName);
             }
@@ -235,7 +235,7 @@ namespace OBeautifulCode.Assertion.Recipes
 
             var dictionaryValueType = verifiableItemType.GetClosedDictionaryValueType();
 
-            if (!dictionaryValueType.IsAssignableToNull())
+            if (!dictionaryValueType.IsClosedTypeAssignableToNull())
             {
                 ThrowSubjectUnexpectedType(verification, verifiableItem, DictionaryTypeName, DictionaryWithValueOfAnyReferenceTypeName, DictionaryWithValueOfNullableGenericTypeName, ReadOnlyDictionaryWithValueOfAnyReferenceTypeName, ReadOnlyDictionaryWithValueOfNullableGenericTypeName);
             }
