@@ -667,6 +667,80 @@ namespace OBeautifulCode.String.Recipes.Test
         }
 
         [Fact]
+        public static void ReplaceTokens___Should_throw_ArgumentNullException___When_parameter_value_is_null()
+        {
+            // Arrange
+            var tokenToReplacementValueMap = A.Dummy<IReadOnlyDictionary<string, string>>();
+
+            // Act
+            var actual = Record.Exception(() => StringExtensions.ReplaceTokens(null, tokenToReplacementValueMap));
+
+            // Assert
+            actual.AsTest().Must().BeOfType<ArgumentNullException>();
+            actual.Message.AsTest().Must().ContainString("value");
+        }
+
+        [Fact]
+        public static void ReplaceTokens___Should_throw_ArgumentNullException___When_parameter_tokenToReplacementValueMap_is_null()
+        {
+            // Arrange
+            var value = A.Dummy<string>();
+
+            // Act
+            var actual = Record.Exception(() => value.ReplaceTokens(null));
+
+            // Assert
+            actual.AsTest().Must().BeOfType<ArgumentNullException>();
+            actual.Message.AsTest().Must().ContainString("tokenToReplacementValueMap");
+        }
+
+        [Fact]
+        public static void ReplaceTokens___Should_replace_tokens___When_called()
+        {
+            // Arrange
+            var scenarios = new[]
+            {
+                new
+                {
+                    Value = string.Empty,
+                    TokenToReplacementValueMap = new Dictionary<string, string>
+                    {
+                        { "[token1]", "value" },
+                    },
+                    Expected = string.Empty,
+                },
+                new
+                {
+                    Value = "does-not-contain-token",
+                    TokenToReplacementValueMap = new Dictionary<string, string>
+                    {
+                        { "[token1]", "value" },
+                    },
+                    Expected = "does-not-contain-token",
+                },
+                new
+                {
+                    Value = "contains [token1] multiple [token2] token [token3] such [token4] as [token5]",
+                    TokenToReplacementValueMap = new Dictionary<string, string>
+                    {
+                        { "[token1]", null },
+                        { "[token2]", string.Empty },
+                        { "[token3]", "some-value" },
+                        { "[token4]", "some-other-value" },
+                        { "[token6]", "not-there" },
+                    },
+                    Expected = "contains  multiple  token some-value such some-other-value as [token5]",
+                },
+            };
+
+            // Act
+            var actuals = scenarios.Select(_ => _.Value.ReplaceTokens(_.TokenToReplacementValueMap)).ToList();
+
+            // Assert
+            actuals.AsTest().Must().BeEqualTo(scenarios.Select(_ => _.Expected).ToList());
+        }
+
+        [Fact]
         public static void ReplaceCaseInsensitive_OldValueFoundAndNewValueIsNotEmpty_ReplacesAllOccurrencesOfOldValueWithNewValue()
         {
             // Arrange
