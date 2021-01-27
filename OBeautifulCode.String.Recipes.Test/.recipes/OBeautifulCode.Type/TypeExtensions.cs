@@ -42,8 +42,8 @@ namespace OBeautifulCode.Type.Recipes
     /// <a href="https://stackoverflow.com/questions/59141721/why-is-the-basetype-of-a-generic-type-definition-not-itself-a-generic-type-defin?noredirect=1#comment104515814_59141721" />.
     /// </remarks>
 #if !OBeautifulCodeTypeSolution
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Type.Recipes", "See package version number")]
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+    [global::System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Type.Recipes", "See package version number")]
     internal
 #else
     public
@@ -340,6 +340,31 @@ namespace OBeautifulCode.Type.Recipes
         }
 
         /// <summary>
+        /// Gets the generic type definition of a specified type if the type is generic
+        /// but not a generic type definition, otherwise returns the specified type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        /// If the specified type is a generic type but not a generic type definition then the
+        /// generic type definition is returned, otherwise the specified type is returned.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
+        public static Type GetGenericTypeDefinitionOrSpecifiedType(
+            this Type type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            var result = type.IsGenericType && (!type.IsGenericTypeDefinition)
+                ? type.GetGenericTypeDefinition()
+                : type;
+
+            return result;
+        }
+
+        /// <summary>
         /// Gets the types in the inheritance path starting from the specified type's
         /// <see cref="Type.BaseType"/> and ending in a type with no <see cref="Type.BaseType"/>.
         /// </summary>
@@ -391,6 +416,46 @@ namespace OBeautifulCode.Type.Recipes
             var defaultConstructor = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance).SingleOrDefault(_ => _.GetParameters().Length == 0);
 
             var result = defaultConstructor != null;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Determines if the specified type has a base type.
+        /// </summary>
+        /// <returns>
+        /// true if the specified type has a base type, otherwise false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
+        public static bool HasBaseType(
+            this Type type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            var result = type.BaseType != null;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Determines if the base type of the specified type is object.
+        /// </summary>
+        /// <returns>
+        /// true if the base type of the specified type is object, otherwise false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
+        public static bool HasObjectAsBaseType(
+            this Type type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            var result = type.BaseType == typeof(object);
 
             return result;
         }

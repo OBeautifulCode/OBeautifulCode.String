@@ -9,22 +9,22 @@
 
 namespace OBeautifulCode.Assertion.Recipes
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
+    using global::System;
+    using global::System.Collections;
+    using global::System.Collections.Generic;
+    using global::System.Globalization;
+    using global::System.Linq;
 
     using OBeautifulCode.Type.Recipes;
 
-    using static System.FormattableString;
+    using static global::System.FormattableString;
 
-#if !OBeautifulCodeAssertionRecipesProject
+#if !OBeautifulCodeAssertionSolution
     internal
 #else
     public
 #endif
-        static partial class Verifications
+    static partial class Verifications
     {
 #pragma warning disable SA1201
         private static readonly Type EnumerableType = typeof(IEnumerable);
@@ -38,6 +38,10 @@ namespace OBeautifulCode.Assertion.Recipes
         private static readonly Type GuidType = typeof(Guid);
 
         private static readonly Type NullableGuidType = typeof(Guid?);
+
+        private static readonly Type DateTimeType = typeof(DateTime);
+
+        private static readonly Type NullableDateTimeType = typeof(DateTime?);
 
         private static readonly Type DictionaryType = typeof(IDictionary);
 
@@ -53,7 +57,7 @@ namespace OBeautifulCode.Assertion.Recipes
             },
         };
 
-        private static readonly IReadOnlyCollection<TypeValidation> MustBeBooleanTypeValidations = new[]
+        private static readonly IReadOnlyCollection<TypeValidation> MustBeBooleanOrNullableBooleanTypeValidations = new[]
         {
             new TypeValidation
             {
@@ -71,12 +75,31 @@ namespace OBeautifulCode.Assertion.Recipes
             },
         };
 
-        private static readonly IReadOnlyCollection<TypeValidation> MustBeGuidTypeValidations = new[]
+        private static readonly IReadOnlyCollection<TypeValidation> MustBeGuidOrNullableGuidTypeValidations = new[]
         {
             new TypeValidation
             {
                 Handler = ThrowIfNotAssignableToType,
                 ReferenceTypes = new[] { GuidType, NullableGuidType },
+            },
+        };
+
+        private static readonly IReadOnlyCollection<TypeValidation> MustBeDateTimeOrNullableDateTimeTypeValidations = new[]
+        {
+            new TypeValidation
+            {
+                Handler = ThrowIfNotAssignableToType,
+                ReferenceTypes = new[] { DateTimeType, NullableDateTimeType },
+            },
+        };
+
+        private static readonly IReadOnlyCollection<TypeValidation> MustBeNullableDateTimeTypeValidations = new[]
+        {
+            new TypeValidation
+            {
+                // DateTime is assignable to DateTime?, so we call ThrowIfNotEqualToType instead of ThrowIfNotAssignableToType
+                Handler = ThrowIfNotEqualToType,
+                ReferenceTypes = new[] { NullableDateTimeType },
             },
         };
 
@@ -251,6 +274,21 @@ namespace OBeautifulCode.Assertion.Recipes
             var validTypes = typeValidation.ReferenceTypes;
 
             if (!validTypes.Any(_ => verifiableItemType.IsAssignableTo(_, treatGenericTypeDefinitionAsAssignableTo: true)))
+            {
+                ThrowSubjectUnexpectedType(verification, verifiableItem, validTypes);
+            }
+        }
+
+        private static void ThrowIfNotEqualToType(
+            Verification verification,
+            VerifiableItem verifiableItem,
+            TypeValidation typeValidation)
+        {
+            var verifiableItemType = verifiableItem.ItemType;
+
+            var validTypes = typeValidation.ReferenceTypes;
+
+            if (validTypes.All(_ => verifiableItemType != _))
             {
                 ThrowSubjectUnexpectedType(verification, verifiableItem, validTypes);
             }
