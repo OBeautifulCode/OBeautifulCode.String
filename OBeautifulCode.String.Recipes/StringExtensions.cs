@@ -22,8 +22,8 @@ namespace OBeautifulCode.String.Recipes
     /// Adds some convenient extension methods to strings.
     /// </summary>
 #if !OBeautifulCodeStringSolution
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.String.Recipes", "See package version number")]
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+    [global::System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.String.Recipes", "See package version number")]
     internal
 #else
     public
