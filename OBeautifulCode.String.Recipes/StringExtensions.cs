@@ -1172,7 +1172,7 @@ namespace OBeautifulCode.String.Recipes
         public static string ToStringInvariant(
             this bool value)
         {
-            var result = value.ToString(CultureInfo.InvariantCulture);
+            var result = value.ToString(CultureInfo.InvariantCulture).ToLowerInvariant();
 
             return result;
         }

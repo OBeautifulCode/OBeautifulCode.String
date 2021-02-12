@@ -2105,7 +2105,7 @@ namespace OBeautifulCode.String.Recipes.Test
             var actual = value.ToStringInvariant();
 
             // Assert
-            actual.AsTest().Must().BeEqualTo("True");
+            actual.AsTest().Must().BeEqualTo("true");
         }
 
         [Fact]
@@ -2145,7 +2145,7 @@ namespace OBeautifulCode.String.Recipes.Test
             var actual = value.ToStringInvariant();
 
             // Assert
-            actual.AsTest().Must().BeEqualTo("True");
+            actual.AsTest().Must().BeEqualTo("true");
         }
 
         [Fact]
