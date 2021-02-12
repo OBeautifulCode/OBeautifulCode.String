@@ -1212,6 +1212,55 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value.
+        /// </returns>
+        public static string ToStringInvariant(
+            this Guid value)
+        {
+            var result = value.ToString().ToUpperInvariant();
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
+        public static string ToStringInvariant(
+            this Guid? value,
+            bool throwIfNull = true)
+        {
+            string result;
+
+            if (value == null)
+            {
+                if (throwIfNull)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = ((Guid)value).ToStringInvariant();
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Converts the first character of the specified string to upper-case, using <see cref="CultureInfo.InvariantCulture"/>.
         /// </summary>
         /// <param name="value">The string to operate on.</param>

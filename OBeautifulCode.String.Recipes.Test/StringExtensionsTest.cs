@@ -2149,6 +2149,59 @@ namespace OBeautifulCode.String.Recipes.Test
         }
 
         [Fact]
+        public static void ToStringInvariant_Guid___Should_get_string_representation___When_called()
+        {
+            // Arrange
+            Guid value = Guid.Parse("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB");
+
+            // Act
+            var actual = value.ToStringInvariant();
+
+            // Assert
+            actual.AsTest().Must().BeEqualTo("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB");
+        }
+
+        [Fact]
+        public static void ToStringInvariant_Nullable_Guid___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        {
+            // Arrange
+            Guid? value = null;
+
+            // Act
+            var actual = Record.Exception(() => value.ToStringInvariant(throwIfNull: true));
+
+            // Assert
+            actual.AsTest().Must().BeOfType<ArgumentNullException>();
+            actual.Message.AsTest().Must().ContainString("value");
+        }
+
+        [Fact]
+        public static void ToStringInvariant_Nullable_Guid___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        {
+            // Arrange
+            Guid? value = null;
+
+            // Act
+            var actual = value.ToStringInvariant(throwIfNull: false);
+
+            // Assert
+            actual.AsTest().Must().BeNull();
+        }
+
+        [Fact]
+        public static void ToStringInvariant_Nullable_Guid___Should_get_string_representation___When_called()
+        {
+            // Arrange
+            Guid? value = Guid.Parse("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB");
+
+            // Act
+            var actual = value.ToStringInvariant();
+
+            // Assert
+            actual.AsTest().Must().BeEqualTo("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB");
+        }
+
+        [Fact]
         public static void ToUpperFirstCharacter___Should_throw_ArgumentNullException___When_parameter_value_is_null()
         {
             // Arrange, Act
