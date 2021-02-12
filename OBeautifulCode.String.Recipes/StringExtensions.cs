@@ -9,13 +9,15 @@
 
 namespace OBeautifulCode.String.Recipes
 {
-    using System.Diagnostics.CodeAnalysis;
     using global::System;
     using global::System.Collections.Generic;
+    using global::System.Diagnostics.CodeAnalysis;
     using global::System.Globalization;
     using global::System.Linq;
     using global::System.Text;
     using global::System.Text.RegularExpressions;
+
+    using OBeautifulCode.CodeAnalysis.Recipes;
 
     using static global::System.FormattableString;
 
@@ -48,6 +50,7 @@ namespace OBeautifulCode.String.Recipes
         /// <summary>
         /// Specifies a map of <see cref="DateTimeKind"/> to the preferred format string to use for that kind.
         /// </summary>
+        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes", Justification = ObcSuppressBecause.CA2104_DoNotDeclareReadOnlyMutableReferenceTypes_TypeIsImmutable)]
         public static readonly IReadOnlyDictionary<DateTimeKind, string> DateTimeKindToPreferredFormatStringMap =
             new Dictionary<DateTimeKind, string>
             {
