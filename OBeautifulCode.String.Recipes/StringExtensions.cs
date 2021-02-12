@@ -1046,7 +1046,7 @@ namespace OBeautifulCode.String.Recipes
         public static string ToStringInvariantPreferred(
             this float value)
         {
-            var result = value.ToString(CultureInfo.InvariantCulture);
+            var result = value.ToString("G9", CultureInfo.InvariantCulture);
 
             return result;
         }
@@ -1095,7 +1095,7 @@ namespace OBeautifulCode.String.Recipes
         public static string ToStringInvariantPreferred(
             this double value)
         {
-            var result = value.ToString(CultureInfo.InvariantCulture);
+            var result = value.ToString("G17", CultureInfo.InvariantCulture);
 
             return result;
         }
