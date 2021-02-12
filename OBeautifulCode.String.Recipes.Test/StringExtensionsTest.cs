@@ -1498,13 +1498,13 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "sbyte", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_sbyte___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_sbyte___Should_get_string_representation___When_called()
         {
             // Arrange
             sbyte value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
@@ -1512,13 +1512,13 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "sbyte", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_Nullable_sbyte___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        public static void ToStringInvariantPreferred_Nullable_sbyte___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
         {
             // Arrange
             sbyte? value = null;
 
             // Act
-            var actual = Record.Exception(() => value.ToStringInvariant(throwIfNull: true));
+            var actual = Record.Exception(() => value.ToStringInvariantPreferred(throwIfNull: true));
 
             // Assert
             actual.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -1527,13 +1527,13 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "sbyte", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_Nullable_sbyte___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        public static void ToStringInvariantPreferred_Nullable_sbyte___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
         {
             // Arrange
             sbyte? value = null;
 
             // Act
-            var actual = value.ToStringInvariant(throwIfNull: false);
+            var actual = value.ToStringInvariantPreferred(throwIfNull: false);
 
             // Assert
             actual.AsTest().Must().BeNull();
@@ -1541,39 +1541,39 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "sbyte", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_Nullable_sbyte___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_Nullable_sbyte___Should_get_string_representation___When_called()
         {
             // Arrange
             sbyte? value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
         }
 
         [Fact]
-        public static void ToStringInvariant_byte___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_byte___Should_get_string_representation___When_called()
         {
             // Arrange
             byte value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_byte___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        public static void ToStringInvariantPreferred_Nullable_byte___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
         {
             // Arrange
             byte? value = null;
 
             // Act
-            var actual = Record.Exception(() => value.ToStringInvariant(throwIfNull: true));
+            var actual = Record.Exception(() => value.ToStringInvariantPreferred(throwIfNull: true));
 
             // Assert
             actual.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -1581,52 +1581,52 @@ namespace OBeautifulCode.String.Recipes.Test
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_byte___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        public static void ToStringInvariantPreferred_Nullable_byte___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
         {
             // Arrange
             byte? value = null;
 
             // Act
-            var actual = value.ToStringInvariant(throwIfNull: false);
+            var actual = value.ToStringInvariantPreferred(throwIfNull: false);
 
             // Assert
             actual.AsTest().Must().BeNull();
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_byte___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_Nullable_byte___Should_get_string_representation___When_called()
         {
             // Arrange
             byte? value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
         }
 
         [Fact]
-        public static void ToStringInvariant_short___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_short___Should_get_string_representation___When_called()
         {
             // Arrange
             short value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_short___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        public static void ToStringInvariantPreferred_Nullable_short___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
         {
             // Arrange
             short? value = null;
 
             // Act
-            var actual = Record.Exception(() => value.ToStringInvariant(throwIfNull: true));
+            var actual = Record.Exception(() => value.ToStringInvariantPreferred(throwIfNull: true));
 
             // Assert
             actual.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -1634,26 +1634,26 @@ namespace OBeautifulCode.String.Recipes.Test
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_short___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        public static void ToStringInvariantPreferred_Nullable_short___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
         {
             // Arrange
             short? value = null;
 
             // Act
-            var actual = value.ToStringInvariant(throwIfNull: false);
+            var actual = value.ToStringInvariantPreferred(throwIfNull: false);
 
             // Assert
             actual.AsTest().Must().BeNull();
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_short___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_Nullable_short___Should_get_string_representation___When_called()
         {
             // Arrange
             short? value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
@@ -1661,13 +1661,13 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "ushort", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_ushort___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_ushort___Should_get_string_representation___When_called()
         {
             // Arrange
             ushort value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
@@ -1675,13 +1675,13 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "ushort", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_Nullable_ushort___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        public static void ToStringInvariantPreferred_Nullable_ushort___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
         {
             // Arrange
             ushort? value = null;
 
             // Act
-            var actual = Record.Exception(() => value.ToStringInvariant(throwIfNull: true));
+            var actual = Record.Exception(() => value.ToStringInvariantPreferred(throwIfNull: true));
 
             // Assert
             actual.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -1690,13 +1690,13 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "ushort", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_Nullable_ushort___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        public static void ToStringInvariantPreferred_Nullable_ushort___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
         {
             // Arrange
             ushort? value = null;
 
             // Act
-            var actual = value.ToStringInvariant(throwIfNull: false);
+            var actual = value.ToStringInvariantPreferred(throwIfNull: false);
 
             // Assert
             actual.AsTest().Must().BeNull();
@@ -1704,39 +1704,39 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "ushort", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_Nullable_ushort___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_Nullable_ushort___Should_get_string_representation___When_called()
         {
             // Arrange
             ushort? value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
         }
 
         [Fact]
-        public static void ToStringInvariant_int___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_int___Should_get_string_representation___When_called()
         {
             // Arrange
             int value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_int___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        public static void ToStringInvariantPreferred_Nullable_int___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
         {
             // Arrange
             int? value = null;
 
             // Act
-            var actual = Record.Exception(() => value.ToStringInvariant(throwIfNull: true));
+            var actual = Record.Exception(() => value.ToStringInvariantPreferred(throwIfNull: true));
 
             // Assert
             actual.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -1744,26 +1744,26 @@ namespace OBeautifulCode.String.Recipes.Test
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_int___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        public static void ToStringInvariantPreferred_Nullable_int___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
         {
             // Arrange
             int? value = null;
 
             // Act
-            var actual = value.ToStringInvariant(throwIfNull: false);
+            var actual = value.ToStringInvariantPreferred(throwIfNull: false);
 
             // Assert
             actual.AsTest().Must().BeNull();
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_int___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_Nullable_int___Should_get_string_representation___When_called()
         {
             // Arrange
             int? value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
@@ -1771,13 +1771,13 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "uint", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_uint___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_uint___Should_get_string_representation___When_called()
         {
             // Arrange
             uint value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
@@ -1785,13 +1785,13 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "uint", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_Nullable_uint___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        public static void ToStringInvariantPreferred_Nullable_uint___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
         {
             // Arrange
             uint? value = null;
 
             // Act
-            var actual = Record.Exception(() => value.ToStringInvariant(throwIfNull: true));
+            var actual = Record.Exception(() => value.ToStringInvariantPreferred(throwIfNull: true));
 
             // Assert
             actual.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -1800,13 +1800,13 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "uint", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_Nullable_uint___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        public static void ToStringInvariantPreferred_Nullable_uint___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
         {
             // Arrange
             uint? value = null;
 
             // Act
-            var actual = value.ToStringInvariant(throwIfNull: false);
+            var actual = value.ToStringInvariantPreferred(throwIfNull: false);
 
             // Assert
             actual.AsTest().Must().BeNull();
@@ -1814,39 +1814,39 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "uint", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_Nullable_uint___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_Nullable_uint___Should_get_string_representation___When_called()
         {
             // Arrange
             uint? value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
         }
 
         [Fact]
-        public static void ToStringInvariant_long___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_long___Should_get_string_representation___When_called()
         {
             // Arrange
             long value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_long___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        public static void ToStringInvariantPreferred_Nullable_long___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
         {
             // Arrange
             long? value = null;
 
             // Act
-            var actual = Record.Exception(() => value.ToStringInvariant(throwIfNull: true));
+            var actual = Record.Exception(() => value.ToStringInvariantPreferred(throwIfNull: true));
 
             // Assert
             actual.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -1854,26 +1854,26 @@ namespace OBeautifulCode.String.Recipes.Test
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_long___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        public static void ToStringInvariantPreferred_Nullable_long___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
         {
             // Arrange
             long? value = null;
 
             // Act
-            var actual = value.ToStringInvariant(throwIfNull: false);
+            var actual = value.ToStringInvariantPreferred(throwIfNull: false);
 
             // Assert
             actual.AsTest().Must().BeNull();
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_long___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_Nullable_long___Should_get_string_representation___When_called()
         {
             // Arrange
             long? value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
@@ -1881,13 +1881,13 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "ulong", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_ulong___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_ulong___Should_get_string_representation___When_called()
         {
             // Arrange
             ulong value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
@@ -1895,13 +1895,13 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "ulong", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_Nullable_ulong___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        public static void ToStringInvariantPreferred_Nullable_ulong___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
         {
             // Arrange
             ulong? value = null;
 
             // Act
-            var actual = Record.Exception(() => value.ToStringInvariant(throwIfNull: true));
+            var actual = Record.Exception(() => value.ToStringInvariantPreferred(throwIfNull: true));
 
             // Assert
             actual.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -1910,13 +1910,13 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "ulong", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_Nullable_ulong___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        public static void ToStringInvariantPreferred_Nullable_ulong___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
         {
             // Arrange
             ulong? value = null;
 
             // Act
-            var actual = value.ToStringInvariant(throwIfNull: false);
+            var actual = value.ToStringInvariantPreferred(throwIfNull: false);
 
             // Assert
             actual.AsTest().Must().BeNull();
@@ -1924,39 +1924,39 @@ namespace OBeautifulCode.String.Recipes.Test
 
         [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "ulong", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
-        public static void ToStringInvariant_Nullable_ulong___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_Nullable_ulong___Should_get_string_representation___When_called()
         {
             // Arrange
             ulong? value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
         }
 
         [Fact]
-        public static void ToStringInvariant_float___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_float___Should_get_string_representation___When_called()
         {
             // Arrange
             float value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_float___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        public static void ToStringInvariantPreferred_Nullable_float___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
         {
             // Arrange
             float? value = null;
 
             // Act
-            var actual = Record.Exception(() => value.ToStringInvariant(throwIfNull: true));
+            var actual = Record.Exception(() => value.ToStringInvariantPreferred(throwIfNull: true));
 
             // Assert
             actual.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -1964,52 +1964,52 @@ namespace OBeautifulCode.String.Recipes.Test
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_float___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        public static void ToStringInvariantPreferred_Nullable_float___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
         {
             // Arrange
             float? value = null;
 
             // Act
-            var actual = value.ToStringInvariant(throwIfNull: false);
+            var actual = value.ToStringInvariantPreferred(throwIfNull: false);
 
             // Assert
             actual.AsTest().Must().BeNull();
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_float___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_Nullable_float___Should_get_string_representation___When_called()
         {
             // Arrange
             float? value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
         }
 
         [Fact]
-        public static void ToStringInvariant_double___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_double___Should_get_string_representation___When_called()
         {
             // Arrange
             double value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_double___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        public static void ToStringInvariantPreferred_Nullable_double___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
         {
             // Arrange
             double? value = null;
 
             // Act
-            var actual = Record.Exception(() => value.ToStringInvariant(throwIfNull: true));
+            var actual = Record.Exception(() => value.ToStringInvariantPreferred(throwIfNull: true));
 
             // Assert
             actual.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -2017,52 +2017,52 @@ namespace OBeautifulCode.String.Recipes.Test
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_double___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        public static void ToStringInvariantPreferred_Nullable_double___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
         {
             // Arrange
             double? value = null;
 
             // Act
-            var actual = value.ToStringInvariant(throwIfNull: false);
+            var actual = value.ToStringInvariantPreferred(throwIfNull: false);
 
             // Assert
             actual.AsTest().Must().BeNull();
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_double___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_Nullable_double___Should_get_string_representation___When_called()
         {
             // Arrange
             double? value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
         }
 
         [Fact]
-        public static void ToStringInvariant_decimal___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_decimal___Should_get_string_representation___When_called()
         {
             // Arrange
             decimal value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_decimal___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        public static void ToStringInvariantPreferred_Nullable_decimal___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
         {
             // Arrange
             decimal? value = null;
 
             // Act
-            var actual = Record.Exception(() => value.ToStringInvariant(throwIfNull: true));
+            var actual = Record.Exception(() => value.ToStringInvariantPreferred(throwIfNull: true));
 
             // Assert
             actual.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -2070,52 +2070,52 @@ namespace OBeautifulCode.String.Recipes.Test
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_decimal___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        public static void ToStringInvariantPreferred_Nullable_decimal___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
         {
             // Arrange
             decimal? value = null;
 
             // Act
-            var actual = value.ToStringInvariant(throwIfNull: false);
+            var actual = value.ToStringInvariantPreferred(throwIfNull: false);
 
             // Assert
             actual.AsTest().Must().BeNull();
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_decimal___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_Nullable_decimal___Should_get_string_representation___When_called()
         {
             // Arrange
             decimal? value = 53;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("53");
         }
 
         [Fact]
-        public static void ToStringInvariant_bool___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_bool___Should_get_string_representation___When_called()
         {
             // Arrange
             bool value = true;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("true");
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_bool___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        public static void ToStringInvariantPreferred_Nullable_bool___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
         {
             // Arrange
             bool? value = null;
 
             // Act
-            var actual = Record.Exception(() => value.ToStringInvariant(throwIfNull: true));
+            var actual = Record.Exception(() => value.ToStringInvariantPreferred(throwIfNull: true));
 
             // Assert
             actual.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -2123,52 +2123,52 @@ namespace OBeautifulCode.String.Recipes.Test
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_bool___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        public static void ToStringInvariantPreferred_Nullable_bool___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
         {
             // Arrange
             bool? value = null;
 
             // Act
-            var actual = value.ToStringInvariant(throwIfNull: false);
+            var actual = value.ToStringInvariantPreferred(throwIfNull: false);
 
             // Assert
             actual.AsTest().Must().BeNull();
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_bool___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_Nullable_bool___Should_get_string_representation___When_called()
         {
             // Arrange
             bool? value = true;
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("true");
         }
 
         [Fact]
-        public static void ToStringInvariant_Guid___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_Guid___Should_get_string_representation___When_called()
         {
             // Arrange
             Guid value = Guid.Parse("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB");
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB");
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_Guid___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        public static void ToStringInvariantPreferred_Nullable_Guid___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
         {
             // Arrange
             Guid? value = null;
 
             // Act
-            var actual = Record.Exception(() => value.ToStringInvariant(throwIfNull: true));
+            var actual = Record.Exception(() => value.ToStringInvariantPreferred(throwIfNull: true));
 
             // Assert
             actual.AsTest().Must().BeOfType<ArgumentNullException>();
@@ -2176,26 +2176,26 @@ namespace OBeautifulCode.String.Recipes.Test
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_Guid___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        public static void ToStringInvariantPreferred_Nullable_Guid___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
         {
             // Arrange
             Guid? value = null;
 
             // Act
-            var actual = value.ToStringInvariant(throwIfNull: false);
+            var actual = value.ToStringInvariantPreferred(throwIfNull: false);
 
             // Assert
             actual.AsTest().Must().BeNull();
         }
 
         [Fact]
-        public static void ToStringInvariant_Nullable_Guid___Should_get_string_representation___When_called()
+        public static void ToStringInvariantPreferred_Nullable_Guid___Should_get_string_representation___When_called()
         {
             // Arrange
             Guid? value = Guid.Parse("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB");
 
             // Act
-            var actual = value.ToStringInvariant();
+            var actual = value.ToStringInvariantPreferred();
 
             // Assert
             actual.AsTest().Must().BeEqualTo("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB");

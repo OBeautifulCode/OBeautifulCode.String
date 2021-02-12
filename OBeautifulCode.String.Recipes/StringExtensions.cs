@@ -9,6 +9,7 @@
 
 namespace OBeautifulCode.String.Recipes
 {
+    using System.Diagnostics.CodeAnalysis;
     using global::System;
     using global::System.Collections.Generic;
     using global::System.Globalization;
@@ -608,13 +609,13 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
         /// The invariant culture string representation of the specified value.
         /// </returns>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             #pragma warning disable CS3001 // Argument type is not CLS-compliant
             this sbyte value)
             #pragma warning restore CS3001 // Argument type is not CLS-compliant
@@ -625,7 +626,7 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
@@ -633,7 +634,7 @@ namespace OBeautifulCode.String.Recipes
         /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             #pragma warning disable CS3001 // Argument type is not CLS-compliant
             this sbyte? value,
             #pragma warning restore CS3001 // Argument type is not CLS-compliant
@@ -654,20 +655,20 @@ namespace OBeautifulCode.String.Recipes
             }
             else
             {
-                result = ((sbyte)value).ToStringInvariant();
+                result = ((sbyte)value).ToStringInvariantPreferred();
             }
 
             return result;
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
         /// The invariant culture string representation of the specified value.
         /// </returns>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this byte value)
         {
             var result = value.ToString(CultureInfo.InvariantCulture);
@@ -676,7 +677,7 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
@@ -684,7 +685,7 @@ namespace OBeautifulCode.String.Recipes
         /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this byte? value,
             bool throwIfNull = true)
         {
@@ -703,20 +704,20 @@ namespace OBeautifulCode.String.Recipes
             }
             else
             {
-                result = ((byte)value).ToStringInvariant();
+                result = ((byte)value).ToStringInvariantPreferred();
             }
 
             return result;
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
         /// The invariant culture string representation of the specified value.
         /// </returns>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this short value)
         {
             var result = value.ToString(CultureInfo.InvariantCulture);
@@ -725,7 +726,7 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
@@ -733,7 +734,7 @@ namespace OBeautifulCode.String.Recipes
         /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this short? value,
             bool throwIfNull = true)
         {
@@ -752,20 +753,20 @@ namespace OBeautifulCode.String.Recipes
             }
             else
             {
-                result = ((short)value).ToStringInvariant();
+                result = ((short)value).ToStringInvariantPreferred();
             }
 
             return result;
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
         /// The invariant culture string representation of the specified value.
         /// </returns>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             #pragma warning disable CS3001 // Argument type is not CLS-compliant
             this ushort value)
             #pragma warning restore CS3001 // Argument type is not CLS-compliant
@@ -776,7 +777,7 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
@@ -784,7 +785,7 @@ namespace OBeautifulCode.String.Recipes
         /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             #pragma warning disable CS3001 // Argument type is not CLS-compliant
             this ushort? value,
             #pragma warning restore CS3001 // Argument type is not CLS-compliant
@@ -805,20 +806,20 @@ namespace OBeautifulCode.String.Recipes
             }
             else
             {
-                result = ((ushort)value).ToStringInvariant();
+                result = ((ushort)value).ToStringInvariantPreferred();
             }
 
             return result;
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
         /// The invariant culture string representation of the specified value.
         /// </returns>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this int value)
         {
             var result = value.ToString(CultureInfo.InvariantCulture);
@@ -827,7 +828,7 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
@@ -835,7 +836,7 @@ namespace OBeautifulCode.String.Recipes
         /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this int? value,
             bool throwIfNull = true)
         {
@@ -854,20 +855,20 @@ namespace OBeautifulCode.String.Recipes
             }
             else
             {
-                result = ((int)value).ToStringInvariant();
+                result = ((int)value).ToStringInvariantPreferred();
             }
 
             return result;
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
         /// The invariant culture string representation of the specified value.
         /// </returns>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             #pragma warning disable CS3001 // Argument type is not CLS-compliant
             this uint value)
             #pragma warning restore CS3001 // Argument type is not CLS-compliant
@@ -878,7 +879,7 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
@@ -886,7 +887,7 @@ namespace OBeautifulCode.String.Recipes
         /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             #pragma warning disable CS3001 // Argument type is not CLS-compliant
             this uint? value,
             #pragma warning restore CS3001 // Argument type is not CLS-compliant
@@ -907,20 +908,20 @@ namespace OBeautifulCode.String.Recipes
             }
             else
             {
-                result = ((uint)value).ToStringInvariant();
+                result = ((uint)value).ToStringInvariantPreferred();
             }
 
             return result;
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
         /// The invariant culture string representation of the specified value.
         /// </returns>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this long value)
         {
             var result = value.ToString(CultureInfo.InvariantCulture);
@@ -929,7 +930,7 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
@@ -937,7 +938,7 @@ namespace OBeautifulCode.String.Recipes
         /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this long? value,
             bool throwIfNull = true)
         {
@@ -956,20 +957,20 @@ namespace OBeautifulCode.String.Recipes
             }
             else
             {
-                result = ((long)value).ToStringInvariant();
+                result = ((long)value).ToStringInvariantPreferred();
             }
 
             return result;
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
         /// The invariant culture string representation of the specified value.
         /// </returns>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             #pragma warning disable CS3001 // Argument type is not CLS-compliant
             this ulong value)
             #pragma warning restore CS3001 // Argument type is not CLS-compliant
@@ -980,7 +981,7 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
@@ -988,7 +989,7 @@ namespace OBeautifulCode.String.Recipes
         /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             #pragma warning disable CS3001 // Argument type is not CLS-compliant
             this ulong? value,
             #pragma warning restore CS3001 // Argument type is not CLS-compliant
@@ -1009,20 +1010,20 @@ namespace OBeautifulCode.String.Recipes
             }
             else
             {
-                result = ((ulong)value).ToStringInvariant();
+                result = ((ulong)value).ToStringInvariantPreferred();
             }
 
             return result;
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
         /// The invariant culture string representation of the specified value.
         /// </returns>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this float value)
         {
             var result = value.ToString(CultureInfo.InvariantCulture);
@@ -1031,7 +1032,7 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
@@ -1039,7 +1040,7 @@ namespace OBeautifulCode.String.Recipes
         /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this float? value,
             bool throwIfNull = true)
         {
@@ -1058,20 +1059,20 @@ namespace OBeautifulCode.String.Recipes
             }
             else
             {
-                result = ((float)value).ToStringInvariant();
+                result = ((float)value).ToStringInvariantPreferred();
             }
 
             return result;
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
         /// The invariant culture string representation of the specified value.
         /// </returns>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this double value)
         {
             var result = value.ToString(CultureInfo.InvariantCulture);
@@ -1080,7 +1081,7 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
@@ -1088,7 +1089,7 @@ namespace OBeautifulCode.String.Recipes
         /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this double? value,
             bool throwIfNull = true)
         {
@@ -1107,20 +1108,20 @@ namespace OBeautifulCode.String.Recipes
             }
             else
             {
-                result = ((double)value).ToStringInvariant();
+                result = ((double)value).ToStringInvariantPreferred();
             }
 
             return result;
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
         /// The invariant culture string representation of the specified value.
         /// </returns>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this decimal value)
         {
             var result = value.ToString(CultureInfo.InvariantCulture);
@@ -1129,7 +1130,7 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
@@ -1137,7 +1138,7 @@ namespace OBeautifulCode.String.Recipes
         /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this decimal? value,
             bool throwIfNull = true)
         {
@@ -1156,20 +1157,21 @@ namespace OBeautifulCode.String.Recipes
             }
             else
             {
-                result = ((decimal)value).ToStringInvariant();
+                result = ((decimal)value).ToStringInvariantPreferred();
             }
 
             return result;
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
         /// The invariant culture string representation of the specified value.
         /// </returns>
-        public static string ToStringInvariant(
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Prefer bool as lower case.")]
+        public static string ToStringInvariantPreferred(
             this bool value)
         {
             var result = value.ToString(CultureInfo.InvariantCulture).ToLowerInvariant();
@@ -1178,7 +1180,7 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
@@ -1186,7 +1188,7 @@ namespace OBeautifulCode.String.Recipes
         /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this bool? value,
             bool throwIfNull = true)
         {
@@ -1205,20 +1207,20 @@ namespace OBeautifulCode.String.Recipes
             }
             else
             {
-                result = ((bool)value).ToStringInvariant();
+                result = ((bool)value).ToStringInvariantPreferred();
             }
 
             return result;
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>
         /// The invariant culture string representation of the specified value.
         /// </returns>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this Guid value)
         {
             var result = value.ToString().ToUpperInvariant();
@@ -1227,7 +1229,7 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
-        /// Gets the string representation of a specified value using the invariant culture.
+        /// Gets the preferred string representation of a specified value using the invariant culture.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
@@ -1235,7 +1237,7 @@ namespace OBeautifulCode.String.Recipes
         /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
-        public static string ToStringInvariant(
+        public static string ToStringInvariantPreferred(
             this Guid? value,
             bool throwIfNull = true)
         {
@@ -1254,7 +1256,7 @@ namespace OBeautifulCode.String.Recipes
             }
             else
             {
-                result = ((Guid)value).ToStringInvariant();
+                result = ((Guid)value).ToStringInvariantPreferred();
             }
 
             return result;
