@@ -46,6 +46,23 @@ namespace OBeautifulCode.String.Recipes
                     .Concat(Enumerable.Range(97, 26).Select(Convert.ToChar)));
 
         /// <summary>
+        /// Specifies a map of <see cref="DateTimeKind"/> to the preferred format string to use for that kind.
+        /// </summary>
+        public static readonly IReadOnlyDictionary<DateTimeKind, string> DateTimeKindToPreferredFormatStringMap =
+            new Dictionary<DateTimeKind, string>
+            {
+                // ReSharper disable once StringLiteralTypo
+                { DateTimeKind.Utc, "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffff'Z'" },
+
+                // ReSharper disable once StringLiteralTypo
+                { DateTimeKind.Unspecified, "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffff''" },
+
+                // ReSharper disable once StringLiteralTypo
+                // note that the K here expands to the offset (e.g. "-05:00")
+                { DateTimeKind.Local, "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK" },
+            };
+
+        /// <summary>
         /// Appends one string to the another (base) if the base string
         /// doesn't already end with the string to append.
         /// </summary>
@@ -1257,6 +1274,57 @@ namespace OBeautifulCode.String.Recipes
             else
             {
                 result = ((Guid)value).ToStringInvariantPreferred();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the preferred string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value.
+        /// </returns>
+        public static string ToStringInvariantPreferred(
+            this DateTime value)
+        {
+            var formatString = DateTimeKindToPreferredFormatStringMap[value.Kind];
+
+            var result = value.ToString(formatString, CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the preferred string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
+        public static string ToStringInvariantPreferred(
+            this DateTime? value,
+            bool throwIfNull = true)
+        {
+            string result;
+
+            if (value == null)
+            {
+                if (throwIfNull)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = ((DateTime)value).ToStringInvariantPreferred();
             }
 
             return result;

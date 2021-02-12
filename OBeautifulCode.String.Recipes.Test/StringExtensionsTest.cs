@@ -2202,6 +2202,83 @@ namespace OBeautifulCode.String.Recipes.Test
         }
 
         [Fact]
+        public static void ToStringInvariantPreferred_DateTime___Should_get_string_representation___When_called()
+        {
+            // Arrange
+            var values = new[]
+            {
+                new DateTime(2019, 1, 5, 12, 14, 58, 192, DateTimeKind.Utc).AddTicks(20),
+                new DateTime(2019, 1, 5, 12, 14, 58, 192, DateTimeKind.Unspecified).AddTicks(20),
+                new DateTime(2019, 1, 5, 12, 14, 58, 192, DateTimeKind.Local).AddTicks(20),
+            };
+
+            var expected = new[]
+            {
+                "2019-01-05T12:14:58.1920020Z",
+                "2019-01-05T12:14:58.1920020",
+                "2019-01-05T12:14:58.1920020" + DateTime.Now.ToString("%K"),
+            };
+
+            // Act
+            var actual = values.Select(_ => _.ToStringInvariantPreferred()).ToArray();
+
+            // Assert
+            actual.AsTest().Must().BeEqualTo(expected);
+        }
+
+        [Fact]
+        public static void ToStringInvariantPreferred_Nullable_DateTime___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        {
+            // Arrange
+            DateTime? value = null;
+
+            // Act
+            var actual = Record.Exception(() => value.ToStringInvariantPreferred(throwIfNull: true));
+
+            // Assert
+            actual.AsTest().Must().BeOfType<ArgumentNullException>();
+            actual.Message.AsTest().Must().ContainString("value");
+        }
+
+        [Fact]
+        public static void ToStringInvariantPreferred_Nullable_DateTime___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        {
+            // Arrange
+            DateTime? value = null;
+
+            // Act
+            var actual = value.ToStringInvariantPreferred(throwIfNull: false);
+
+            // Assert
+            actual.AsTest().Must().BeNull();
+        }
+
+        [Fact]
+        public static void ToStringInvariantPreferred_Nullable_DateTime___Should_get_string_representation___When_called()
+        {
+            // Arrange
+            var values = new DateTime?[]
+            {
+                new DateTime(2019, 1, 5, 12, 14, 58, 192, DateTimeKind.Utc).AddTicks(20),
+                new DateTime(2019, 1, 5, 12, 14, 58, 192, DateTimeKind.Unspecified).AddTicks(20),
+                new DateTime(2019, 1, 5, 12, 14, 58, 192, DateTimeKind.Local).AddTicks(20),
+            };
+
+            var expected = new[]
+            {
+                "2019-01-05T12:14:58.1920020Z",
+                "2019-01-05T12:14:58.1920020",
+                "2019-01-05T12:14:58.1920020" + DateTime.Now.ToString("%K"),
+            };
+
+            // Act
+            var actual = values.Select(_ => _.ToStringInvariantPreferred()).ToArray();
+
+            // Assert
+            actual.AsTest().Must().BeEqualTo(expected);
+        }
+
+        [Fact]
         public static void ToUpperFirstCharacter___Should_throw_ArgumentNullException___When_parameter_value_is_null()
         {
             // Arrange, Act
