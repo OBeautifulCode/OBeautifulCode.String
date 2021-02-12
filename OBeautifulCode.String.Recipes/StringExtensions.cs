@@ -608,6 +608,610 @@ namespace OBeautifulCode.String.Recipes
         }
 
         /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value.
+        /// </returns>
+        public static string ToStringInvariant(
+            #pragma warning disable CS3001 // Argument type is not CLS-compliant
+            this sbyte value)
+            #pragma warning restore CS3001 // Argument type is not CLS-compliant
+        {
+            var result = value.ToString(CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
+        public static string ToStringInvariant(
+            #pragma warning disable CS3001 // Argument type is not CLS-compliant
+            this sbyte? value,
+            #pragma warning restore CS3001 // Argument type is not CLS-compliant
+            bool throwIfNull = true)
+        {
+            string result;
+
+            if (value == null)
+            {
+                if (throwIfNull)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = ((sbyte)value).ToStringInvariant();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value.
+        /// </returns>
+        public static string ToStringInvariant(
+            this byte value)
+        {
+            var result = value.ToString(CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
+        public static string ToStringInvariant(
+            this byte? value,
+            bool throwIfNull = true)
+        {
+            string result;
+
+            if (value == null)
+            {
+                if (throwIfNull)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = ((byte)value).ToStringInvariant();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value.
+        /// </returns>
+        public static string ToStringInvariant(
+            this short value)
+        {
+            var result = value.ToString(CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
+        public static string ToStringInvariant(
+            this short? value,
+            bool throwIfNull = true)
+        {
+            string result;
+
+            if (value == null)
+            {
+                if (throwIfNull)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = ((short)value).ToStringInvariant();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value.
+        /// </returns>
+        public static string ToStringInvariant(
+            #pragma warning disable CS3001 // Argument type is not CLS-compliant
+            this ushort value)
+            #pragma warning restore CS3001 // Argument type is not CLS-compliant
+        {
+            var result = value.ToString(CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
+        public static string ToStringInvariant(
+            #pragma warning disable CS3001 // Argument type is not CLS-compliant
+            this ushort? value,
+            #pragma warning restore CS3001 // Argument type is not CLS-compliant
+            bool throwIfNull = true)
+        {
+            string result;
+
+            if (value == null)
+            {
+                if (throwIfNull)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = ((ushort)value).ToStringInvariant();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value.
+        /// </returns>
+        public static string ToStringInvariant(
+            this int value)
+        {
+            var result = value.ToString(CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
+        public static string ToStringInvariant(
+            this int? value,
+            bool throwIfNull = true)
+        {
+            string result;
+
+            if (value == null)
+            {
+                if (throwIfNull)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = ((int)value).ToStringInvariant();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value.
+        /// </returns>
+        public static string ToStringInvariant(
+            #pragma warning disable CS3001 // Argument type is not CLS-compliant
+            this uint value)
+            #pragma warning restore CS3001 // Argument type is not CLS-compliant
+        {
+            var result = value.ToString(CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
+        public static string ToStringInvariant(
+            #pragma warning disable CS3001 // Argument type is not CLS-compliant
+            this uint? value,
+            #pragma warning restore CS3001 // Argument type is not CLS-compliant
+            bool throwIfNull = true)
+        {
+            string result;
+
+            if (value == null)
+            {
+                if (throwIfNull)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = ((uint)value).ToStringInvariant();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value.
+        /// </returns>
+        public static string ToStringInvariant(
+            this long value)
+        {
+            var result = value.ToString(CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
+        public static string ToStringInvariant(
+            this long? value,
+            bool throwIfNull = true)
+        {
+            string result;
+
+            if (value == null)
+            {
+                if (throwIfNull)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = ((long)value).ToStringInvariant();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value.
+        /// </returns>
+        public static string ToStringInvariant(
+            #pragma warning disable CS3001 // Argument type is not CLS-compliant
+            this ulong value)
+            #pragma warning restore CS3001 // Argument type is not CLS-compliant
+        {
+            var result = value.ToString(CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
+        public static string ToStringInvariant(
+            #pragma warning disable CS3001 // Argument type is not CLS-compliant
+            this ulong? value,
+            #pragma warning restore CS3001 // Argument type is not CLS-compliant
+            bool throwIfNull = true)
+        {
+            string result;
+
+            if (value == null)
+            {
+                if (throwIfNull)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = ((ulong)value).ToStringInvariant();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value.
+        /// </returns>
+        public static string ToStringInvariant(
+            this float value)
+        {
+            var result = value.ToString(CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
+        public static string ToStringInvariant(
+            this float? value,
+            bool throwIfNull = true)
+        {
+            string result;
+
+            if (value == null)
+            {
+                if (throwIfNull)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = ((float)value).ToStringInvariant();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value.
+        /// </returns>
+        public static string ToStringInvariant(
+            this double value)
+        {
+            var result = value.ToString(CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
+        public static string ToStringInvariant(
+            this double? value,
+            bool throwIfNull = true)
+        {
+            string result;
+
+            if (value == null)
+            {
+                if (throwIfNull)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = ((double)value).ToStringInvariant();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value.
+        /// </returns>
+        public static string ToStringInvariant(
+            this decimal value)
+        {
+            var result = value.ToString(CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
+        public static string ToStringInvariant(
+            this decimal? value,
+            bool throwIfNull = true)
+        {
+            string result;
+
+            if (value == null)
+            {
+                if (throwIfNull)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = ((decimal)value).ToStringInvariant();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value.
+        /// </returns>
+        public static string ToStringInvariant(
+            this bool value)
+        {
+            var result = value.ToString(CultureInfo.InvariantCulture);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the string representation of a specified value using the invariant culture.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="throwIfNull">OPTIONAL value that determines whether to throw if <paramref name="value"/> is null.  DEFAULT is to throw.</param>
+        /// <returns>
+        /// The invariant culture string representation of the specified value or null if <paramref name="value"/> is null and <paramref name="throwIfNull"/> is false.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is null and <paramref name="throwIfNull"/> is true.</exception>
+        public static string ToStringInvariant(
+            this bool? value,
+            bool throwIfNull = true)
+        {
+            string result;
+
+            if (value == null)
+            {
+                if (throwIfNull)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                else
+                {
+                    result = null;
+                }
+            }
+            else
+            {
+                result = ((bool)value).ToStringInvariant();
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Converts the first character of the specified string to upper-case, using <see cref="CultureInfo.InvariantCulture"/>.
         /// </summary>
         /// <param name="value">The string to operate on.</param>
