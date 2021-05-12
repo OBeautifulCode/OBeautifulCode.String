@@ -113,9 +113,19 @@ namespace OBeautifulCode.Assertion.Recipes
 
         public const string NotContainAnyNullElementsExceptionMessageSuffix = "contains at least one null element";
 
+        public const string NotContainAnyNullElementsWhenNotNullExceptionMessageSuffix = "is not null and contains at least one null element";
+
         public const string ContainSomeKeyValuePairsWithNullValueExceptionMessageSuffix = "contains no key-value pairs with a null value";
 
         public const string NotContainAnyKeyValuePairsWithNullValueExceptionMessageSuffix = "contains at least one key-value pair with a null value";
+
+        public const string ContainKeyExceptionMessageSuffix = "does not contain the key to search for";
+
+        public const string NotContainKeyExceptionMessageSuffix = "contains the key to search for";
+
+        public const string ContainKeyWhenNotNullExceptionMessageSuffix = "is not null and does not contain the key to search for";
+
+        public const string NotContainKeyWhenNotNullExceptionMessageSuffix = "is not null and contains the key to search for";
 
         public const string IsEqualToMethod = "EqualityExtensions.IsEqualTo<T>";
 
@@ -152,6 +162,14 @@ namespace OBeautifulCode.Assertion.Recipes
         public const string BeEqualToWhenNotNullExceptionMessageSuffix = "is not null and is not equal to the comparison value";
 
         public const string NotBeEqualToWhenNotNullExceptionMessageSuffix = "is not null and is equal to the comparison value";
+
+        public const string BeEqualToAnyOfExceptionMessageSuffix = "is not equal to any of the comparison values";
+
+        public const string NotBeEqualToAnyOfExceptionMessageSuffix = "is equal to one or more of the comparison values";
+
+        public const string BeEqualToAnyOfWhenNotNullExceptionMessageSuffix = "is not null and is not equal to any of the comparison values";
+
+        public const string NotBeEqualToAnyOfWhenNotNullExceptionMessageSuffix = "is not null and is equal to one or more of the comparison values";
 
         public const string BeInRangeExceptionMessageSuffix = "is not within the specified range";
 
