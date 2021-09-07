@@ -2488,7 +2488,7 @@ namespace OBeautifulCode.String.Recipes.Test
         }
 
         [Fact]
-        public static void Truncate___Should_throw_ArgumentOutOfRangeException___When_parameter_maxLenth_is_negative()
+        public static void Truncate___Should_throw_ArgumentOutOfRangeException___When_parameter_maxLength_is_negative()
         {
             // Arrange, Act
             var actual = Record.Exception(() => A.Dummy<string>().Truncate(A.Dummy<NegativeInteger>()));
