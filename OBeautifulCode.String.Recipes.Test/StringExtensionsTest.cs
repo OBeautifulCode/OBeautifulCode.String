@@ -2475,5 +2475,87 @@ namespace OBeautifulCode.String.Recipes.Test
 
             Assert.Equal(Expected, bytesPrintout.ToString());
         }
+
+        [Fact]
+        public static void Truncate___Should_throw_ArgumentNullException___When_parameter_value_is_null()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => StringExtensions.Truncate(null, A.Dummy<ZeroOrPositiveInteger>()));
+
+            // Assert
+            actual.AsTest().Must().BeOfType<ArgumentNullException>();
+            actual.Message.AsTest().Must().ContainString("value");
+        }
+
+        [Fact]
+        public static void Truncate___Should_throw_ArgumentOutOfRangeException___When_parameter_maxLenth_is_negative()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => A.Dummy<string>().Truncate(A.Dummy<NegativeInteger>()));
+
+            // Assert
+            actual.AsTest().Must().BeOfType<ArgumentOutOfRangeException>();
+            actual.Message.AsTest().Must().ContainString("maxLength is < 0.");
+        }
+
+        [Fact]
+        public static void Truncate___Should_return_empty_string___When_value_is_empty_string()
+        {
+            // Arrange
+            var value = string.Empty;
+
+            // Act
+            var actual = value.Truncate(A.Dummy<PositiveInteger>());
+
+            // Assert
+            actual.AsTest().Must().BeEqualTo(string.Empty);
+        }
+
+        [Fact]
+        public static void Truncate___Should_return_empty_string___When_maxLength_is_0()
+        {
+            // Arrange
+            var value1 = string.Empty;
+            var value2 = A.Dummy<string>();
+
+            // Act
+            var actual1 = value1.Truncate(0);
+            var actual2 = value2.Truncate(0);
+
+            // Assert
+            actual1.AsTest().Must().BeEqualTo(string.Empty);
+            actual2.AsTest().Must().BeEqualTo(string.Empty);
+        }
+
+        [Fact]
+        public static void Truncate___Should_return_value___When_maxLength_is_greater_than_or_equal_to_length_of_value()
+        {
+            // Arrange
+            var value = A.Dummy<string>();
+
+            // Act
+            var actual1 = value.Truncate(value.Length);
+            var actual2 = value.Truncate(value.Length + 1);
+
+            // Assert
+            actual1.AsTest().Must().BeEqualTo(value);
+            actual2.AsTest().Must().BeEqualTo(value);
+        }
+
+        [Fact]
+        public static void Truncate___Should_return_truncated_value___When_maxLength_is_less_than_length_of_value()
+        {
+            // Arrange
+            var value1 = "ab";
+            var value2 = "ab cd";
+
+            // Act
+            var actual1 = value1.Truncate(value1.Length - 1);
+            var actual2 = value2.Truncate(value2.Length - 2);
+
+            // Assert
+            actual1.AsTest().Must().BeEqualTo("a");
+            actual2.AsTest().Must().BeEqualTo("ab ");
+        }
     }
 }
