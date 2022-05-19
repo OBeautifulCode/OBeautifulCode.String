@@ -160,6 +160,11 @@ namespace OBeautifulCode.CodeAnalysis.Recipes
         public const string CA1709_IdentifiersShouldBeCasedCorrectly_CasingIsAsPreferred = "The casing is as preferred.";
 
         /// <summary>
+        /// An Exception base class should end in 'Base' (as is the convention for all base classes), not 'Exception'.
+        /// </summary>
+        public const string CA1710_IdentifiersShouldHaveCorrectSuffix_ExceptionBaseClassShouldEndWithBase = "An Exception base class should end in 'Base' (as is the convention for all base classes), not 'Exception'.";
+
+        /// <summary>
         /// The identifier is suffixed with the name of the Type that it directly extends or implements to improves readability and comprehension of unit tests whre the Type is a primary concern of those tests.
         /// </summary>
         public const string CA1710_IdentifiersShouldHaveCorrectSuffix_NameDirectlyExtendedOrImplementedTypeAddedAsSuffixForTestsWhereTypeIsPrimaryConcern = "The identifier is suffixed with the name of the Type that it directly extends or implements to improves readability and comprehension of unit tests whre the Type is a primary concern of those tests.";
@@ -168,6 +173,11 @@ namespace OBeautifulCode.CodeAnalysis.Recipes
         /// The identifier is suffixed with it's Type name to improve readability and comprehension of unit tests where the Type is a primary concern of those tests.
         /// </summary>
         public const string CA1711_IdentifiersShouldNotHaveIncorrectSuffix_TypeNameAddedAsSuffixForTestsWhereTypeIsPrimaryConcern = "The identifier is suffixed with it's Type name to improve readability and comprehension of unit tests where the Type is a primary concern of those tests.";
+
+        /// <summary>
+        /// The delegate identifier is suffixed with 'Delegate' which is the preferred suffix for non-event-handling and non-callback delegates.
+        /// </summary>
+        public const string CA1711_IdentifiersShouldNotHaveIncorrectSuffix_PreferToUseDelegateForNonEventHandlingNonCallbackDelegates = "The delegate identifier is suffixed with 'Delegate' which is the preferred suffix for non-event-handling and non-callback delegates.";
 
         /// <summary>
         /// The name is plural.

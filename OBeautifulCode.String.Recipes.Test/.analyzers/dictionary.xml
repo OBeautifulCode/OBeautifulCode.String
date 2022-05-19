@@ -99,6 +99,9 @@
       <!-- Describes something that persists information. -->
       <Word>persistor</Word>
 
+      <!-- The act of re-calculating something. -->
+      <Word>recalc</Word>
+
       <!-- 
       Commonly-used to describe a PKCS#12 file, which stores a private key 
       and it's associated certificate chain. 

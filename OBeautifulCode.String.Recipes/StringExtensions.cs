@@ -636,6 +636,7 @@ namespace OBeautifulCode.String.Recipes
         /// <returns>
         /// The invariant culture string representation of the specified value.
         /// </returns>
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = ObcSuppressBecause.CA1502_AvoidExcessiveComplexity_DisagreeWithAssessment)]
         public static string ToStringInvariantPreferred(
             this object value,
             bool throwIfNull = true)
