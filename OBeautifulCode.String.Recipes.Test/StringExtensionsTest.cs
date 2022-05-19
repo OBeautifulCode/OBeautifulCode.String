@@ -1497,6 +1497,84 @@ namespace OBeautifulCode.String.Recipes.Test
         }
 
         [Fact]
+        public static void ToStringInvariantPreferred_object___Should_throw_ArgumentNullException___When_value_is_null_and_throwIfNull_is_true()
+        {
+            // Arrange
+            object value = null;
+
+            // Act
+            var actual = Record.Exception(() => value.ToStringInvariantPreferred(throwIfNull: true));
+
+            // Assert
+            actual.AsTest().Must().BeOfType<ArgumentNullException>();
+            actual.Message.AsTest().Must().ContainString("value");
+        }
+
+        [Fact]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "sbyte", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
+        public static void ToStringInvariantPreferred_object___Should_return_null___When_value_is_null_and_throwIfNull_is_false()
+        {
+            // Arrange
+            object value = null;
+
+            // Act
+            var actual = value.ToStringInvariantPreferred(throwIfNull: false);
+
+            // Assert
+            actual.AsTest().Must().BeNull();
+        }
+
+        [Fact]
+        public static void ToStringInvariantPreferred_object___Should_get_string_representation___When_called()
+        {
+            // Arrange
+            sbyte? value = 53;
+
+            object test = value;
+
+            test.ToStringInvariantPreferred();
+
+            var valueAndExpected = new[]
+            {
+                new { Value = (object)"some-string", Expected = "some-string" },
+                new { Value = (object)(sbyte?)10, Expected = "10" },
+                new { Value = (object)(sbyte)11, Expected = "11" },
+                new { Value = (object)(byte)12, Expected = "12" },
+                new { Value = (object)(byte?)13, Expected = "13" },
+                new { Value = (object)(short)14, Expected = "14" },
+                new { Value = (object)(short?)15, Expected = "15" },
+                new { Value = (object)(ushort)16, Expected = "16" },
+                new { Value = (object)(ushort?)17, Expected = "17" },
+                new { Value = (object)(int)18, Expected = "18" },
+                new { Value = (object)(int?)19, Expected = "19" },
+                new { Value = (object)20U, Expected = "20" },
+                new { Value = (object)(uint?)21U, Expected = "21" },
+                new { Value = (object)22L, Expected = "22" },
+                new { Value = (object)(long?)23L, Expected = "23" },
+                new { Value = (object)24UL, Expected = "24" },
+                new { Value = (object)(ulong?)25UL, Expected = "25" },
+                new { Value = (object)26.25F, Expected = "26.25" },
+                new { Value = (object)(float?)27.25F, Expected = "27.25" },
+                new { Value = (object)28.25d, Expected = "28.25" },
+                new { Value = (object)(double?)29.25, Expected = "29.25" },
+                new { Value = (object)30.25m, Expected = "30.25" },
+                new { Value = (object)(decimal?)31.25m, Expected = "31.25" },
+                new { Value = (object)true, Expected = "true" },
+                new { Value = (object)(bool?)true, Expected = "true" },
+                new { Value = (object)Guid.Parse("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB"), Expected = "F950C64B-A629-4E65-9BC8-28DA7A2DFCBB" },
+                new { Value = (object)(Guid?)Guid.Parse("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB"), Expected = "F950C64B-A629-4E65-9BC8-28DA7A2DFCBB" },
+                new { Value = (object)new DateTime(2019, 1, 5, 12, 14, 58, 192, DateTimeKind.Utc).AddTicks(20), Expected = "2019-01-05T12:14:58.1920020Z" },
+                new { Value = (object)(DateTime?)new DateTime(2019, 1, 5, 12, 14, 58, 192, DateTimeKind.Utc).AddTicks(20), Expected = "2019-01-05T12:14:58.1920020Z" },
+            };
+
+            // Act
+            var actuals = valueAndExpected.Select(_ => _.Value.ToStringInvariantPreferred(true)).ToList();
+
+            // Assert
+            actuals.AsTest().Must().BeEqualTo(valueAndExpected.Select(_ => _.Expected).ToList());
+        }
+
+        [Fact]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "sbyte", Justification = ObcSuppressBecause.CA1704_IdentifiersShouldBeSpelledCorrectly_SpellingIsCorrectInContextOfTheDomain)]
         public static void ToStringInvariantPreferred_sbyte___Should_get_string_representation___When_called()
         {
@@ -1940,13 +2018,13 @@ namespace OBeautifulCode.String.Recipes.Test
         public static void ToStringInvariantPreferred_float___Should_get_string_representation___When_called()
         {
             // Arrange
-            float value = 53;
+            var value = 53.25F;
 
             // Act
             var actual = value.ToStringInvariantPreferred();
 
             // Assert
-            actual.AsTest().Must().BeEqualTo("53");
+            actual.AsTest().Must().BeEqualTo("53.25");
         }
 
         [Fact]
@@ -1980,26 +2058,26 @@ namespace OBeautifulCode.String.Recipes.Test
         public static void ToStringInvariantPreferred_Nullable_float___Should_get_string_representation___When_called()
         {
             // Arrange
-            float? value = 53;
+            float? value = 53.25F;
 
             // Act
             var actual = value.ToStringInvariantPreferred();
 
             // Assert
-            actual.AsTest().Must().BeEqualTo("53");
+            actual.AsTest().Must().BeEqualTo("53.25");
         }
 
         [Fact]
         public static void ToStringInvariantPreferred_double___Should_get_string_representation___When_called()
         {
             // Arrange
-            double value = 53;
+            double value = 53.25;
 
             // Act
             var actual = value.ToStringInvariantPreferred();
 
             // Assert
-            actual.AsTest().Must().BeEqualTo("53");
+            actual.AsTest().Must().BeEqualTo("53.25");
         }
 
         [Fact]
@@ -2033,26 +2111,26 @@ namespace OBeautifulCode.String.Recipes.Test
         public static void ToStringInvariantPreferred_Nullable_double___Should_get_string_representation___When_called()
         {
             // Arrange
-            double? value = 53;
+            double? value = 53.25;
 
             // Act
             var actual = value.ToStringInvariantPreferred();
 
             // Assert
-            actual.AsTest().Must().BeEqualTo("53");
+            actual.AsTest().Must().BeEqualTo("53.25");
         }
 
         [Fact]
         public static void ToStringInvariantPreferred_decimal___Should_get_string_representation___When_called()
         {
             // Arrange
-            decimal value = 53;
+            var value = 53.25m;
 
             // Act
             var actual = value.ToStringInvariantPreferred();
 
             // Assert
-            actual.AsTest().Must().BeEqualTo("53");
+            actual.AsTest().Must().BeEqualTo("53.25");
         }
 
         [Fact]
@@ -2086,13 +2164,13 @@ namespace OBeautifulCode.String.Recipes.Test
         public static void ToStringInvariantPreferred_Nullable_decimal___Should_get_string_representation___When_called()
         {
             // Arrange
-            decimal? value = 53;
+            decimal? value = 53.25m;
 
             // Act
             var actual = value.ToStringInvariantPreferred();
 
             // Assert
-            actual.AsTest().Must().BeEqualTo("53");
+            actual.AsTest().Must().BeEqualTo("53.25");
         }
 
         [Fact]
