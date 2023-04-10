@@ -2236,7 +2236,7 @@ namespace OBeautifulCode.String.Recipes.Test
             var actual = value.ToStringInvariantPreferred();
 
             // Assert
-            actual.AsTest().Must().BeEqualTo("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB");
+            actual.AsTest().Must().BeEqualTo("f950c64b-a629-4e65-9bc8-28da7a2dfcbb");
         }
 
         [Fact]
@@ -2276,7 +2276,7 @@ namespace OBeautifulCode.String.Recipes.Test
             var actual = value.ToStringInvariantPreferred();
 
             // Assert
-            actual.AsTest().Must().BeEqualTo("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB");
+            actual.AsTest().Must().BeEqualTo("f950c64b-a629-4e65-9bc8-28da7a2dfcbb");
         }
 
         [Fact]
