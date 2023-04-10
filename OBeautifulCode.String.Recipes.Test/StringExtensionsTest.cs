@@ -1561,8 +1561,8 @@ namespace OBeautifulCode.String.Recipes.Test
                 new { Value = (object)(decimal?)31.25m, Expected = "31.25" },
                 new { Value = (object)true, Expected = "true" },
                 new { Value = (object)(bool?)true, Expected = "true" },
-                new { Value = (object)Guid.Parse("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB"), Expected = "F950C64B-A629-4E65-9BC8-28DA7A2DFCBB" },
-                new { Value = (object)(Guid?)Guid.Parse("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB"), Expected = "F950C64B-A629-4E65-9BC8-28DA7A2DFCBB" },
+                new { Value = (object)Guid.Parse("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB"), Expected = "f950c64b-a629-4e65-9bc8-28da7a2dfcbb" },
+                new { Value = (object)(Guid?)Guid.Parse("F950C64B-A629-4E65-9BC8-28DA7A2DFCBB"), Expected = "f950c64b-a629-4e65-9bc8-28da7a2dfcbb" },
                 new { Value = (object)new DateTime(2019, 1, 5, 12, 14, 58, 192, DateTimeKind.Utc).AddTicks(20), Expected = "2019-01-05T12:14:58.1920020Z" },
                 new { Value = (object)(DateTime?)new DateTime(2019, 1, 5, 12, 14, 58, 192, DateTimeKind.Utc).AddTicks(20), Expected = "2019-01-05T12:14:58.1920020Z" },
             };
