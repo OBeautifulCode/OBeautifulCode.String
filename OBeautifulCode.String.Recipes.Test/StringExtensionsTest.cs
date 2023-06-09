@@ -316,24 +316,30 @@ namespace OBeautifulCode.String.Recipes.Test
             Assert.False("q9@z".IsAlphanumeric());
             Assert.False("q9asdfz+".IsAlphanumeric());
             Assert.False("abCd29382-afjKsdf9209283".IsAlphanumeric());
+            Assert.False("abCd29382-afjKsdf9209283".IsAlphanumeric(new[] { '_' }));
+
             for (int i = 0; i <= 47; i++)
             {
                 Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphanumeric());
+                Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphanumeric(new char[0]));
             }
 
             for (int i = 58; i <= 64; i++)
             {
                 Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphanumeric());
+                Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphanumeric(new char[0]));
             }
 
             for (int i = 91; i <= 96; i++)
             {
                 Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphanumeric());
+                Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphanumeric(new char[0]));
             }
 
             for (int i = 123; i <= 127; i++)
             {
                 Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphanumeric());
+                Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphanumeric(new char[0]));
             }
         }
 
@@ -350,6 +356,9 @@ namespace OBeautifulCode.String.Recipes.Test
             Assert.True("1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ".IsAlphanumeric());
             Assert.True("abcdefghijklmnopqrstuvwxyz1234567890".IsAlphanumeric());
             Assert.True("1234567890abcdefghijklmnopqrstuvwxyz".IsAlphanumeric());
+            Assert.True("+".IsAlphanumeric(new[] { '+' }));
+            Assert.True("abcdefghijkl=34567890".IsAlphanumeric(new[] { '+', '=' }));
+            Assert.True("abcdefghijkl=34567+890".IsAlphanumeric(new[] { '+', '=' }));
         }
 
         [Fact]
@@ -378,26 +387,27 @@ namespace OBeautifulCode.String.Recipes.Test
         {
             // Arrange, Act, Assert
             Assert.False("q9".IsAlphabetic());
-
             Assert.False("9q".IsAlphabetic());
-
             Assert.False("ab2cd".IsAlphabetic());
-
             Assert.False("123".IsAlphabetic());
+            Assert.False("ab0gf".IsAlphabetic(new[] { '1' }));
 
             for (int i = 0; i <= 64; i++)
             {
                 Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphabetic());
+                Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphabetic(new char[0]));
             }
 
             for (int i = 91; i <= 96; i++)
             {
                 Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphabetic());
+                Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphabetic(new char[0]));
             }
 
             for (int i = 123; i <= 127; i++)
             {
                 Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphabetic());
+                Assert.False(Convert.ToString((char)i, CultureInfo.InvariantCulture).IsAlphabetic(new char[0]));
             }
         }
 
@@ -410,6 +420,9 @@ namespace OBeautifulCode.String.Recipes.Test
             Assert.True("ABcd".IsAlphabetic());
             Assert.True("ABCDEFGHIJKLMNOPQRSTUVWXYZ".IsAlphabetic());
             Assert.True("abcdefghijklmnopqrstuvwxyz".IsAlphabetic());
+            Assert.True("_".IsAlphabetic(new[] { '_' }));
+            Assert.True("ABCDEFGHIJK_MNOPQRSTUVWXYZ".IsAlphabetic(new[] { '+', '_' }));
+            Assert.True("ABCDEFGHIJK_MNOPQRS+UVWXYZ".IsAlphabetic(new[] { '+', '_' }));
         }
 
         [Fact]
