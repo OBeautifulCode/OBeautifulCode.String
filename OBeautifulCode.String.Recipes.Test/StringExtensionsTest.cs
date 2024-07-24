@@ -2370,6 +2370,26 @@ namespace OBeautifulCode.String.Recipes.Test
         }
 
         [Fact]
+        public static void ToStringInvariantPreferred_Version___Should_get_string_representation___When_called()
+        {
+            // Arrange
+            var valueAndExpected = new[]
+            {
+                new { Value = (Version)null, Expected = (string)null },
+                new { Value = new Version(), Expected = "0.0" },
+                new { Value = new Version(1, 2), Expected = "1.2" },
+                new { Value = new Version(1, 2, 3), Expected = "1.2.3" },
+                new { Value = new Version(1, 2, 3, 4), Expected = "1.2.3.4" },
+            };
+
+            // Act
+            var actual = valueAndExpected.Select(_ => _.Value.ToStringInvariantPreferred()).ToList();
+
+            // Assert
+            actual.AsTest().Must().BeEqualTo(valueAndExpected.Select(_ => _.Expected).ToList());
+        }
+
+        [Fact]
         public static void ToUpperFirstCharacter___Should_throw_ArgumentNullException___When_parameter_value_is_null()
         {
             // Arrange, Act
